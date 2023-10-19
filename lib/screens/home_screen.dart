@@ -13,7 +13,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
-      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 0),
+      bottomNavigationBar: CustomBottomNavigation(selectedIndex: 0),
     );
   }
 }

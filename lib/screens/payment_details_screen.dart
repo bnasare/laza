@@ -13,7 +13,7 @@ class PaymentDetailsScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
-      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 3),
+      bottomNavigationBar: CustomBottomNavigation(selectedIndex: 3),
     );
   }
 }

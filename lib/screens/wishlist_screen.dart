@@ -13,7 +13,7 @@ class WishlistScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
-      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 1),
+      bottomNavigationBar: CustomBottomNavigation(selectedIndex: 1),
     );
   }
 }

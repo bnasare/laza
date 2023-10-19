@@ -5,12 +5,12 @@ import 'package:laza/screens/payment_details_screen.dart';
 import 'package:laza/screens/wishlist_screen.dart';
 
 import '../screens/home_screen.dart';
-import 'bottom_appbar_item.dart';
+import 'bottom_tab_item.dart';
 
-class CustomBottomAppBar extends StatelessWidget {
+class CustomBottomNavigation extends StatelessWidget {
   final int selectedIndex;
 
-  const CustomBottomAppBar({
+  const CustomBottomNavigation({
     Key? key,
     required this.selectedIndex,
   }) : super(key: key);
@@ -26,7 +26,7 @@ class CustomBottomAppBar extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          TabItem(
+          BottomTabItem(
             icon: IconlyLight.home,
             label: 'Home',
             index: 0,
@@ -36,7 +36,7 @@ class CustomBottomAppBar extends StatelessWidget {
               Navigator.pushNamed(context, HomeScreen.routeName);
             },
           ),
-          TabItem(
+          BottomTabItem(
             icon: IconlyLight.heart,
             label: 'Wishlist',
             index: 1,
@@ -46,7 +46,7 @@ class CustomBottomAppBar extends StatelessWidget {
               Navigator.pushNamed(context, WishlistScreen.routeName);
             },
           ),
-          TabItem(
+          BottomTabItem(
             icon: IconlyLight.bag,
             label: 'Cart',
             index: 2,
@@ -56,8 +56,8 @@ class CustomBottomAppBar extends StatelessWidget {
               Navigator.pushNamed(context, CartScreen.routeName);
             },
           ),
-          TabItem(
-            icon: IconlyLight.profile,
+          BottomTabItem(
+            icon: IconlyLight.wallet,
             label: 'Payment',
             index: 3,
             color: color,

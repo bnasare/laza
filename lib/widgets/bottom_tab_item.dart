@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class TabItem extends StatelessWidget {
+class BottomTabItem extends StatelessWidget {
   final IconData icon;
   final String label;
   final int index;
@@ -8,7 +8,7 @@ class TabItem extends StatelessWidget {
   final Function() onTap;
   final bool isSelected;
 
-  const TabItem({
+  const BottomTabItem({
     Key? key,
     required this.icon,
     required this.label,
@@ -20,7 +20,7 @@ class TabItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: onTap,
       child: Column(
         mainAxisSize: MainAxisSize.min,
@@ -28,16 +28,15 @@ class TabItem extends StatelessWidget {
           if (!isSelected)
             Icon(
               icon,
-              color: color.secondary,
+              color: isSelected ? color.secondary : color.tertiary,
             ),
-          if (!isSelected) const SizedBox(height: 5),
-          Text(
-            label,
-            style: TextStyle(
-              fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-              color: isSelected ? color.onTertiary : color.onSecondary,
+          if (isSelected)
+            Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? color.primary : color.onSecondary,
+              ),
             ),
-          ),
         ],
       ),
     );

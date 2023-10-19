@@ -13,7 +13,7 @@ class CartScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
-      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 2),
+      bottomNavigationBar: CustomBottomNavigation(selectedIndex: 2),
     );
   }
 }
