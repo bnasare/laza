@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/bottom_appbar.dart';
+
 class PaymentDetailsScreen extends StatelessWidget {
   static const routeName = '/payment_details';
 
@@ -11,6 +13,7 @@ class PaymentDetailsScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
+      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 3),
     );
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:laza/screens/bottom_appbar.dart';
 
 import '../screens/add_review_screen.dart';
 import '../screens/all_products_screen.dart';
@@ -43,7 +42,6 @@ class AppRoutes {
       OrderConfirmedScreen.routeName: (context) => const OrderConfirmedScreen(),
       AllProductsScreen.routeName: (context) => const AllProductsScreen(),
       WishlistScreen.routeName: (context) => const WishlistScreen(),
-      BottomBarScreen.routeName: (context) => const BottomBarScreen(),
     };
   }
 }

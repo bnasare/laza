@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/bottom_appbar.dart';
+
 class HomeScreen extends StatelessWidget {
   static const routeName = '/home';
 
@@ -11,6 +13,7 @@ class HomeScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
+      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 0),
     );
   }
 }

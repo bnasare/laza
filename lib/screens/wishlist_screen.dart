@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/bottom_appbar.dart';
+
 class WishlistScreen extends StatelessWidget {
   static const routeName = '/wishlist';
 
@@ -11,6 +13,7 @@ class WishlistScreen extends StatelessWidget {
       body: Center(
         child: Text("Flutter is dope"),
       ),
+      bottomNavigationBar: CustomBottomAppBar(selectedIndex: 1),
     );
   }
 }
