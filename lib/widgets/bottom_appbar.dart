@@ -21,7 +21,7 @@ class CustomBottomNavigation extends StatelessWidget {
 
     return BottomAppBar(
       height: 70,
-      elevation: 24,
+      elevation: 30,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
@@ -82,13 +82,10 @@ Future<void> _navigateToScreen(
         const begin = Offset(0.0, 1.0);
         const end = Offset.zero;
         const curve = Curves.ease;
-
         var tween = Tween(begin: begin, end: end).chain(
           CurveTween(curve: curve),
         );
-
         var offsetAnimation = animation.drive(tween);
-
         return SlideTransition(
           position: offsetAnimation,
           child: child,
