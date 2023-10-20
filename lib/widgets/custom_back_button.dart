@@ -12,7 +12,9 @@ class CustomBackButton extends StatelessWidget {
       shape: const CircleBorder(),
       color: backgroundColor,
       child: BackButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.canPop(context) ? Navigator.pop(context) : null;
+        },
         color: color.secondary,
       ),
     );

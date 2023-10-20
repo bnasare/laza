@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
+import '../widgets/bottom_appbar.dart';
 import '../widgets/custom_trailing_button.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -31,6 +32,7 @@ class HomeScreen extends StatelessWidget {
           )
         ],
       ),
+      bottomNavigationBar: const CustomBottomNavigation(selectedIndex: 0),
     );
   }
 }
