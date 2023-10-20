@@ -29,11 +29,13 @@ class BottomTabItem extends StatelessWidget {
             Icon(
               icon,
               color: isSelected ? color.secondary : color.tertiary,
+              size: 30,
             ),
           if (isSelected)
             Text(
               label,
               style: TextStyle(
+                fontSize: 16,
                 color: isSelected ? color.primary : color.onSecondary,
               ),
             ),

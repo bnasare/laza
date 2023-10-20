@@ -21,8 +21,7 @@ class CustomBottomNavigation extends StatelessWidget {
 
     return BottomAppBar(
       height: 70,
-      elevation: 0,
-      color: color.surface,
+      elevation: 24,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
