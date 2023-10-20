@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../widgets/custom_back_button.dart';
+
 class AddReviewScreen extends StatelessWidget {
   static const routeName = '/add_review';
 
@@ -7,9 +9,17 @@ class AddReviewScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Flutter is dope"),
+    final color = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 13.0),
+          child: CustomBackButton(
+            backgroundColor: color.background,
+          ),
+        ),
       ),
     );
   }

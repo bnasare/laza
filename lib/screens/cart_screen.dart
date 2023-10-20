@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/bottom_appbar.dart';
+import '../widgets/custom_back_button.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -9,11 +9,17 @@ class CartScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: Center(
-        child: Text("Flutter is dope"),
+    final color = Theme.of(context).colorScheme;
+
+    return Scaffold(
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 13.0),
+          child: CustomBackButton(
+            backgroundColor: color.background,
+          ),
+        ),
       ),
-      bottomNavigationBar: CustomBottomNavigation(selectedIndex: 2),
     );
   }
 }

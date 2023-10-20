@@ -3,15 +3,11 @@ import 'package:google_fonts/google_fonts.dart';
 
 class Styles {
   ThemeData themeData(BuildContext context) {
-    final scaffoldColor = Theme.of(context).scaffoldBackgroundColor;
-
     return ThemeData(
-      appBarTheme: AppBarTheme(
-        color: scaffoldColor,
-        elevation: 0,
-      ),
+      scaffoldBackgroundColor: Colors.white,
       colorScheme: ThemeData().colorScheme.copyWith(
             primary: const Color.fromRGBO(151, 117, 250, 1),
+            onPrimary: Colors.white,
             secondary: const Color.fromRGBO(29, 30, 32, 1),
             onSecondary: const Color.fromRGBO(52, 197, 89, 1),
             background: const Color.fromRGBO(245, 246, 250, 1),
@@ -19,6 +15,11 @@ class Styles {
             tertiary: const Color.fromRGBO(143, 149, 158, 1),
           ),
       textTheme: GoogleFonts.interTextTheme(),
+      appBarTheme: const AppBarTheme(
+        color: Colors.white,
+        elevation: 0,
+        toolbarHeight: 70,
+      ),
     );
   }
 }

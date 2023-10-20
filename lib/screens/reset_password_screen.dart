@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:laza/consts/theme.dart';
 import 'package:laza/widgets/auth_text_field.dart';
-import 'package:laza/widgets/bottom_auth_button.dart';
+import 'package:laza/widgets/custom_back_button.dart';
+import 'package:laza/widgets/navigation_card.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   static const routeName = '/reset_password';
@@ -12,20 +12,15 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController passwordController = TextEditingController();
     final TextEditingController confirmController = TextEditingController();
+    final color = Theme.of(context).colorScheme;
+
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.transparent,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+          padding: const EdgeInsets.only(left: 13.0),
+          child: CustomBackButton(
+            backgroundColor: color.background,
           ),
         ),
       ),
@@ -66,7 +61,7 @@ class ResetPasswordScreen extends StatelessWidget {
               style: TextStyle(color: Color.fromRGBO(143, 149, 158, 1)),
             ),
           ),
-          BottomAuthButton(
+          NavigationCard(
             text: 'Reset Password',
             onTap: () {},
           ),
