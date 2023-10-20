@@ -32,7 +32,7 @@ class CustomBottomNavigation extends StatelessWidget {
             color: color,
             isSelected: selectedIndex == 0,
             onTap: () {
-              Navigator.pushNamed(context, HomeScreen.routeName);
+              _navigateToScreen(context, const HomeScreen());
             },
           ),
           BottomTabItem(
@@ -42,7 +42,7 @@ class CustomBottomNavigation extends StatelessWidget {
             color: color,
             isSelected: selectedIndex == 1,
             onTap: () {
-              Navigator.pushNamed(context, WishlistScreen.routeName);
+              _navigateToScreen(context, const WishlistScreen());
             },
           ),
           BottomTabItem(
@@ -52,7 +52,7 @@ class CustomBottomNavigation extends StatelessWidget {
             color: color,
             isSelected: selectedIndex == 2,
             onTap: () {
-              Navigator.pushNamed(context, CartScreen.routeName);
+              _navigateToScreen(context, const CartScreen());
             },
           ),
           BottomTabItem(
@@ -62,11 +62,38 @@ class CustomBottomNavigation extends StatelessWidget {
             color: color,
             isSelected: selectedIndex == 3,
             onTap: () {
-              Navigator.pushNamed(context, PaymentDetailsScreen.routeName);
+              _navigateToScreen(context, const PaymentDetailsScreen());
             },
           ),
         ],
       ),
     );
   }
+}
+
+Future<void> _navigateToScreen(
+    BuildContext context, Widget targetScreen) async {
+  await Navigator.of(context).push(
+    PageRouteBuilder(
+      pageBuilder: (context, animation, secondaryAnimation) {
+        return targetScreen;
+      },
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        const begin = Offset(0.0, 1.0);
+        const end = Offset.zero;
+        const curve = Curves.ease;
+
+        var tween = Tween(begin: begin, end: end).chain(
+          CurveTween(curve: curve),
+        );
+
+        var offsetAnimation = animation.drive(tween);
+
+        return SlideTransition(
+          position: offsetAnimation,
+          child: child,
+        );
+      },
+    ),
+  );
 }
