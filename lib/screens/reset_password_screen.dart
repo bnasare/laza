@@ -14,11 +14,25 @@ class ResetPasswordScreen extends StatelessWidget {
     final TextEditingController confirmController = TextEditingController();
     final color = Theme.of(context).colorScheme;
 
+    double verticalConverter(double value) {
+      double height = MediaQuery.of(context).size.height;
+      double heightRatio = height / 812;
+      double newValue = heightRatio * value;
+      return newValue;
+    }
+
+    double horizontalConverter(double value) {
+      double width = MediaQuery.of(context).size.width;
+      double widthRatio = width / 375;
+      double newValue = widthRatio * value;
+      return newValue;
+    }
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         leading: Padding(
-          padding: const EdgeInsets.only(left: 13.0),
+          padding: EdgeInsets.only(left: horizontalConverter(13)),
           child: CustomBackButton(
             backgroundColor: color.background,
           ),
@@ -26,17 +40,24 @@ class ResetPasswordScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
-          const Padding(
-            padding: EdgeInsets.only(top: 15),
-            child: Center(
+          Padding(
+            padding: EdgeInsets.only(top: verticalConverter(15)),
+            child: const Center(
               child: Text(
                 'New Password',
-                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 28,
+                ),
               ),
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 182, left: 20, right: 20),
+            padding: EdgeInsets.only(
+              top: verticalConverter(182),
+              left: horizontalConverter(20),
+              right: horizontalConverter(20),
+            ),
             child: Center(
               child: AuthTextField(
                 controller: passwordController,
@@ -45,7 +66,11 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(top: 20, left: 20, right: 20),
+            padding: EdgeInsets.only(
+              top: verticalConverter(20),
+              left: horizontalConverter(20),
+              right: horizontalConverter(20),
+            ),
             child: Center(
               child: AuthTextField(
                 controller: confirmController,
@@ -54,11 +79,11 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
           ),
           Expanded(child: Container()),
-          const Padding(
-            padding: EdgeInsets.only(bottom: 25),
+          Padding(
+            padding: EdgeInsets.only(bottom: verticalConverter(25)),
             child: Text(
               'Please write your new password',
-              style: TextStyle(color: Color.fromRGBO(143, 149, 158, 1)),
+              style: TextStyle(color: color.tertiary),
             ),
           ),
           NavigationCard(

@@ -9,12 +9,14 @@ class AuthTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme;
+
     return TextField(
       controller: controller,
       decoration: InputDecoration(
         label: Text(labelText),
-        labelStyle: const TextStyle(
-          color: Color.fromRGBO(143, 149, 158, 1),
+        labelStyle: TextStyle(
+          color: color.tertiary,
         ),
       ),
     );
