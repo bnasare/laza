@@ -32,7 +32,6 @@ class ForgotPasswordScreen extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xFF1D1E20),
                 fontSize: 28,
-                fontFamily: 'Inter',
                 fontWeight: FontWeight.w600,
                 height: 0.04,
                 letterSpacing: -0.21,
@@ -43,7 +42,14 @@ class ForgotPasswordScreen extends StatelessWidget {
                 controller: TextEditingController(),
                 labelText: "Email Address"),
             const Text(
-                "Please write your email to receive a confirmation code to set a new password")
+              "Please write your email to receive a confirmation code to set a new password",
+              style: TextStyle(
+                color: Color(0xFF8F959E),
+                fontSize: 13,
+                fontWeight: FontWeight.w400,
+                // height: 0.11,
+              ),
+            )
           ],
         ),
       ),
@@ -57,7 +63,6 @@ class ForgotPasswordScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Color(0xFFFEFEFE),
                   fontSize: 17,
-                  fontFamily: 'Inter',
                   fontWeight: FontWeight.w500,
                   height: 0.06,
                 ),

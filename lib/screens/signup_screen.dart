@@ -48,7 +48,11 @@ class SignUpScreen extends StatelessWidget {
               AuthTextField(
                 controller: TextEditingController(),
                 labelText: "Password",
-                trailingWidget: Text("Strong"),
+                trailingWidget: const Text("Strong", style: TextStyle(
+                  color: Color(0xFF34C559),
+                  fontSize: 11,
+                  fontWeight: FontWeight.w400,
+                ),),
               ),
               AuthTextField(
                 controller: TextEditingController(),

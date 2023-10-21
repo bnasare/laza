@@ -59,13 +59,22 @@ class LoginScreen extends StatelessWidget {
             ),
           ),
           AuthTextField(
-              controller: TextEditingController(), labelText: "Password"),
+            controller: TextEditingController(),
+            labelText: "Password",
+            trailingWidget: const Text(
+              "Strong",
+              style: TextStyle(
+                color: Color(0xFF34C559),
+                fontSize: 11,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+          ),
           const Text(
             "Forgot password??",
             style: TextStyle(
               color: Color(0xFFEA4335),
               fontSize: 15,
-              fontFamily: 'Inter',
               fontWeight: FontWeight.w400,
             ),
           ),
@@ -79,7 +88,6 @@ class LoginScreen extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xFF8F959E),
                 fontSize: 13,
-                fontFamily: 'Inter',
                 fontWeight: FontWeight.w400,
                 height: 0,
               ),
@@ -89,7 +97,6 @@ class LoginScreen extends StatelessWidget {
                   style: TextStyle(
                     color: Color(0xFF1D1E20),
                     fontSize: 13,
-                    fontFamily: 'Inter',
                     fontWeight: FontWeight.w500,
                     height: 0,
                   ),
@@ -109,7 +116,6 @@ class LoginScreen extends StatelessWidget {
             style: TextStyle(
               color: Color(0xFFFEFEFE),
               fontSize: 17,
-              fontFamily: 'Inter',
               fontWeight: FontWeight.w500,
               height: 0.06,
             ),
