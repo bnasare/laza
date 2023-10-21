@@ -1,9 +1,6 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/screens/home_screen.dart';
 import 'package:laza/screens/order_confirmed_screen.dart';
 
 import 'consts/app_routes.dart';
@@ -33,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: Styles().themeData(context),
       debugShowCheckedModeBanner: false,
       routes: AppRoutes().getRoutes(),
-      initialRoute: HomeScreen.routeName,
+      initialRoute: OrderConfirmedScreen.routeName,
     );
   }
 }

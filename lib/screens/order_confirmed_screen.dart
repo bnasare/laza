@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/widgets/navigation_card.dart';
 
 import '../widgets/custom_back_button.dart';
 
@@ -20,90 +21,64 @@ class OrderConfirmedScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Stack(
+      body: Column(
         children: [
-          Column(
-            children: [
-              Center(
-                child: Container(
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/mask_group.png'),
-                    ),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin:
-                            const EdgeInsets.only(right: 55, left: 55, top: 55),
-                        height: MediaQuery.of(context).size.height / 2.8,
-                        decoration: const BoxDecoration(
-                          image: DecorationImage(
-                            image: AssetImage(
-                                'assets/images/confirmed_screen.png'),
-                          ),
-                        ),
-                      ),
-                      const Text(
-                        'Order Confirmed!',
-                        style: TextStyle(
-                            fontWeight: FontWeight.w900, fontSize: 25),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: const Text(
-                          'Your order has been confirmed, we will send you confirmation email shortly.',
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      InkWell(
-                        onTap: () {},
-                        child: Container(
-                          margin: const EdgeInsets.all(10),
-                          height: 45,
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(5),
-                              color: Theme.of(context).colorScheme.tertiary),
-                          child: const Center(
-                            child: Text('Go to orders'),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+          Center(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/images/mask_group.png'),
                 ),
               ),
-            ],
-          ),
-          Positioned(
-            bottom: 0,
-            child: InkWell(
-              onTap: () {},
-              child: Container(
-                height: 55,
-                width: MediaQuery.of(context).size.width,
-                decoration:
-                    BoxDecoration(color: Theme.of(context).colorScheme.primary),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Padding(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 55, left: 55, top: 55),
+                    height: MediaQuery.of(context).size.height / 2.8,
+                    decoration: const BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage('assets/images/confirmed_screen.png'),
+                      ),
+                    ),
+                  ),
+                  const Text(
+                    'Order Confirmed!',
+                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
+                  ),
+                  Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: Text(
-                      'Continue Shopping',
-                      style: TextStyle(
-                          color: Theme.of(context).colorScheme.onPrimary),
+                      'Your order has been confirmed, we will send you confirmation email shortly.',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 15, color: color.tertiary),
                     ),
                   ),
-                ),
+                  const SizedBox(
+                    height: 50,
+                  ),
+                ],
               ),
             ),
-          )
+          ),
+          const Spacer(),
+          GestureDetector(
+            onTap: () {},
+            child: Container(
+              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 27),
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: color.background),
+              child: Center(
+                child: Text('Go to orders',
+                    style: TextStyle(fontSize: 17, color: color.tertiary)),
+              ),
+            ),
+          ),
+          NavigationCard(text: 'Continue Shopping', onTap: () {})
         ],
       ),
     );
