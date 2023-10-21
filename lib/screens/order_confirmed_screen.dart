@@ -48,11 +48,13 @@ class OrderConfirmedScreen extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
                   ),
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.only(
+                        left: 45, right: 45, top: 8, bottom: 8),
                     child: Text(
                       'Your order has been confirmed, we will send you confirmation email shortly.',
                       textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 15, color: color.tertiary),
+                      style: TextStyle(
+                          fontSize: 15, color: color.tertiary, height: 1.3),
                     ),
                   ),
                   const SizedBox(
