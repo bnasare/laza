@@ -21,67 +21,72 @@ class OrderConfirmedScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          Center(
-            child: Container(
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/mask_group.png'),
+            fit: BoxFit.fill,
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Container(
+              margin: const EdgeInsets.only(
+                  right: 55, left: 55, top: 50, bottom: 30),
+              height: MediaQuery.of(context).size.height / 2.8,
               decoration: const BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('assets/images/mask_group.png'),
+                  image: AssetImage('assets/images/confirmed_screen.png'),
+                  fit: BoxFit.fill,
                 ),
               ),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Container(
-                    margin: const EdgeInsets.only(right: 55, left: 55, top: 55),
-                    height: MediaQuery.of(context).size.height / 2.8,
-                    decoration: const BoxDecoration(
-                      image: DecorationImage(
-                        image: AssetImage('assets/images/confirmed_screen.png'),
+            ),
+            const Text(
+              'Order Confirmed!',
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.only(left: 15, right: 15, top: 5, bottom: 8),
+              child: Text(
+                'Your order has been confirmed, we will send you a confirmation email shortly.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 15,
+                  color: color.tertiary,
+                  height: 1.3,
+                ),
+              ),
+            ),
+            const Spacer(),
+            Column(
+              children: [
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    margin:
+                        const EdgeInsets.only(left: 10, right: 10, bottom: 27),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: color.background,
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Go to orders',
+                        style: TextStyle(fontSize: 17, color: color.tertiary),
                       ),
                     ),
                   ),
-                  const Text(
-                    'Order Confirmed!',
-                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 28),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 45, right: 45, top: 8, bottom: 8),
-                    child: Text(
-                      'Your order has been confirmed, we will send you confirmation email shortly.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                          fontSize: 15, color: color.tertiary, height: 1.3),
-                    ),
-                  ),
-                  const SizedBox(
-                    height: 50,
-                  ),
-                ],
-              ),
+                ),
+                NavigationCard(text: 'Continue Shopping', onTap: () {}),
+              ],
             ),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {},
-            child: Container(
-              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 27),
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: color.background),
-              child: Center(
-                child: Text('Go to orders',
-                    style: TextStyle(fontSize: 17, color: color.tertiary)),
-              ),
-            ),
-          ),
-          NavigationCard(text: 'Continue Shopping', onTap: () {})
-        ],
+          ],
+        ),
       ),
     );
   }
