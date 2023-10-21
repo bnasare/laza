@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/auth_text_field.dart';
 import '../widgets/custom_back_button.dart';
@@ -12,7 +13,6 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    bool state = false;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -26,63 +26,92 @@ class LoginScreen extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(children: [
-          RichText(
-            text: const TextSpan(
-              text: "Welcome\n",
-              style: TextStyle(
-                color: Color(0xFF1D1E20),
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
-                height: 0,
-                letterSpacing: -0.21,
+        child:
+            Column(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.1),
+            child: RichText(
+              textAlign: TextAlign.center,
+              text: const TextSpan(
+                text: "Welcome\n",
+                style: TextStyle(
+                  color: Color(0xFF1D1E20),
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                  height: 0,
+                  letterSpacing: -0.21,
+                ),
+                children: [
+                  TextSpan(
+                    text: "Please enter your data to continue",
+                    style: TextStyle(
+                      color: Color(0xFF8F959E),
+                      fontSize: 15,
+                      fontWeight: FontWeight.w400,
+                      height: 0,
+                    ),
+                  ),
+                ],
               ),
+            ),
+          ),
+          Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                TextSpan(
-                  text: "Please enter your data to continue",
-                  style: TextStyle(
-                    color: Color(0xFF8F959E),
-                    fontSize: 15,
-                    fontWeight: FontWeight.w400,
-                    height: 0,
+                AuthTextField(
+                  controller: TextEditingController(),
+                  labelText: "Username",
+                  trailingWidget: const Icon(
+                    Icons.check_outlined,
                   ),
                 ),
+                AuthTextField(
+                  controller: TextEditingController(),
+                  labelText: "Password",
+                  // trailingWidget: const Text(
+                  //   "Strong",
+                  //   style: TextStyle(
+                  //     color: Color(0xFF34C559),
+                  //     fontSize: 11,
+                  //     fontWeight: FontWeight.w400,
+                  //   ),
+                  // ),
+                  trailingText: "Strong",
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                const Text(
+                  "Forgot password??",
+                  style: TextStyle(
+                    color: Color(0xFFEA4335),
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ]),
+          Padding(
+            padding: EdgeInsets.only(
+                bottom: MediaQuery.of(context).size.height * 0.05),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  "Remember me",
+                  style: GoogleFonts.manrope(
+                    color: const Color(0xFF1D1E20),
+                    fontSize: 13,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const CustomSwitch(),
               ],
             ),
           ),
-          AuthTextField(
-            controller: TextEditingController(),
-            labelText: "Username",
-            trailingWidget: const Icon(
-              Icons.check_outlined,
-              color: Colors.green,
-            ),
-          ),
-          AuthTextField(
-            controller: TextEditingController(),
-            labelText: "Password",
-            trailingWidget: const Text(
-              "Strong",
-              style: TextStyle(
-                color: Color(0xFF34C559),
-                fontSize: 11,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-          ),
-          const Text(
-            "Forgot password??",
-            style: TextStyle(
-              color: Color(0xFFEA4335),
-              fontSize: 15,
-              fontWeight: FontWeight.w400,
-            ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [const Text("Remember me"), MySwitch(state: state)],
-          ),
           RichText(
+            textAlign: TextAlign.center,
             text: const TextSpan(
               text: "By connecting you account, confirm that you agree to our",
               style: TextStyle(
@@ -93,7 +122,7 @@ class LoginScreen extends StatelessWidget {
               ),
               children: [
                 TextSpan(
-                  text: "terms and conditions",
+                  text: " Terms and conditions",
                   style: TextStyle(
                     color: Color(0xFF1D1E20),
                     fontSize: 13,

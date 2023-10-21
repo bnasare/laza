@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:timer_count_down/timer_count_down.dart';
 
 import '../widgets/custom_back_button.dart';
 import '../widgets/verification_code_container.dart';
@@ -27,7 +28,7 @@ class CodeVerificationScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 const Text(
                   "Verification Code",
@@ -40,25 +41,44 @@ class CodeVerificationScreen extends StatelessWidget {
                   ),
                 ),
                 SvgPicture.asset("assets/images/cloud.svg"),
-                const Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    CodeContainer(),
-                    CodeContainer(),
-                    CodeContainer(),
-                    CodeContainer()
-                  ],
-                ),
-                const Text(
-                  "Resend confirmation code",
-                  style: TextStyle(
-                    color: Color(0xFF8F959E),
-                    fontSize: 13,
-                    fontFamily: 'Inter',
-                    fontWeight: FontWeight.w400,
-                    // height: 0.11,
+                Padding(
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).size.height * 0.2),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      CodeContainer(),
+                      CodeContainer(),
+                      CodeContainer(),
+                      CodeContainer()
+                    ],
                   ),
-                )
+                ),
+                Countdown(
+                  seconds: 60,
+                  build: (BuildContext context, double time) => RichText(
+                    text: TextSpan(
+                      text: time.toString(),
+                      style: const TextStyle(
+                        color: Color(0xFF1D1E20),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                        // height: 0.11,
+                      ),
+                      children: const [
+                        TextSpan(
+                          text: " Resend confirmation code",
+                          style: TextStyle(
+                            color: Color(0xFF8F959E),
+                            fontSize: 13,
+                            fontWeight: FontWeight.w400,
+                            // height: 0.11,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
               ]),
         ),
         bottomNavigationBar: BottomAppBar(
@@ -71,7 +91,6 @@ class CodeVerificationScreen extends StatelessWidget {
               style: TextStyle(
                 color: Color(0xFFFEFEFE),
                 fontSize: 17,
-                fontFamily: 'Inter',
                 fontWeight: FontWeight.w500,
                 height: 0.06,
               ),

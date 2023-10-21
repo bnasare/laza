@@ -26,6 +26,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Text(
               "Forgot password",
@@ -33,16 +34,21 @@ class ForgotPasswordScreen extends StatelessWidget {
                 color: Color(0xFF1D1E20),
                 fontSize: 28,
                 fontWeight: FontWeight.w600,
-                height: 0.04,
+                // height: 0.04,
                 letterSpacing: -0.21,
               ),
             ),
             SvgPicture.asset("assets/images/cloud.svg"),
-            AuthTextField(
-                controller: TextEditingController(),
-                labelText: "Email Address"),
+            Padding(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).size.height * 0.2),
+              child: AuthTextField(
+                  controller: TextEditingController(),
+                  labelText: "Email Address"),
+            ),
             const Text(
               "Please write your email to receive a confirmation code to set a new password",
+              textAlign: TextAlign.center,
               style: TextStyle(
                 color: Color(0xFF8F959E),
                 fontSize: 13,
