@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/screens/review_screen.dart';
+import 'package:laza/screens/user_address_screen.dart';
 
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: Styles().themeData(context),
       debugShowCheckedModeBanner: false,
       routes: AppRoutes().getRoutes(),
-      initialRoute: ReviewScreen.routeName,
+      initialRoute: UserAddressScreen.routeName,
     );
   }
 }

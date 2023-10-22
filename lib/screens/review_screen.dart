@@ -62,10 +62,8 @@ class _ReviewScreenState extends State<ReviewScreen> {
                       controller: nameController,
                       hintText: 'Type your name',
                       maxLines: 1,
-                      contentPadding: const EdgeInsets.only(
-                        left: 15,
-                        right: 15,
-                      ),
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 15),
                     ),
                   ),
                   const Text(
