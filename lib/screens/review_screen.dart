@@ -14,14 +14,14 @@ class ReviewScreen extends StatefulWidget {
 }
 
 class _ReviewScreenState extends State<ReviewScreen> {
+  double sliderValue = 4;
+
+  TextEditingController nameController = TextEditingController();
+  TextEditingController describeExperienceController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-    double sliderValue = 2.5;
-
     final color = Theme.of(context).colorScheme;
-    TextEditingController nameController = TextEditingController();
-    TextEditingController describeExperienceController =
-        TextEditingController();
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -38,86 +38,101 @@ class _ReviewScreenState extends State<ReviewScreen> {
         title: Text(
           'Add Review',
           style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.w600,
-              color: color.secondary),
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+            color: color.secondary,
+          ),
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Name',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 30),
-                  child: CustomTextfield(
-                    fixedHeight: 40,
-                    controller: nameController,
-                    hintText: 'Type your name',
-                    contentPadding: const EdgeInsets.only(
-                        left: 15, right: 15, top: 0, bottom: 0),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'Name',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
                   ),
-                ),
-                const Text(
-                  'How was your experience ?',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10, bottom: 20),
-                  child: CustomTextfield(
-                    fixedHeight: 40,
-                    controller: describeExperienceController,
-                    hintText: 'Describe your experience',
-                    contentPadding: const EdgeInsets.only(
-                        left: 15, right: 15, top: 15, bottom: 0),
-                  ),
-                ),
-                const Text(
-                  'Star',
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Text(
-                      '0.0',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                    ),
-                    Expanded(
-                      child: Slider(
-                        value: sliderValue,
-                        min: 0.0,
-                        max: 5.0,
-                        onChanged: (value) {
-                          setState(() {
-                            sliderValue = value;
-                          });
-                        },
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 30),
+                    child: CustomTextfield(
+                      controller: nameController,
+                      hintText: 'Type your name',
+                      maxLines: 1,
+                      contentPadding: const EdgeInsets.only(
+                        left: 15,
+                        right: 15,
                       ),
                     ),
-                    const Text(
-                      '5.0',
-                      style:
-                          TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  ),
+                  const Text(
+                    'How was your experience ?',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 10, bottom: 20),
+                    child: CustomTextfield(
+                      controller: describeExperienceController,
+                      hintText: 'Describe your experience',
+                      maxLines: 12,
+                      contentPadding: const EdgeInsets.only(
+                          left: 15, right: 15, top: 30, bottom: 0),
                     ),
-                  ],
-                )
-              ],
+                  ),
+                  const Text(
+                    'Star',
+                    style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        '0.0',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w500),
+                      ),
+                      Expanded(
+                          child: SliderTheme(
+                        data: const SliderThemeData(
+                          trackHeight: 8.0,
+                          trackShape: RoundedRectSliderTrackShape(),
+                        ),
+                        child: Slider.adaptive(
+                          thumbColor: color.primary,
+                          inactiveColor: color.background,
+                          value: sliderValue,
+                          activeColor: color.background,
+                          min: 0.0,
+                          max: 5.0,
+                          onChanged: (value) {
+                            setState(() {
+                              sliderValue = value;
+                            });
+                          },
+                        ),
+                      )),
+                      const Text(
+                        '5.0',
+                        style: TextStyle(
+                            fontSize: 17, fontWeight: FontWeight.w500),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Spacer(),
-          NavigationCard(text: 'Submit Review', onTap: () {}),
-        ],
+          ],
+        ),
+      ),
+      bottomNavigationBar: NavigationCard(
+        text: 'Submit Review',
+        onTap: () {},
       ),
     );
   }
