@@ -24,10 +24,7 @@ class _ReviewScreenState extends State<ReviewScreen> {
     final color = Theme.of(context).colorScheme;
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.only(left: 13.0),
           child: CustomBackButton(

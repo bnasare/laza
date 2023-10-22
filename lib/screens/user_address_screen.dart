@@ -23,8 +23,6 @@ class UserAddressScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.transparent,
-        elevation: 0,
         title: Text(
           'Address',
           style: TextStyle(
