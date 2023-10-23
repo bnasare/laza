@@ -15,7 +15,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-
+    final TextEditingController searchController = TextEditingController();
     return Scaffold(
       appBar: AppBar(
         leading: Padding(
@@ -64,36 +64,47 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                    width: horizontalConverter(context, 275),
-                    height: verticalConverter(context, 50),
-                    decoration: BoxDecoration(
-                        color: color.background,
-                        borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding:
-                          EdgeInsets.only(left: horizontalConverter(context, 20)),
-                          child: Icon(
-                            Icons.search,
-                            size: 20,
-                            color: color.tertiary,
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                          EdgeInsets.only(left: horizontalConverter(context, 20)),
-                          child: Text(
-                            'Search...',
-                            style: TextStyle(
-                              color: color.tertiary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
+                      width: horizontalConverter(context, 275),
+                      height: verticalConverter(context, 50),
+                      decoration: BoxDecoration(
+                          color: color.background,
+                          borderRadius: BorderRadius.circular(10)),
+                      child: TextField(
+                        controller: searchController,
+                        maxLines: 1,
+                        keyboardType: TextInputType.text,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide: BorderSide.none,
                             ),
-                          ),
+                            label: Row(
+                              children: [
+                                Padding(
+                                  padding:
+                                  EdgeInsets.only(left: horizontalConverter(context, 20)),
+                                  child: Icon(
+                                    Icons.search,
+                                    size: 20,
+                                    color: color.tertiary,
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                  EdgeInsets.only(left: horizontalConverter(context, 20)),
+                                  child: Text(
+                                    'Search...',
+                                    style: TextStyle(
+                                      color: color.tertiary,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            )
                         ),
-                      ],
-                    ),
+                      )
                   ),
                   const Spacer(),
                   Container(
