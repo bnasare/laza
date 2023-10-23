@@ -5,7 +5,7 @@ import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/new_payment_details_screen.dart';
 import 'package:laza/screens/order_confirmed_screen.dart';
-
+import 'package:laza/screens/add_review_screen.dart';
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
 
@@ -34,6 +34,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       routes: AppRoutes().getRoutes(),
       initialRoute: NewPaymentDetailsScreen.routeName,
+
     );
   }
 }

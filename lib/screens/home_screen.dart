@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/widgets/brand_card.dart';
 import 'package:laza/widgets/product_card.dart';
-
 import '../widgets/bottom_appbar.dart';
 import '../widgets/custom_trailing_button.dart';
 
@@ -14,6 +13,14 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final TextEditingController searchController = TextEditingController();
+    List firstLines = [
+      'Nike Sportswear Club ',
+      'Trail Running Jacket Nike ',
+      'NO_NAME',
+      'NO_NAME'
+    ];
+    List secondLines = ['Fleece', 'Windrunner', null, null];
     double verticalConverter(double value) {
       double height = MediaQuery.of(context).size.height;
       double heightRatio = height / 812;
@@ -81,30 +88,38 @@ class HomeScreen extends StatelessWidget {
                     decoration: BoxDecoration(
                         color: color.background,
                         borderRadius: BorderRadius.circular(10)),
-                    child: Row(
-                      children: [
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: horizontalConverter(20)),
-                          child: Icon(
-                            Icons.search,
-                            size: 20,
-                            color: color.tertiary,
-                          ),
-                        ),
-                        Padding(
-                          padding:
-                              EdgeInsets.only(left: horizontalConverter(20)),
-                          child: Text(
-                            'Search...',
-                            style: TextStyle(
-                              color: color.tertiary,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w400,
+                    child: TextField(
+                      controller: searchController,
+                      decoration: InputDecoration(
+                        label: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: horizontalConverter(20)),
+                              child: Icon(
+                                Icons.search,
+                                size: 20,
+                                color: color.tertiary,
+                              ),
                             ),
-                          ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: horizontalConverter(20)),
+                              child: Text(
+                                'Search...',
+                                style: TextStyle(
+                                  color: color.tertiary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
-                      ],
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: BorderSide.none),
+                      ),
                     ),
                   ),
                   Expanded(child: Container()),
@@ -135,7 +150,7 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
-                  Expanded(child: Container()),
+                  const Spacer(),
                   Text(
                     'View All',
                     style: TextStyle(
@@ -184,7 +199,7 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
-                  Expanded(child: Container()),
+                  const Spacer(),
                   Text(
                     'View All',
                     style: TextStyle(
@@ -196,33 +211,26 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(20)),
-              child: Row(
-                children: [
-                  const ProductCard(
-                    assetName: 'card_1',
-                    firstLine: 'Nike Sportswear Club',
-                    secondLine: 'Fleece',
-                    price: 99,
+              padding: EdgeInsets.only(top: verticalConverter(10)),
+              child: SizedBox(
+                height: verticalConverter(700),
+                child: GridView.builder(
+                  itemCount: 4,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    childAspectRatio: 0.7,
+                    crossAxisCount: 2,
+                    mainAxisSpacing: verticalConverter(20),
+                    crossAxisSpacing: horizontalConverter(15),
                   ),
-                  Expanded(child: Container()),
-                  const ProductCard(
-                    assetName: 'card_2',
-                    firstLine: 'Trail Running Jacket Nike',
-                    secondLine: 'Windrunner',
-                    price: 99,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(5)),
-              child: Row(
-                children: [
-                  const ProductCard(assetName: 'card_3'),
-                  Expanded(child: Container()),
-                  const ProductCard(assetName: 'card_4'),
-                ],
+                  itemBuilder: (context, index) {
+                    return ProductCard(
+                      assetName: 'card_${index + 1}',
+                      firstLine: firstLines[index],
+                      secondLine: secondLines[index],
+                      price: 99,
+                    );
+                  },
+                ),
               ),
             ),
           ],
