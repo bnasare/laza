@@ -17,7 +17,7 @@ class ReviewCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            leading: Image.asset('assets/images/$assetName.png'),
+            leading: Image.asset('assets/images/$assetName.jpg'),
             title: Text(
               name,
               style: TextStyle(

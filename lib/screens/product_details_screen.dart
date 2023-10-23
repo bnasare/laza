@@ -191,7 +191,7 @@ class ProductDetailsScreen extends StatelessWidget {
                 SizedBox(
                   height: verticalConverter(context, 120),
                   child: const ReviewCard(
-                    assetName: 'face_1',
+                    assetName: 'face_3',
                     name: 'Ronald Richards',
                   ),
                 ),
