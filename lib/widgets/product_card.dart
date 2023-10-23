@@ -25,8 +25,13 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/images/$assetName.jpg',
+          ClipRRect(
+            child: Image.asset(
+              'assets/images/$assetName.jpg',
+              height: verticalConverter(context, 203),
+              width: horizontalConverter(context, 160),
+              fit: BoxFit.cover,
+            ),
           ),
           firstLine != null
           ? Text(
