@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../consts/sizing_config.dart';
+
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
@@ -16,28 +18,20 @@ class ProductCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double verticalConverter(double value) {
-      double height = MediaQuery.of(context).size.height;
-      double heightRatio = height / 812;
-      double newValue = heightRatio * value;
-      return newValue;
-    }
-
-    double horizontalConverter(double value) {
-      double width = MediaQuery.of(context).size.width;
-      double widthRatio = width / 375;
-      double newValue = widthRatio * value;
-      return newValue;
-    }
 
     return SizedBox(
-      height: verticalConverter(257),
-      width: horizontalConverter(160),
+      height: verticalConverter(context, 257),
+      width: horizontalConverter(context, 160),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Image.asset(
-            'assets/images/$assetName.png',
+          ClipRRect(
+            child: Image.asset(
+              'assets/images/$assetName.jpg',
+              height: verticalConverter(context, 203),
+              width: horizontalConverter(context, 160),
+              fit: BoxFit.cover,
+            ),
           ),
           firstLine != null
           ? Text(
