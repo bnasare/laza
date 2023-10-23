@@ -5,20 +5,36 @@ import 'package:laza/widgets/new_custom_textfield.dart';
 import '../widgets/custom_back_button.dart';
 import '../widgets/navigation_card.dart';
 
-class UserAddressScreen extends StatelessWidget {
+class UserAddressScreen extends StatefulWidget {
   static const routeName = '/user_address';
 
   const UserAddressScreen({Key? key}) : super(key: key);
 
   @override
+  State<UserAddressScreen> createState() => _UserAddressScreenState();
+}
+
+class _UserAddressScreenState extends State<UserAddressScreen> {
+  TextEditingController nameController = TextEditingController();
+  TextEditingController countryController = TextEditingController();
+  TextEditingController cityController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  bool isPrimaryAddress = true;
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    countryController.dispose();
+    cityController.dispose();
+    phoneController.dispose();
+    addressController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    TextEditingController nameController = TextEditingController();
-    TextEditingController countryController = TextEditingController();
-    TextEditingController cityController = TextEditingController();
-    TextEditingController phoneController = TextEditingController();
-    TextEditingController addressController = TextEditingController();
-    bool isPrimaryAddress = true;
 
     return Scaffold(
       appBar: AppBar(
@@ -54,7 +70,7 @@ class UserAddressScreen extends StatelessWidget {
                   width: double.infinity,
                   child: CustomTextfield(
                     controller: nameController,
-                    hintText: 'Type your name',
+                    hintText: 'Mrh Raju',
                     contentPadding: const EdgeInsets.symmetric(horizontal: 15),
                     maxLines: 1,
                   ),

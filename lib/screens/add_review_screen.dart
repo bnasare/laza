@@ -20,6 +20,13 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
   TextEditingController describeExperienceController = TextEditingController();
 
   @override
+  void dispose() {
+    nameController.dispose();
+    describeExperienceController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
 

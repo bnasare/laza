@@ -37,8 +37,7 @@ class AppRoutes {
       CartScreen.routeName: (context) => const CartScreen(),
       UserAddressScreen.routeName: (context) => const UserAddressScreen(),
       PaymentDetailsScreen.routeName: (context) => const PaymentDetailsScreen(),
-      NewPaymentDetailsScreen.routeName: (context) =>
-          const NewPaymentDetailsScreen(),
+      NewPaymentDetailsScreen.routeName: (context) => NewPaymentDetailsScreen(),
       OrderConfirmedScreen.routeName: (context) => const OrderConfirmedScreen(),
       AllProductsScreen.routeName: (context) => const AllProductsScreen(),
       WishlistScreen.routeName: (context) => const WishlistScreen(),
