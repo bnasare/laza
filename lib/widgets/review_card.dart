@@ -11,13 +11,20 @@ class ReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
     return SizedBox(
-      height: verticalConverter(context, 113),
+      height: verticalConverter(context, 120),
       width: horizontalConverter(context, 335),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           ListTile(
-            leading: Image.asset('assets/images/$assetName.jpg'),
+            leading: ClipOval(
+              child: Image.asset(
+                'assets/images/$assetName.jpg',
+                width: horizontalConverter(context, 40),
+                height: verticalConverter(context, 40),
+                fit: BoxFit.cover,
+              ),
+            ),
             title: Text(
               name,
               style: TextStyle(
@@ -71,10 +78,26 @@ class ReviewCard extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.star, size: 13, color: color.onTertiary,),
-                      Icon(Icons.star, size: 13, color: color.onTertiary,),
-                      Icon(Icons.star, size: 13, color: color.onTertiary,),
-                      Icon(Icons.star, size: 13, color: color.onTertiary,),
+                      Icon(
+                        Icons.star,
+                        size: 13,
+                        color: color.onTertiary,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 13,
+                        color: color.onTertiary,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 13,
+                        color: color.onTertiary,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 13,
+                        color: color.onTertiary,
+                      ),
                       const Icon(Icons.star_outline, size: 13),
                     ],
                   )
@@ -83,7 +106,8 @@ class ReviewCard extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: horizontalConverter(context, 20)),
+            padding: EdgeInsets.symmetric(
+                horizontal: horizontalConverter(context, 20)),
             child: Text(
               'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget vitae amet...',
               style: TextStyle(
