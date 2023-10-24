@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/widgets/double_header_widget.dart';
 import 'package:laza/widgets/review_card.dart';
 import 'package:laza/widgets/size_card.dart';
+
 import '../consts/sizing_config.dart';
 import '../widgets/custom_back_button.dart';
 import '../widgets/custom_trailing_button.dart';
@@ -36,14 +37,15 @@ class ProductDetailsScreen extends StatelessWidget {
                     Row(
                       children: [
                         Padding(
-                            padding: EdgeInsets.only(left: horizontalConverter(context, 20)),
+                            padding: EdgeInsets.only(
+                                left: horizontalConverter(context, 20)),
                             child: CustomBackButton(
                               backgroundColor: color.onPrimary,
-                            )
-                        ),
+                            )),
                         const Spacer(),
                         Padding(
-                          padding: EdgeInsets.only(right: horizontalConverter(context, 20)),
+                          padding: EdgeInsets.only(
+                              right: horizontalConverter(context, 20)),
                           child: CustomTrailingButton(
                             backgroundColor: color.onPrimary,
                             icon: IconlyLight.bag,
@@ -135,15 +137,12 @@ class ProductDetailsScreen extends StatelessWidget {
                       0,
                     ),
                     child: const Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         SizeCard(size: 'S'),
-                        Spacer(),
                         SizeCard(size: 'M'),
-                        Spacer(),
                         SizeCard(size: 'L'),
-                        Spacer(),
                         SizeCard(size: 'XL'),
-                        Spacer(),
                         SizeCard(size: '2XL'),
                       ],
                     )),
@@ -165,7 +164,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     text: TextSpan(children: [
                       TextSpan(
                         text:
-                        'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel with',
+                            'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel with',
                         style: TextStyle(
                             color: color.tertiary,
                             fontWeight: FontWeight.w400,
@@ -210,16 +209,14 @@ class ProductDetailsScreen extends StatelessWidget {
                               style: TextStyle(
                                   fontSize: 15,
                                   fontWeight: FontWeight.w600,
-                                  color: color.secondary
-                              ),
+                                  color: color.secondary),
                             ),
                             Text(
                               'With VAT,SD',
                               style: TextStyle(
                                   fontSize: 11,
                                   fontWeight: FontWeight.w400,
-                                  color: color.tertiary
-                              ),
+                                  color: color.tertiary),
                             ),
                           ],
                         ),
@@ -229,19 +226,16 @@ class ProductDetailsScreen extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 17,
                               fontWeight: FontWeight.w600,
-                              color: color.secondary
-                          ),
+                              color: color.secondary),
                         )
                       ],
-                    )
-                ),
+                    )),
               ],
             ),
           ),
-          const Spacer(),
-          NavigationCard(text: 'Add to Cart', onTap: () {}),
         ],
       ),
+      bottomNavigationBar: NavigationCard(text: 'Add to Cart', onTap: () {}),
     );
   }
 }
