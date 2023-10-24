@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../widgets/auth_text_field.dart';
 import '../widgets/custom_back_button.dart';
+import '../widgets/navbar_button.dart';
 import '../widgets/switch.dart';
 
 class SignUpScreen extends StatelessWidget {
@@ -81,11 +82,14 @@ class SignUpScreen extends StatelessWidget {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text("Remember me", style: GoogleFonts.manrope(
-                      color: const Color(0xFF1D1E20),
-                      fontSize: 13,
-                      fontWeight: FontWeight.w500,
-                    ),),
+                    Text(
+                      "Remember me",
+                      style: GoogleFonts.manrope(
+                        color: const Color(0xFF1D1E20),
+                        fontSize: 13,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                     const CustomSwitch(),
                   ],
                 ),
@@ -93,21 +97,6 @@ class SignUpScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: BottomAppBar(
-          height: 75,
-          color: const Color(0xFF9775FA),
-          child: TextButton(
-              onPressed: () {},
-              child: const Text(
-                "Sign Up",
-                style: TextStyle(
-                  color: Color(0xFFFEFEFE),
-                  fontSize: 17,
-                  fontFamily: 'Inter',
-                  fontWeight: FontWeight.w500,
-                  height: 0.06,
-                ),
-              )),
-        ));
+        bottomNavigationBar: const NavBarButton(text: "Sign Up"));
   }
 }

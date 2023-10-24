@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
 import '../widgets/custom_back_button.dart';
+import '../widgets/navbar_button.dart';
 import '../widgets/verification_code_container.dart';
 
 class CodeVerificationScreen extends StatelessWidget {
@@ -81,21 +82,8 @@ class CodeVerificationScreen extends StatelessWidget {
                 ),
               ]),
         ),
-        bottomNavigationBar: BottomAppBar(
-          height: 75,
-          color: const Color(0xFF9775FA),
-          child: TextButton(
-            onPressed: () {},
-            child: const Text(
-              "Confirm Code",
-              style: TextStyle(
-                color: Color(0xFFFEFEFE),
-                fontSize: 17,
-                fontWeight: FontWeight.w500,
-                height: 0.06,
-              ),
-            ),
-          ),
+        bottomNavigationBar: const NavBarButton(
+          text: "Confirm Code",
         ),
       ),
     );
