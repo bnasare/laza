@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/screens/home_screen.dart';
-import 'package:laza/screens/new_payment_details_screen.dart';
-import 'package:laza/screens/product_details_screen.dart';
 
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
+import 'screens/product_details_screen.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -32,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: Styles().themeData(context),
       debugShowCheckedModeBanner: false,
       routes: AppRoutes().getRoutes(),
-      initialRoute: HomeScreen.routeName,
+      initialRoute: ProductDetailsScreen.routeName,
     );
   }
 }
