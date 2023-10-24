@@ -24,6 +24,8 @@ class _NewPaymentDetailsScreenState extends State<NewPaymentDetailsScreen> {
   void dispose() {
     cardController.dispose();
     nameController.dispose();
+    expiryDateController.dispose();
+    cvvController.dispose();
     super.dispose();
   }
 
