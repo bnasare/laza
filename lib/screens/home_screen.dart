@@ -1,29 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/widgets/brand_card.dart';
+import 'package:laza/widgets/drawer.dart';
 import 'package:laza/widgets/product_card.dart';
 
 import '../consts/sizing_config.dart';
 import '../widgets/bottom_appbar.dart';
 import '../widgets/custom_trailing_button.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
 
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
     final TextEditingController searchController = TextEditingController();
     return Scaffold(
+      key: _scaffoldKey,
+      drawerEnableOpenDragGesture: true,
+      drawer: const Drawers(
+        username: 'Mrh Raju',
+        profile: 'assets/images/profile.png',
+        orders: '3 orders',
+      ),
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: CustomTrailingButton(
-            backgroundColor: color.background,
-            icon: Icons.menu,
-          ),
+        automaticallyImplyLeading: true,
+        leading: GestureDetector(
+          onTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+          child: Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Image.asset('assets/images/home_drawer.png')),
         ),
         actions: [
           Padding(
@@ -36,7 +52,8 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: horizontalConverter(context, 20)),
+        padding:
+            EdgeInsets.symmetric(horizontal: horizontalConverter(context, 20)),
         child: ListView(
           children: [
             Padding(
@@ -81,8 +98,8 @@ class HomeScreen extends StatelessWidget {
                             label: Row(
                               children: [
                                 Padding(
-                                  padding:
-                                  EdgeInsets.only(left: horizontalConverter(context, 20)),
+                                  padding: EdgeInsets.only(
+                                      left: horizontalConverter(context, 20)),
                                   child: Icon(
                                     Icons.search,
                                     size: 20,
@@ -90,8 +107,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                  EdgeInsets.only(left: horizontalConverter(context, 20)),
+                                  padding: EdgeInsets.only(
+                                      left: horizontalConverter(context, 20)),
                                   child: Text(
                                     'Search...',
                                     style: TextStyle(
@@ -102,10 +119,8 @@ class HomeScreen extends StatelessWidget {
                                   ),
                                 ),
                               ],
-                            )
-                        ),
-                      )
-                  ),
+                            )),
+                      )),
                   const Spacer(),
                   Container(
                     height: verticalConverter(context, 50),
