@@ -36,7 +36,8 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: horizontalConverter(context, 20)),
+        padding:
+            EdgeInsets.symmetric(horizontal: horizontalConverter(context, 20)),
         child: ListView(
           children: [
             Padding(
@@ -64,47 +65,47 @@ class HomeScreen extends StatelessWidget {
               child: Row(
                 children: [
                   Container(
-                      width: horizontalConverter(context, 275),
-                      height: verticalConverter(context, 50),
-                      decoration: BoxDecoration(
-                          color: color.background,
-                          borderRadius: BorderRadius.circular(10)),
-                      child: TextField(
-                        controller: searchController,
-                        maxLines: 1,
-                        keyboardType: TextInputType.text,
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                              borderSide: BorderSide.none,
-                            ),
-                            label: Row(
-                              children: [
-                                Padding(
-                                  padding:
-                                  EdgeInsets.only(left: horizontalConverter(context, 20)),
-                                  child: Icon(
-                                    Icons.search,
-                                    size: 20,
-                                    color: color.tertiary,
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                  EdgeInsets.only(left: horizontalConverter(context, 20)),
-                                  child: Text(
-                                    'Search...',
-                                    style: TextStyle(
-                                      color: color.tertiary,
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w400,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            )
+                    width: horizontalConverter(context, 275),
+                    height: verticalConverter(context, 50),
+                    decoration: BoxDecoration(
+                        color: color.background,
+                        borderRadius: BorderRadius.circular(10)),
+                    child: TextField(
+                      controller: searchController,
+                      maxLines: 1,
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
                         ),
-                      )
+                        label: Row(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: horizontalConverter(context, 20)),
+                              child: Icon(
+                                Icons.search,
+                                size: 20,
+                                color: color.tertiary,
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                  left: horizontalConverter(context, 20)),
+                              child: Text(
+                                'Search...',
+                                style: TextStyle(
+                                  color: color.tertiary,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ),
                   const Spacer(),
                   Container(
@@ -198,29 +199,53 @@ class HomeScreen extends StatelessWidget {
               padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
                 children: [
-                  const ProductCard(
-                    assetName: 'card_1',
-                    firstLine: 'Nike Sportswear Club',
-                    secondLine: 'Fleece',
+                  ProductCard(
+                    assetName: products[0]['productAsset'].toString(),
+                    productName: products[0]['productName'].toString(),
                     price: 99,
                   ),
-                  Expanded(child: Container()),
-                  const ProductCard(
-                    assetName: 'card_2',
-                    firstLine: 'Trail Running Jacket Nike',
-                    secondLine: 'Windrunner',
+                  const Spacer(),
+                  ProductCard(
+                    assetName: products[1]['productAsset'].toString(),
+                    productName: products[1]['productName'].toString(),
                     price: 99,
                   ),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 5)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
                 children: [
-                  const ProductCard(assetName: 'card_3'),
-                  Expanded(child: Container()),
-                  const ProductCard(assetName: 'card_4'),
+                  ProductCard(
+                    assetName: products[2]['productAsset'].toString(),
+                    productName: products[2]['productName'].toString(),
+                    price: 99,
+                  ),
+                  const Spacer(),
+                  ProductCard(
+                    assetName: products[3]['productAsset'].toString(),
+                    productName: products[3]['productName'].toString(),
+                    price: 99,
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
+              child: Row(
+                children: [
+                  ProductCard(
+                    assetName: products[4]['productAsset'].toString(),
+                    productName: products[4]['productName'].toString(),
+                    price: 99,
+                  ),
+                  const Spacer(),
+                  ProductCard(
+                    assetName: products[5]['productAsset'].toString(),
+                    productName: products[5]['productName'].toString(),
+                    price: 99,
+                  ),
                 ],
               ),
             ),
@@ -230,4 +255,31 @@ class HomeScreen extends StatelessWidget {
       bottomNavigationBar: const CustomBottomNavigation(selectedIndex: 0),
     );
   }
+
+  static const products = [
+    {
+      'productName': 'Nike Tech Fleece Lilac Purple Full Zip Jacket',
+      'productAsset': 'card_5'
+    },
+    {
+      "productName": "Nike Men's Sportswear Club Fleece",
+      'productAsset': 'card_3'
+    },
+    {
+      "productName": "Nike SB Icon Pullover Skate Hoodie",
+      'productAsset': 'card_4'
+    },
+    {
+      "productName": "Champion Men's Trail Running Hoodie",
+      'productAsset': 'card_2'
+    },
+    {
+      "productName": "Nike Sportswear Essential Zip-Up Hoodie",
+      'productAsset': 'card_6'
+    },
+    {
+      "productName": "Nike Double Logo Sportswear Club Fleece",
+      'productAsset': 'card_1'
+    },
+  ];
 }
