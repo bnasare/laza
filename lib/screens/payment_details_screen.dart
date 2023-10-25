@@ -215,17 +215,19 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 10),
-                  const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Save as primary address',
-                        style: TextStyle(
-                            fontSize: 15, fontWeight: FontWeight.w500),
-                      ),
-                      CustomSwitch(initialState: true)
-                    ],
+                  const Padding(
+                    padding: EdgeInsets.only(top: 10, bottom: 40),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'Save card info',
+                          style: TextStyle(
+                              fontSize: 15, fontWeight: FontWeight.w500),
+                        ),
+                        CustomSwitch(initialState: true)
+                      ],
+                    ),
                   ),
                 ],
               ),
@@ -233,7 +235,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationCard(text: 'Save Address', onTap: () {}),
+      bottomNavigationBar: NavigationCard(text: 'Save Card', onTap: () {}),
     );
   }
 }
