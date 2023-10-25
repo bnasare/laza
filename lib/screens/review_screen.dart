@@ -79,7 +79,7 @@ class ReviewScreen extends StatelessWidget {
                 ],
               ),
               trailing: SizedBox(
-                width: horizontalConverter(context, 120),
+                width: horizontalConverter(context, 125),
                 height: verticalConverter(context, 35),
                 child: ElevatedButton(
                   onPressed: () {},
@@ -89,6 +89,7 @@ class ReviewScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.edit_outlined,

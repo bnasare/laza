@@ -48,30 +48,33 @@ class ReviewCard extends StatelessWidget {
             ],
           ),
           trailing: SizedBox(
-            width: horizontalConverter(context, 65),
+            width: horizontalConverter(context, 70),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
-                  children: [
-                    Text(
-                      '4.8',
-                      style: TextStyle(
-                        color: color.secondary,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w500,
+                RichText(
+                  softWrap: true,
+                  text: TextSpan(
+                    children: [
+                      TextSpan(
+                        text: '4.8',
+                        style: TextStyle(
+                          color: color.secondary,
+                          fontSize: 15,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
-                    ),
-                    Text(
-                      ' rating',
-                      style: TextStyle(
-                        color: color.tertiary,
-                        fontWeight: FontWeight.w400,
-                        fontSize: 11,
-                      ),
-                    )
-                  ],
+                      TextSpan(
+                        text: ' ratings',
+                        style: TextStyle(
+                          color: color.tertiary,
+                          fontWeight: FontWeight.w400,
+                          fontSize: 11,
+                        ),
+                      )
+                    ]
+                  )
                 ),
                 Row(
                   children: [
