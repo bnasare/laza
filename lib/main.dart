@@ -1,5 +1,3 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,10 +17,11 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     GoogleFonts.config.allowRuntimeFetching = false;
     runApp(
-      DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(),
-      ),
+      // DevicePreview(
+      // enabled: !kReleaseMode,
+      // builder: (context) =>
+      const MyApp(),
+      // ),
     );
   });
 }
