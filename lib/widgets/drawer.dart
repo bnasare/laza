@@ -25,11 +25,10 @@ class _DrawersState extends State<Drawers> {
       child: ListView(
         children: <Widget>[
           ListTile(
-              leading: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset('assets/images/drawer_vector.png'))),
+              onTap: () {
+                Navigator.pop(context);
+              },
+              leading: Image.asset('assets/images/drawer_vector.png')),
           ListTile(
             leading: Image.asset(widget.profile),
             title: Text(
@@ -66,60 +65,46 @@ class _DrawersState extends State<Drawers> {
                   });
                 }),
           ),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.dangerCircle),
-              title: Text('Account Information'),
-            ),
+            leading: const Icon(IconlyLight.dangerCircle),
+            title: const Text('Account Information'),
           ),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.lock),
-              title: Text('Password'),
-            ),
+            leading: const Icon(IconlyLight.lock),
+            title: const Text('Password'),
           ),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.bag),
-              title: Text('Order'),
-            ),
+            leading: const Icon(IconlyLight.bag),
+            title: const Text('Order'),
           ),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.wallet),
-              title: Text('My Cards'),
-            ),
+            leading: const Icon(IconlyLight.wallet),
+            title: const Text('My Cards'),
           ),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.heart),
-              title: Text('Wishlist'),
-            ),
+            leading: const Icon(IconlyLight.heart),
+            title: const Text('Wishlist'),
           ),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.setting),
-              title: Text('Settings'),
-            ),
+            leading: const Icon(IconlyLight.setting),
+            title: const Text('Settings'),
           ),
           const Spacer(),
-          GestureDetector(
+          ListTile(
             onTap: () {},
-            child: ListTile(
-              leading: Icon(
-                IconlyLight.logout,
-                color: color.onBackground,
-              ),
-              title: Text(
-                'Logout',
-                style: TextStyle(color: color.onBackground),
-              ),
+            leading: Icon(
+              IconlyLight.logout,
+              color: color.onBackground,
+            ),
+            title: Text(
+              'Logout',
+              style: TextStyle(color: color.onBackground),
             ),
           ),
         ],
