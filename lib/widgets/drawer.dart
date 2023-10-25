@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/widgets/switch.dart';
 
 class Drawers extends StatefulWidget {
   final String username;
@@ -19,99 +20,83 @@ class _DrawersState extends State<Drawers> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    bool isSwitched = false;
+
     return Drawer(
       width: 300,
-      child: ListView(
-        children: <Widget>[
-          ListTile(
-              leading: GestureDetector(
-                  onTap: () {
-                    Navigator.pop(context);
-                  },
-                  child: Image.asset('assets/images/drawer_vector.png'))),
-          ListTile(
-            leading: Image.asset(widget.profile),
-            title: Text(
-              widget.username,
-              style: const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-            ),
-            subtitle: const Text(
-              'Verified Profile',
-              style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
-            ),
-            trailing: Container(
-              width: 66,
-              height: 32,
-              decoration: BoxDecoration(
-                  color: color.background,
-                  borderRadius: BorderRadius.circular(5)),
-              child: Center(
-                child: Text(
-                  widget.orders,
-                  style: const TextStyle(
-                      fontSize: 11, fontWeight: FontWeight.w500),
+      child: SafeArea(
+        child: Column(
+          children: <Widget>[
+            ListTile(
+                contentPadding: const EdgeInsets.only(top: 10, left: 15),
+                leading: GestureDetector(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Image.asset('assets/images/drawer_vector.png'))),
+            ListTile(
+              leading: Image.asset(widget.profile),
+              title: Text(
+                widget.username,
+                style:
+                    const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+              ),
+              subtitle: const Text(
+                'Verified Profile',
+                style: TextStyle(fontSize: 13, fontWeight: FontWeight.w400),
+              ),
+              trailing: Container(
+                width: 66,
+                height: 32,
+                decoration: BoxDecoration(
+                    color: color.background,
+                    borderRadius: BorderRadius.circular(5)),
+                child: Center(
+                  child: Text(
+                    widget.orders,
+                    style: const TextStyle(
+                        fontSize: 11, fontWeight: FontWeight.w500),
+                  ),
                 ),
               ),
             ),
-          ),
-          ListTile(
-            leading: const Icon(Icons.wb_sunny_outlined),
-            title: const Text('Dark Mode'),
-            trailing: Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                  setState(() {
-                    isSwitched = value; // Update the switch state
-                  });
-                }),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.dangerCircle),
-              title: Text('Account Information'),
+            const ListTile(
+              leading: Icon(Icons.wb_sunny_outlined),
+              title: Text('Dark Mode'),
+              trailing: CustomSwitch(initialState: false),
             ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.lock),
-              title: Text('Password'),
+            ListTile(
+              leading: const Icon(IconlyLight.dangerCircle),
+              title: const Text('Account Information'),
+              onTap: () {},
             ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.bag),
-              title: Text('Order'),
+            ListTile(
+              leading: const Icon(IconlyLight.lock),
+              title: const Text('Password'),
+              onTap: () {},
             ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.wallet),
-              title: Text('My Cards'),
+            ListTile(
+              leading: const Icon(IconlyLight.bag),
+              title: const Text('Order'),
+              onTap: () {},
             ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.heart),
-              title: Text('Wishlist'),
+            ListTile(
+              leading: const Icon(IconlyLight.wallet),
+              title: const Text('My Cards'),
+              onTap: () {},
             ),
-          ),
-          GestureDetector(
-            onTap: () {},
-            child: const ListTile(
-              leading: Icon(IconlyLight.setting),
-              title: Text('Settings'),
+            ListTile(
+              leading: const Icon(IconlyLight.heart),
+              title: const Text('Wishlist'),
+              onTap: () {},
             ),
-          ),
-          const Spacer(),
-          GestureDetector(
-            onTap: () {},
-            child: ListTile(
+            ListTile(
+              leading: const Icon(IconlyLight.setting),
+              title: const Text('Settings'),
+              onTap: () {},
+            ),
+            const Spacer(),
+            ListTile(
+              contentPadding: const EdgeInsets.only(bottom: 20, left: 20),
               leading: Icon(
                 IconlyLight.logout,
                 color: color.onBackground,
@@ -120,9 +105,10 @@ class _DrawersState extends State<Drawers> {
                 'Logout',
                 style: TextStyle(color: color.onBackground),
               ),
+              onTap: () {},
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

@@ -90,7 +90,7 @@ class SignUpScreen extends StatelessWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const CustomSwitch(),
+                    const CustomSwitch(initialState: true),
                   ],
                 ),
               ),

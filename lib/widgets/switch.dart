@@ -1,36 +1,25 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class MySwitch extends StatelessWidget {
-  MySwitch({super.key, required this.state});
-  late bool state;
-
-  @override
-  Widget build(BuildContext context) {
-    return Switch(
-      value: state,
-      activeColor: Colors.green,
-      onChanged: (bool value) {
-        // setState((){});
-        state = value;
-      },
-    );
-  }
-}
-
 class CustomSwitch extends StatefulWidget {
-  const CustomSwitch({super.key});
+  final bool initialState;
+
+  const CustomSwitch({Key? key, required this.initialState}) : super(key: key);
 
   @override
-  State<CustomSwitch> createState() => _CustomSwitchState();
+  State<CustomSwitch> createState() => _CustomSwitchState(initialState);
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool state = true;
+  bool state;
+
+  _CustomSwitchState(this.state);
+
   @override
   Widget build(BuildContext context) {
-    return Switch(
+    return CupertinoSwitch(
       value: state,
-      activeColor: Colors.green,
+      activeColor: Theme.of(context).colorScheme.onSecondary,
       onChanged: (bool value) {
         setState(() {
           state = value;

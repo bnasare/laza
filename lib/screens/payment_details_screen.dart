@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:laza/widgets/navigation_card.dart';
 import 'package:laza/widgets/new_custom_textfield.dart';
+import 'package:laza/widgets/switch.dart';
 
 import '../widgets/custom_back_button.dart';
 
@@ -22,7 +22,6 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
     TextEditingController cardNumberContoller = TextEditingController();
     TextEditingController expiryDateController = TextEditingController();
     TextEditingController cvvController = TextEditingController();
-    bool light = true;
 
     @override
     void dispose() {
@@ -34,7 +33,6 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
     }
 
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
@@ -57,7 +55,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20.0, bottom: 0, left: 20),
+              padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
               child: SizedBox(
                 height: 200,
                 child: ListView(
@@ -217,19 +215,16 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                       ),
                     ],
                   ),
-                  Row(
+                  const SizedBox(height: 10),
+                  const Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Save as primary address',
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.w500),
                       ),
-                      CupertinoSwitch(
-                          value: light,
-                          onChanged: (bool value) {
-                            light = value;
-                          }),
+                      CustomSwitch(initialState: true)
                     ],
                   ),
                 ],

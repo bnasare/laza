@@ -1,5 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../consts/sizing_config.dart';
 
@@ -43,17 +43,16 @@ class ProductCard extends StatelessWidget {
                 ),
               ),
               Positioned(
-                top: 5,
-                right: 5,
-                child: IconButton(
-                  icon: Icon(
-                    CupertinoIcons.heart,
-                    color: color.tertiary,
-                    size: 25,
-                  ),
-                  onPressed: (){},
-                )
-              ),
+                  top: 5,
+                  right: 5,
+                  child: IconButton(
+                    icon: Icon(
+                      IconlyLight.heart,
+                      color: color.tertiary,
+                      size: 25,
+                    ),
+                    onPressed: () {},
+                  )),
             ],
           ),
           Text(

@@ -80,51 +80,37 @@ class _HomeScreenState extends State<HomeScreen> {
               padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
                 children: [
-                  Container(
-                    width: horizontalConverter(context, 275),
-                    height: verticalConverter(context, 50),
-                    decoration: BoxDecoration(
-                        color: color.background,
-                        borderRadius: BorderRadius.circular(10)),
+                  Expanded(
                     child: TextField(
                       controller: searchController,
                       maxLines: 1,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 16),
+                        filled: true,
+                        fillColor: color.background,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide.none,
                         ),
-                        label: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: horizontalConverter(context, 20)),
-                              child: Icon(
-                                Icons.search,
-                                size: 20,
-                                color: color.tertiary,
-                              ),
-                            ),
-
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: horizontalConverter(context, 20)),
-                              child: Text(
-                                'Search...',
-                                style: TextStyle(
-                                  color: color.tertiary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: Icon(
+                            IconlyLight.search,
+                            color: color.tertiary,
+                          ),
+                        ),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                          color: color.tertiary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
                     ),
                   ),
-                  const Spacer(),
+                  const SizedBox(width: 10),
                   Container(
                     height: verticalConverter(context, 50),
                     width: verticalConverter(context, 50),
@@ -144,6 +130,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'Choose Brand',
@@ -152,7 +139,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 17,
                     ),
                   ),
-                  Expanded(child: Container()),
                   Text(
                     'View All',
                     style: TextStyle(
@@ -193,6 +179,7 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'New Arrival',
@@ -201,7 +188,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 17,
                     ),
                   ),
-                  Expanded(child: Container()),
                   Text(
                     'View All',
                     style: TextStyle(
@@ -212,60 +198,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-              child: Row(
-                children: [
-                  ProductCard(
-                    assetName: products[0]['productAsset'].toString(),
-                    productName: products[0]['productName'].toString(),
-                    price: 99,
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.only(top: verticalConverter(context, 20)),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 0.62,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(
+                        assetName: products[index]['productAsset'].toString(),
+                        productName: products[index]['productName'].toString(),
+                        price: 99,
+                      );
+                    },
                   ),
-                  const Spacer(),
-                  ProductCard(
-                    assetName: products[1]['productAsset'].toString(),
-                    productName: products[1]['productName'].toString(),
-                    price: 99,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-              child: Row(
-                children: [
-                  ProductCard(
-                    assetName: products[2]['productAsset'].toString(),
-                    productName: products[2]['productName'].toString(),
-                    price: 99,
-                  ),
-                  const Spacer(),
-                  ProductCard(
-                    assetName: products[3]['productAsset'].toString(),
-                    productName: products[3]['productName'].toString(),
-                    price: 99,
-                  ),
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-              child: Row(
-                children: [
-                  ProductCard(
-                    assetName: products[4]['productAsset'].toString(),
-                    productName: products[4]['productName'].toString(),
-                    price: 99,
-                  ),
-                  const Spacer(),
-                  ProductCard(
-                    assetName: products[5]['productAsset'].toString(),
-                    productName: products[5]['productName'].toString(),
-                    price: 99,
-                  ),
-                ],
-              ),
-            ),
+                );
+              },
+            )
           ],
         ),
       ),

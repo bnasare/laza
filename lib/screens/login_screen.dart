@@ -108,7 +108,7 @@ class LoginScreen extends StatelessWidget {
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                      const CustomSwitch(),
+                      const CustomSwitch(initialState: false),
                     ],
                   ),
                 ),
