@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/widgets/double_header_widget.dart';
+import 'package:laza/widgets/product_image_widget.dart';
 import 'package:laza/widgets/review_card.dart';
 import 'package:laza/widgets/size_card.dart';
 
@@ -33,6 +34,27 @@ class ProductDetailsScreen extends StatelessWidget {
                       height: verticalConverter(context, 418),
                       width: horizontalConverter(context, 375),
                       color: color.background,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 10,
+                      right: 10,
+                      child: Image.asset(
+                        'assets/images/card_5.png',
+                        width: horizontalConverter(context, 310),
+                        height: verticalConverter(context, 387),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      left: 170,
+                      child: Image.asset(
+                        'assets/images/nike_logo.png',
+                        width: horizontalConverter(context, 80),
+                        height: verticalConverter(context, 49),
+                        fit: BoxFit.cover,
+                      ),
                     ),
                     Row(
                       children: [
@@ -68,7 +90,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Men's Printed Pullover Hoodie",
+                            "Men's Full Zip Jacket",
                             style: TextStyle(
                               color: color.tertiary,
                               fontSize: 13,
@@ -79,7 +101,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             padding: EdgeInsets.only(
                                 top: verticalConverter(context, 8)),
                             child: const Text(
-                              "Nike Club Fleece",
+                              "Nike Tech Fleece",
                               style: TextStyle(
                                 fontSize: 22,
                                 fontWeight: FontWeight.w600,
@@ -117,9 +139,16 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: verticalConverter(context, 21)),
-                  child: Center(
-                    child: Image.asset('assets/images/products_img.png'),
+                  padding: EdgeInsets.only(
+                    top: verticalConverter(context, 21),
+                    left: horizontalConverter(context, 20),
+                    right: horizontalConverter(context, 20),
+                  ),
+                  child: const ProductImage(
+                    firstImage: 'pic_1',
+                    secondImage: 'pic_2',
+                    thirdImage: 'card_5',
+                    fourthImage: 'pic_4',
                   ),
                 ),
                 Padding(
@@ -130,22 +159,23 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                    padding: EdgeInsets.fromLTRB(
-                      horizontalConverter(context, 20),
-                      verticalConverter(context, 10),
-                      horizontalConverter(context, 20),
-                      0,
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizeCard(size: 'S'),
-                        SizeCard(size: 'M'),
-                        SizeCard(size: 'L'),
-                        SizeCard(size: 'XL'),
-                        SizeCard(size: '2XL'),
-                      ],
-                    )),
+                  padding: EdgeInsets.fromLTRB(
+                    horizontalConverter(context, 20),
+                    verticalConverter(context, 10),
+                    horizontalConverter(context, 20),
+                    0,
+                  ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      SizeCard(size: 'S'),
+                      SizeCard(size: 'M'),
+                      SizeCard(size: 'L'),
+                      SizeCard(size: 'XL'),
+                      SizeCard(size: '2XL'),
+                    ],
+                  ),
+                ),
                 Padding(
                   padding: EdgeInsets.only(
                     top: verticalConverter(context, 20),
