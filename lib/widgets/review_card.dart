@@ -10,115 +10,112 @@ class ReviewCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    return SizedBox(
-      height: verticalConverter(context, 120),
-      width: horizontalConverter(context, 335),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ListTile(
-            leading: ClipOval(
-              child: Image.asset(
-                'assets/images/$assetName.jpg',
-                width: horizontalConverter(context, 40),
-                height: verticalConverter(context, 40),
-                fit: BoxFit.cover,
-              ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        ListTile(
+          leading: ClipOval(
+            child: Image.asset(
+              'assets/images/$assetName.jpg',
+              width: horizontalConverter(context, 40),
+              height: verticalConverter(context, 40),
+              fit: BoxFit.cover,
             ),
-            title: Text(
-              name,
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
-                color: color.secondary,
-              ),
+          ),
+          title: Text(
+            name,
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+              color: color.secondary,
             ),
-            subtitle: Row(
-              children: [
-                Icon(
-                  Icons.timer_outlined,
-                  size: 15,
+          ),
+          subtitle: Row(
+            children: [
+              Icon(
+                Icons.timer_outlined,
+                size: 15,
+                color: color.tertiary,
+              ),
+              Text(
+                '  13 Sep, 2020',
+                style: TextStyle(
                   color: color.tertiary,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 11,
                 ),
-                Text(
-                  '  13 Sep, 2020',
-                  style: TextStyle(
-                    color: color.tertiary,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 11,
-                  ),
+              )
+            ],
+          ),
+          trailing: SizedBox(
+            width: horizontalConverter(context, 65),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  children: [
+                    Text(
+                      '4.8',
+                      style: TextStyle(
+                        color: color.secondary,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      ' rating',
+                      style: TextStyle(
+                        color: color.tertiary,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 11,
+                      ),
+                    )
+                  ],
+                ),
+                Row(
+                  children: [
+                    Icon(
+                      Icons.star,
+                      size: 13,
+                      color: color.onTertiary,
+                    ),
+                    Icon(
+                      Icons.star,
+                      size: 13,
+                      color: color.onTertiary,
+                    ),
+                    Icon(
+                      Icons.star,
+                      size: 13,
+                      color: color.onTertiary,
+                    ),
+                    Icon(
+                      Icons.star,
+                      size: 13,
+                      color: color.onTertiary,
+                    ),
+                    const Icon(Icons.star_outline, size: 13),
+                  ],
                 )
               ],
             ),
-            trailing: SizedBox(
-              width: horizontalConverter(context, 60),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    children: [
-                      Text(
-                        '4.8',
-                        style: TextStyle(
-                          color: color.secondary,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        ' rating',
-                        style: TextStyle(
-                          color: color.tertiary,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 11,
-                        ),
-                      )
-                    ],
-                  ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        size: 13,
-                        color: color.onTertiary,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 13,
-                        color: color.onTertiary,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 13,
-                        color: color.onTertiary,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 13,
-                        color: color.onTertiary,
-                      ),
-                      const Icon(Icons.star_outline, size: 13),
-                    ],
-                  )
-                ],
-              ),
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.symmetric(
+            horizontal: horizontalConverter(context, 20),
+          ),
+          child: Text(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget vitae amet...',
+            style: TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+              color: color.tertiary,
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(
-                horizontal: horizontalConverter(context, 20)),
-            child: Text(
-              'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget vitae amet...',
-              style: TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w400,
-                color: color.tertiary,
-              ),
-            ),
-          )
-        ],
-      ),
+        )
+      ],
     );
   }
 }
