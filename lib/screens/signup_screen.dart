@@ -28,7 +28,7 @@ class SignUpScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               const Text(
                 "Sign Up",
@@ -40,10 +40,11 @@ class SignUpScreen extends StatelessWidget {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.15),
+                padding: const EdgeInsets.only(
+                    // top: MediaQuery.of(context).size.height * 0.15
+                    top: 35),
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    // mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       AuthTextField(
                         controller: TextEditingController(),
@@ -56,14 +57,6 @@ class SignUpScreen extends StatelessWidget {
                       AuthTextField(
                         controller: TextEditingController(),
                         labelText: "Password",
-                        // trailingWidget: const Text(
-                        //   "Strong",
-                        //   style: TextStyle(
-                        //     color: Color(0xFF34C559),
-                        //     fontSize: 11,
-                        //     fontWeight: FontWeight.w400,
-                        //   ),
-                        // ),
                         trailingText: "Strong",
                       ),
                       AuthTextField(
@@ -72,13 +65,15 @@ class SignUpScreen extends StatelessWidget {
                         trailingWidget: const Icon(
                           Icons.check_outlined,
                           color: Colors.green,
+                          // color: color.primary,
                         ),
                       ),
                     ]),
               ),
               Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height * 0.15),
+                padding: const EdgeInsets.only(
+                    // bottom: MediaQuery.of(context).size.height * 0.15
+                    bottom: 100),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
