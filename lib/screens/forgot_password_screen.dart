@@ -41,8 +41,10 @@ class ForgotPasswordScreen extends StatelessWidget {
               ),
               SvgPicture.asset("assets/images/cloud.svg"),
               Padding(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).size.height * 0.2),
+                padding: const EdgeInsets.only(
+                  // bottom: MediaQuery.of(context).size.height * 0.2
+                  bottom: 150,
+                ),
                 child: AuthTextField(
                     controller: TextEditingController(),
                     labelText: "Email Address"),
