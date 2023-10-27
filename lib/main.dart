@@ -1,9 +1,6 @@
-import 'package:device_preview/device_preview.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/screens/cart_screen.dart';
 import 'package:laza/screens/new_payment_details_screen.dart';
 
 import 'consts/app_routes.dart';
@@ -15,11 +12,11 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     GoogleFonts.config.allowRuntimeFetching = false;
     runApp(
-      DevicePreview(
-       enabled: !kReleaseMode,
-       builder: (context) =>
+      //DevicePreview(
+      //  enabled: !kReleaseMode,
+      //  builder: (context) =>
       const MyApp(),
-      ),
+      //),
     );
   });
 }
@@ -30,10 +27,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: Styles().themeData(context),
+      theme: themeData(),
       debugShowCheckedModeBanner: false,
       routes: AppRoutes().getRoutes(),
-      initialRoute: CartScreen.routeName,
+      initialRoute: NewPaymentDetailsScreen.routeName,
     );
   }
 }

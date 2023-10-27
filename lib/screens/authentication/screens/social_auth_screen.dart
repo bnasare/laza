@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/custom_back_button.dart';
+import '../../../widgets/custom_back_button.dart';
 
-class SignUpScreen extends StatelessWidget {
-  static const routeName = '/signup';
+class SocialAuthScreen extends StatelessWidget {
+  static const routeName = '/social_auth';
 
-  const SignUpScreen({Key? key}) : super(key: key);
+  const SocialAuthScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

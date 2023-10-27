@@ -4,7 +4,7 @@ import 'package:laza/widgets/address_card.dart';
 import 'package:laza/widgets/navigation_card.dart';
 import 'package:laza/widgets/product_card.dart';
 
-import '../widgets/custom_back_button.dart';
+import '../../../widgets/custom_back_button.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';

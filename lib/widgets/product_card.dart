@@ -1,74 +1,100 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/screens/product_details_screen.dart';
 
-class ProductCard extends StatelessWidget {
+import '../consts/sizing_config.dart';
+
+class ProductCard extends StatefulWidget {
   const ProductCard({
     super.key,
     required this.assetName,
-    this.firstLine,
-    this.price,
-    this.secondLine,
+    required this.productName,
+    required this.price,
   });
 
   final String assetName;
-  final String? firstLine;
-  final String? secondLine;
-  final int? price;
+  final String productName;
+  final int price;
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  bool _isLiked = false;
 
   @override
   Widget build(BuildContext context) {
-    double verticalConverter(double value) {
-      double height = MediaQuery.of(context).size.height;
-      double heightRatio = height / 812;
-      double newValue = heightRatio * value;
-      return newValue;
-    }
-
-    double horizontalConverter(double value) {
-      double width = MediaQuery.of(context).size.width;
-      double widthRatio = width / 375;
-      double newValue = widthRatio * value;
-      return newValue;
-    }
-
-    return SizedBox(
-      height: verticalConverter(257),
-      width: horizontalConverter(160),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Image.asset(
-            'assets/images/$assetName.png',
-          ),
-          firstLine != null
-          ? Text(
-            firstLine!,
-            softWrap: true,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 11,
+    final color = Theme.of(context).colorScheme;
+    return GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+      },
+      child: SizedBox(
+        height: verticalConverter(context, 257),
+        width: horizontalConverter(context, 160),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: verticalConverter(context, 203),
+                  width: horizontalConverter(context, 160),
+                  decoration: BoxDecoration(
+                    color: color.background,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  child: ClipRRect(
+                    child: Image.asset(
+                      'assets/images/${widget.assetName}.png',
+                      height: verticalConverter(context, 203),
+                      width: horizontalConverter(context, 160),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 5,
+                  right: 5,
+                  child: IconButton(
+                    icon: _isLiked == false
+                        ? Icon(
+                            IconlyLight.heart,
+                            color: color.tertiary,
+                            size: 25,
+                          )
+                        : Icon(
+                            IconlyLight.heart,
+                            color: color.onBackground,
+                            size: 25,
+                          ),
+                    onPressed: () {
+                      setState(() {
+                        _isLiked = !_isLiked;
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
-          )
-          : const SizedBox(),
-          secondLine != null
-          ?Text(
-            secondLine!,
-            softWrap: true,
-            style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 11,
+            Text(
+              widget.productName,
+              softWrap: true,
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 11,
+              ),
             ),
-          )
-          : const SizedBox(),
-          price != null
-          ?Text(
-            '\$ ${price!}',
-            style: const TextStyle(
-              fontSize: 13,
-              fontWeight: FontWeight.w600,
+            Text(
+              '\$ ${widget.price}',
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.w600,
+              ),
             ),
-          )
-              : const SizedBox()
-        ],
+          ],
+        ),
       ),
     );
   }

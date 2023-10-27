@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laza/widgets/navigation_card.dart';
+import 'package:laza/widgets/bottom_navigation_card.dart';
 
 import '../widgets/custom_back_button.dart';
 

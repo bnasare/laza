@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:laza/widgets/new_custom_textfield.dart';
+import 'package:laza/screens/user/widgets/custom_textfield.dart';
+import 'package:laza/widgets/switch.dart';
 
-import '../widgets/custom_back_button.dart';
-import '../widgets/navigation_card.dart';
+import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/bottom_navigation_card.dart';
 
 class UserAddressScreen extends StatefulWidget {
   static const routeName = '/user_address';
@@ -172,22 +172,17 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                   ),
                 ),
               ),
-              Row(
+              const Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'Save as primary address',
                     style: TextStyle(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  CupertinoSwitch(
-                    value: isPrimaryAddress,
-                    onChanged: (bool value) {
-                      isPrimaryAddress = value;
-                    },
-                  ),
+                  CustomSwitch(initialState: true)
                 ],
               ),
             ],

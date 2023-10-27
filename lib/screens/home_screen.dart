@@ -1,48 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/widgets/brand_card.dart';
+import 'package:laza/widgets/drawer.dart';
 import 'package:laza/widgets/product_card.dart';
+
+import '../consts/sizing_config.dart';
 import '../widgets/bottom_appbar.dart';
 import '../widgets/custom_trailing_button.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
 
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
     final TextEditingController searchController = TextEditingController();
-    List firstLines = [
-      'Nike Sportswear Club ',
-      'Trail Running Jacket Nike ',
-      'NO_NAME',
-      'NO_NAME'
-    ];
-    List secondLines = ['Fleece', 'Windrunner', null, null];
-    double verticalConverter(double value) {
-      double height = MediaQuery.of(context).size.height;
-      double heightRatio = height / 812;
-      double newValue = heightRatio * value;
-      return newValue;
-    }
-
-    double horizontalConverter(double value) {
-      double width = MediaQuery.of(context).size.width;
-      double widthRatio = width / 375;
-      double newValue = widthRatio * value;
-      return newValue;
-    }
-
     return Scaffold(
+      key: _scaffoldKey,
+      drawerEnableOpenDragGesture: true,
+      drawer: const Drawers(
+        username: 'Mrh Raju',
+        profile: 'assets/images/profile.png',
+        orders: '3 orders',
+      ),
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 15.0),
-          child: CustomTrailingButton(
-            backgroundColor: color.background,
-            icon: Icons.menu,
-          ),
+        automaticallyImplyLeading: true,
+        leading: GestureDetector(
+          onTap: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
+          child: Padding(
+              padding: const EdgeInsets.only(left: 15.0),
+              child: Image.asset('assets/images/home_drawer.png')),
         ),
         actions: [
           Padding(
@@ -55,11 +52,12 @@ class HomeScreen extends StatelessWidget {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: horizontalConverter(20)),
+        padding:
+            EdgeInsets.symmetric(horizontal: horizontalConverter(context, 20)),
         child: ListView(
           children: [
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(20)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: const Text(
                 'Hello',
                 style: TextStyle(
@@ -69,7 +67,7 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(5)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 5)),
               child: Text(
                 'Welcome to Laza',
                 style: TextStyle(
@@ -79,53 +77,43 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(20)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
                 children: [
-                  Container(
-                    width: horizontalConverter(275),
-                    height: verticalConverter(50),
-                    decoration: BoxDecoration(
-                        color: color.background,
-                        borderRadius: BorderRadius.circular(10)),
+                  Expanded(
                     child: TextField(
                       controller: searchController,
+                      maxLines: 1,
+                      keyboardType: TextInputType.text,
                       decoration: InputDecoration(
-                        label: Row(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: horizontalConverter(20)),
-                              child: Icon(
-                                Icons.search,
-                                size: 20,
-                                color: color.tertiary,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  left: horizontalConverter(20)),
-                              child: Text(
-                                'Search...',
-                                style: TextStyle(
-                                  color: color.tertiary,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
+                        contentPadding:
+                            const EdgeInsets.symmetric(vertical: 16),
+                        filled: true,
+                        fillColor: color.background,
                         border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                            borderSide: BorderSide.none),
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide.none,
+                        ),
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.only(bottom: 4.0),
+                          child: Icon(
+                            IconlyLight.search,
+                            color: color.tertiary,
+                          ),
+                        ),
+                        hintText: 'Search',
+                        hintStyle: TextStyle(
+                          color: color.tertiary,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w400,
+                        ),
                       ),
                     ),
                   ),
-                  Expanded(child: Container()),
+                  const SizedBox(width: 10),
                   Container(
-                    height: verticalConverter(50),
-                    width: verticalConverter(50),
+                    height: verticalConverter(context, 50),
+                    width: verticalConverter(context, 50),
                     decoration: BoxDecoration(
                       color: color.primary,
                       borderRadius: BorderRadius.circular(10),
@@ -140,8 +128,9 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(20)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'Choose Brand',
@@ -150,7 +139,6 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
-                  const Spacer(),
                   Text(
                     'View All',
                     style: TextStyle(
@@ -162,35 +150,36 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(20)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: SizedBox(
-                height: verticalConverter(55),
+                height: verticalConverter(context, 55),
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
                     BrandCard(
                       assetName: 'adidas',
                       brandName: 'Adidas',
-                      width: horizontalConverter(115),
+                      width: horizontalConverter(context, 115),
                     ),
-                    SizedBox(width: horizontalConverter(10)),
+                    SizedBox(width: horizontalConverter(context, 10)),
                     BrandCard(
                         assetName: 'nike',
                         brandName: 'Nike',
-                        width: horizontalConverter(98)),
-                    SizedBox(width: horizontalConverter(10)),
+                        width: horizontalConverter(context, 98)),
+                    SizedBox(width: horizontalConverter(context, 10)),
                     BrandCard(
                       assetName: 'fila',
                       brandName: 'Fila',
-                      width: horizontalConverter(91),
+                      width: horizontalConverter(context, 91),
                     ),
                   ],
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: verticalConverter(20)),
+              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Text(
                     'New Arrival',
@@ -199,7 +188,6 @@ class HomeScreen extends StatelessWidget {
                       fontSize: 17,
                     ),
                   ),
-                  const Spacer(),
                   Text(
                     'View All',
                     style: TextStyle(
@@ -210,33 +198,65 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(10)),
-              child: SizedBox(
-                height: verticalConverter(700),
-                child: GridView.builder(
-                  itemCount: 4,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    childAspectRatio: 0.7,
-                    crossAxisCount: 2,
-                    mainAxisSpacing: verticalConverter(20),
-                    crossAxisSpacing: horizontalConverter(15),
+            ListView.builder(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: 1,
+              itemBuilder: (context, index) {
+                return Container(
+                  padding: EdgeInsets.only(top: verticalConverter(context, 20)),
+                  child: GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 0.62,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(
+                        assetName: products[index]['productAsset'].toString(),
+                        productName: products[index]['productName'].toString(),
+                        price: 99,
+                      );
+                    },
                   ),
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                      assetName: 'card_${index + 1}',
-                      firstLine: firstLines[index],
-                      secondLine: secondLines[index],
-                      price: 99,
-                    );
-                  },
-                ),
-              ),
-            ),
+                );
+              },
+            )
           ],
         ),
       ),
       bottomNavigationBar: const CustomBottomNavigation(selectedIndex: 0),
     );
   }
+
+  static const products = [
+    {
+      'productName': 'Nike Tech Fleece Lilac Purple Full Zip Jacket',
+      'productAsset': 'card_5'
+    },
+    {
+      "productName": "Nike Men's Sportswear Club Fleece",
+      'productAsset': 'card_3'
+    },
+    {
+      "productName": "Nike SB Icon Pullover Skate Hoodie",
+      'productAsset': 'card_4'
+    },
+    {
+      "productName": "Champion Men's Trail Running Hoodie",
+      'productAsset': 'card_2'
+    },
+    {
+      "productName": "Nike Sportswear Essential Zip-Up Hoodie",
+      'productAsset': 'card_6'
+    },
+    {
+      "productName": "Nike Double Logo Sportswear Club Fleece",
+      'productAsset': 'card_1'
+    },
+  ];
 }

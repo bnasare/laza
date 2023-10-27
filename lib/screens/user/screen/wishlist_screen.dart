@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/widgets/bottom_appbar.dart';
 
-import '../widgets/custom_back_button.dart';
-import '../widgets/custom_trailing_button.dart';
+import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/custom_trailing_button.dart';
 
 class WishlistScreen extends StatelessWidget {
   static const routeName = '/wishlist';

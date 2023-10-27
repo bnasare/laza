@@ -38,6 +38,8 @@ dependencies:
   google_fonts: ^6.1.0
   device_preview: ^1.1.0
   flutter_iconly: ^1.0.2
+  flutter_svg: ^2.0.7
+  timer_count_down: ^2.2.2
   flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
@@ -82,11 +84,9 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter-Regular.ttf
-  #       - asset: fonts/Schyler-Italic.ttf
-  #         style: italic
-  #   - family: Trajan Pro
-  #     fonts:
-  #       - asset: fonts/TrajanPro.ttf
+    - family: Manrope
+      fonts:
+        - asset: assets/fonts/Manrope-Regular.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #
