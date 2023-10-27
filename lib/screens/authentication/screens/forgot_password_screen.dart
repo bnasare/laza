@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:laza/widgets/bottom_navigation_card.dart';
 
+import '../../../widgets/custom_back_button.dart';
 import '../widgets/auth_text_field.dart';
-import '../widgets/custom_back_button.dart';
-import '../widgets/navbar_button.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   static const routeName = '/forgot_password';
@@ -29,39 +29,37 @@ class ForgotPasswordScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              const Text(
+              Text(
                 "Forgot password",
                 style: TextStyle(
-                  color: Color(0xFF1D1E20),
+                  color: color.secondary,
                   fontSize: 28,
                   fontWeight: FontWeight.w600,
-                  // height: 0.04,
                   letterSpacing: -0.21,
                 ),
               ),
               SvgPicture.asset("assets/images/cloud.svg"),
               Padding(
                 padding: const EdgeInsets.only(
-                  // bottom: MediaQuery.of(context).size.height * 0.2
                   bottom: 150,
                 ),
                 child: AuthTextField(
                     controller: TextEditingController(),
                     labelText: "Email Address"),
               ),
-              const Text(
+              Text(
                 "Please write your email to receive a confirmation code to set a new password",
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: Color(0xFF8F959E),
+                  color: color.tertiary,
                   fontSize: 13,
                   fontWeight: FontWeight.w400,
-                  // height: 0.11,
                 ),
               )
             ],
           ),
         ),
-        bottomNavigationBar: const NavBarButton(text: "Confirm Mail"));
+        bottomNavigationBar:
+            NavigationCard(text: 'Confirm Mail', onTap: () {}));
   }
 }

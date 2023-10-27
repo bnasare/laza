@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:laza/widgets/bottom_navigation_card.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
-import '../widgets/custom_back_button.dart';
-import '../widgets/navbar_button.dart';
+import '../../../widgets/custom_back_button.dart';
 import '../widgets/verification_code_container.dart';
 
 class CodeVerificationScreen extends StatelessWidget {
@@ -31,20 +31,18 @@ class CodeVerificationScreen extends StatelessWidget {
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                const Text(
+                Text(
                   "Verification Code",
                   style: TextStyle(
-                    color: Color(0xFF1D1E20),
+                    color: color.secondary,
                     fontSize: 28,
                     fontWeight: FontWeight.w600,
-                    // height: 0.04,
                     letterSpacing: -0.21,
                   ),
                 ),
                 SvgPicture.asset("assets/images/cloud.svg"),
                 const Padding(
                   padding: EdgeInsets.only(
-                    // bottom: MediaQuery.of(context).size.height * 0.2
                     bottom: 150,
                   ),
                   child: Row(
@@ -66,16 +64,14 @@ class CodeVerificationScreen extends StatelessWidget {
                         color: Color(0xFF1D1E20),
                         fontSize: 13,
                         fontWeight: FontWeight.w500,
-                        // height: 0.11,
                       ),
-                      children: const [
+                      children: [
                         TextSpan(
                           text: " Resend confirmation code",
                           style: TextStyle(
-                            color: Color(0xFF8F959E),
+                            color: color.tertiary,
                             fontSize: 13,
                             fontWeight: FontWeight.w400,
-                            // height: 0.11,
                           ),
                         )
                       ],
@@ -84,9 +80,7 @@ class CodeVerificationScreen extends StatelessWidget {
                 ),
               ]),
         ),
-        bottomNavigationBar: const NavBarButton(
-          text: "Confirm Code",
-        ),
+        bottomNavigationBar: NavigationCard(text: 'Confirm Code', onTap: () {}),
       ),
     );
   }

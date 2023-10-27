@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
+import '../../../widgets/bottom_navigation_card.dart';
+import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
-import '../widgets/custom_back_button.dart';
-import '../widgets/navbar_button.dart';
-import '../widgets/switch.dart';
 
 class LoginScreen extends StatelessWidget {
   static const routeName = '/login';
@@ -31,15 +31,13 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(
-                      // bottom: MediaQuery.of(context).size.height * 0.1
-                      bottom: 15),
+                  padding: const EdgeInsets.only(bottom: 15),
                   child: RichText(
                     textAlign: TextAlign.center,
-                    text: const TextSpan(
+                    text: TextSpan(
                       text: "Welcome\n",
                       style: TextStyle(
-                        color: Color(0xFF1D1E20),
+                        color: color.secondary,
                         fontSize: 28,
                         fontWeight: FontWeight.w600,
                         height: 0,
@@ -49,7 +47,7 @@ class LoginScreen extends StatelessWidget {
                         TextSpan(
                           text: "Please enter your data to continue",
                           style: TextStyle(
-                            color: Color(0xFF8F959E),
+                            color: color.tertiary,
                             fontSize: 15,
                             fontWeight: FontWeight.w400,
                             height: 0,
@@ -72,13 +70,12 @@ class LoginScreen extends StatelessWidget {
                     labelText: "Password",
                     trailingText: "Strong",
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20.0),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
                       "Forgot password??",
                       style: TextStyle(
-                        color: Color(0xFFEA4335),
-                        // color: color.onBackground,
+                        color: color.onBackground,
                         fontSize: 15,
                         fontWeight: FontWeight.w400,
                       ),
@@ -86,16 +83,14 @@ class LoginScreen extends StatelessWidget {
                   ),
                 ]),
                 Padding(
-                  padding: const EdgeInsets.only(
-                      // bottom: MediaQuery.of(context).size.height * 0.05
-                      bottom: 15),
+                  padding: const EdgeInsets.only(bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "Remember me",
                         style: GoogleFonts.manrope(
-                          color: const Color(0xFF1D1E20),
+                          color: color.tertiary,
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                         ),
@@ -106,11 +101,11 @@ class LoginScreen extends StatelessWidget {
                 ),
                 RichText(
                   textAlign: TextAlign.center,
-                  text: const TextSpan(
+                  text: TextSpan(
                     text:
                         "By connecting you account, confirm that you agree to our",
                     style: TextStyle(
-                      color: Color(0xFF8F959E),
+                      color: color.tertiary,
                       fontSize: 13,
                       fontWeight: FontWeight.w400,
                       height: 0,
@@ -119,7 +114,7 @@ class LoginScreen extends StatelessWidget {
                       TextSpan(
                         text: " Terms and conditions",
                         style: TextStyle(
-                          color: Color(0xFF1D1E20),
+                          color: color.secondary,
                           fontSize: 13,
                           fontWeight: FontWeight.w500,
                           height: 0,
@@ -130,6 +125,6 @@ class LoginScreen extends StatelessWidget {
                 ),
               ]),
         ),
-        bottomNavigationBar: const NavBarButton(text: "Login"));
+        bottomNavigationBar: NavigationCard(text: 'Login', onTap: () {}));
   }
 }

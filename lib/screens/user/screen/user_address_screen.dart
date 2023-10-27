@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:laza/widgets/new_custom_textfield.dart';
+import 'package:laza/screens/user/widgets/custom_textfield.dart';
 import 'package:laza/widgets/switch.dart';
 
-import '../widgets/custom_back_button.dart';
-import '../widgets/navigation_card.dart';
+import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/bottom_navigation_card.dart';
 
 class UserAddressScreen extends StatefulWidget {
   static const routeName = '/user_address';
