@@ -31,8 +31,9 @@ class LoginScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.1),
+                  padding: const EdgeInsets.only(
+                      // bottom: MediaQuery.of(context).size.height * 0.1
+                      bottom: 15),
                   child: RichText(
                     textAlign: TextAlign.center,
                     text: const TextSpan(
@@ -58,45 +59,36 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      AuthTextField(
-                        controller: TextEditingController(),
-                        labelText: "Username",
-                        trailingWidget: const Icon(
-                          Icons.check_outlined,
-                        ),
+                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
+                  AuthTextField(
+                    controller: TextEditingController(),
+                    labelText: "Username",
+                    trailingWidget: const Icon(
+                      Icons.check_outlined,
+                    ),
+                  ),
+                  AuthTextField(
+                    controller: TextEditingController(),
+                    labelText: "Password",
+                    trailingText: "Strong",
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 20.0),
+                    child: Text(
+                      "Forgot password??",
+                      style: TextStyle(
+                        color: Color(0xFFEA4335),
+                        // color: color.onBackground,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
                       ),
-                      AuthTextField(
-                        controller: TextEditingController(),
-                        labelText: "Password",
-                        // trailingWidget: const Text(
-                        //   "Strong",
-                        //   style: TextStyle(
-                        //     color: Color(0xFF34C559),
-                        //     fontSize: 11,
-                        //     fontWeight: FontWeight.w400,
-                        //   ),
-                        // ),
-                        trailingText: "Strong",
-                      ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.03,
-                      ),
-                      const Text(
-                        "Forgot password??",
-                        style: TextStyle(
-                          color: Color(0xFFEA4335),
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                    ]),
+                    ),
+                  ),
+                ]),
                 Padding(
-                  padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.05),
+                  padding: const EdgeInsets.only(
+                      // bottom: MediaQuery.of(context).size.height * 0.05
+                      bottom: 15),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
