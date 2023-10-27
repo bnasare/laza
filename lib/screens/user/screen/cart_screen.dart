@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:laza/widgets/ShirtCard.dart';
-import 'package:laza/widgets/address_card.dart';
+import 'package:laza/screens/user/widgets/address_card.dart';
+import 'package:laza/widgets/shirtCard.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';

@@ -54,9 +54,8 @@ class ReviewCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 RichText(
-                  softWrap: true,
-                  text: TextSpan(
-                    children: [
+                    softWrap: true,
+                    text: TextSpan(children: [
                       TextSpan(
                         text: '4.8',
                         style: TextStyle(
@@ -73,9 +72,7 @@ class ReviewCard extends StatelessWidget {
                           fontSize: 11,
                         ),
                       )
-                    ]
-                  )
-                ),
+                    ])),
                 Row(
                   children: [
                     Icon(
