@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/consts/product_data.dart';
+import 'package:laza/screens/all_products_screen.dart';
 import 'package:laza/widgets/brand_card.dart';
 import 'package:laza/widgets/drawer.dart';
 import 'package:laza/widgets/product_card.dart';
@@ -22,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    List <Map<String, String>> products = ProductData.products;
     final TextEditingController searchController = TextEditingController();
     return Scaffold(
       key: _scaffoldKey,
@@ -188,12 +191,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 17,
                     ),
                   ),
-                  Text(
-                    'View All',
-                    style: TextStyle(
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushNamed(context, AllProductsScreen.routeName);
+                    },
+                    child: Text(
+                      'View All',
+                      style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 13,
-                        color: color.tertiary),
+                        color: color.tertiary,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -232,31 +241,4 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar: const CustomBottomNavigation(selectedIndex: 0),
     );
   }
-
-  static const products = [
-    {
-      'productName': 'Nike Tech Fleece Lilac Purple Full Zip Jacket',
-      'productAsset': 'card_5'
-    },
-    {
-      "productName": "Nike Men's Sportswear Club Fleece",
-      'productAsset': 'card_3'
-    },
-    {
-      "productName": "Nike SB Icon Pullover Skate Hoodie",
-      'productAsset': 'card_4'
-    },
-    {
-      "productName": "Champion Men's Trail Running Hoodie",
-      'productAsset': 'card_2'
-    },
-    {
-      "productName": "Nike Sportswear Essential Zip-Up Hoodie",
-      'productAsset': 'card_6'
-    },
-    {
-      "productName": "Nike Double Logo Sportswear Club Fleece",
-      'productAsset': 'card_1'
-    },
-  ];
 }
