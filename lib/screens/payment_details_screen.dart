@@ -1,35 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:laza/screens/user/widgets/custom_textfield.dart';
 import 'package:laza/widgets/switch.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../../../widgets/custom_back_button.dart';
+import '../widgets/bottom_card.dart';
+import '../widgets/custom_back_button.dart';
+import 'user/widgets/custom_textfield.dart';
 
-class PaymentDetailsScreen extends StatefulWidget {
+class PaymentDetailsScreen extends StatelessWidget {
   static const routeName = '/payment_details';
 
-  const PaymentDetailsScreen({super.key});
+  const PaymentDetailsScreen({Key? key}) : super(key: key);
 
-  @override
-  State<PaymentDetailsScreen> createState() => _PaymentDetailsScreenState();
-}
-
-class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    TextEditingController ownerController = TextEditingController();
-    TextEditingController cardNumberContoller = TextEditingController();
-    TextEditingController expiryDateController = TextEditingController();
-    TextEditingController cvvController = TextEditingController();
+    TextEditingController OwnerController = TextEditingController();
+    TextEditingController CardNumberController = TextEditingController();
+    TextEditingController ExpController = TextEditingController();
+    TextEditingController CvvController = TextEditingController();
 
     @override
     void dispose() {
-      cardNumberContoller.dispose();
-      ownerController.dispose();
-      expiryDateController.dispose();
-      cvvController.dispose();
-      super.dispose();
+      OwnerController.dispose();
+      CardNumberController.dispose();
+      ExpController.dispose();
+      CvvController.dispose();
     }
 
     return Scaffold(
@@ -55,7 +49,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 20.0, left: 20, right: 20),
+              padding: const EdgeInsets.only(top: 20.0, bottom: 0, left: 20),
               child: SizedBox(
                 height: 200,
                 child: ListView(
@@ -135,7 +129,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                     child: SizedBox(
                       width: double.infinity,
                       child: CustomTextfield(
-                        controller: ownerController,
+                        controller: OwnerController,
                         hintText: 'Mrh Raju',
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 15),
@@ -152,7 +146,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                     child: SizedBox(
                       width: double.infinity,
                       child: CustomTextfield(
-                        controller: cardNumberContoller,
+                        controller: CardNumberController,
                         hintText: '5254 7634 8734 7690',
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 15),
@@ -177,7 +171,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                               height: 10,
                             ),
                             CustomTextfield(
-                              controller: expiryDateController,
+                              controller: ExpController,
                               hintText: '24/24',
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 15),
@@ -204,7 +198,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                               height: 10,
                             ),
                             CustomTextfield(
-                              controller: cvvController,
+                              controller: CvvController,
                               hintText: '7763',
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 15),
@@ -215,19 +209,16 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                       ),
                     ],
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 10, bottom: 40),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Save card info',
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w500),
-                        ),
-                        CustomSwitch(initialState: true)
-                      ],
-                    ),
+                  const Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        'Save as primary address',
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.w500),
+                      ),
+                      CustomSwitch(initialState: true),
+                    ],
                   ),
                 ],
               ),
@@ -235,7 +226,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationCard(text: 'Save Card', onTap: () {}),
+      bottomNavigationBar: NavigationCard(text: 'Save Address', onTap: () {}),
     );
   }
 }

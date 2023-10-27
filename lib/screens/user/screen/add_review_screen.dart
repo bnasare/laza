@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
-import '../../../widgets/bottom_navigation_card.dart';
 import '../widgets/custom_textfield.dart';
 
 class AddReviewScreen extends StatefulWidget {

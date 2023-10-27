@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:laza/widgets/bottom_navigation_card.dart';
 import 'package:timer_count_down/timer_count_down.dart';
 
+import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
 import '../widgets/verification_code_container.dart';
 
