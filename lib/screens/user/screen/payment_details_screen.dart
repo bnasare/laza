@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:laza/widgets/bottom_navigation_card.dart';
 import 'package:laza/screens/user/widgets/custom_textfield.dart';
 import 'package:laza/widgets/switch.dart';
 
+import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
 
 class PaymentDetailsScreen extends StatefulWidget {

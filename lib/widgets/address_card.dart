@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class addressCard extends StatelessWidget {
@@ -23,11 +22,11 @@ class addressCard extends StatelessWidget {
     final color = Theme.of(context).colorScheme;
 
     return Container(
-      padding: EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8.0),
       width: MediaQuery.of(context).size.width,
       height: 120,
       decoration: BoxDecoration(
-        color: Color(0xffFEFEFE),
+        color: const Color(0xffFEFEFE),
         borderRadius: BorderRadius.circular(10),
       
       ),
@@ -70,12 +69,12 @@ IconButton(onPressed: (){}, icon:Icon(Icons.arrow_forward_ios,size: 13,color: co
                  padding: const EdgeInsets.only(left: 8.0),
                  child: Container(
                         width: 25,height: 25,
-                        decoration: BoxDecoration(
+                        decoration: const BoxDecoration(
                           color: Color.fromARGB(255, 105, 222, 109),
                           shape: BoxShape.circle,
                         
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Icon(Icons.check,size:15,color: Colors.white,),
                         ),
                       ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:laza/widgets/bottom_navigation_card.dart';
 
+import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
 import '../widgets/auth_text_field.dart';
 

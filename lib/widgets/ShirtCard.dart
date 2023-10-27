@@ -23,7 +23,7 @@ class ShirtCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
 
-    return Container(padding: EdgeInsets.all(8.0),
+    return Container(padding: const EdgeInsets.all(8.0),
       width: double.infinity,
       height: 120,
       decoration: BoxDecoration(
@@ -47,7 +47,7 @@ class ShirtCard extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(top:10.0,bottom: 12),
-                child: Text(price!,style: TextStyle(fontSize: 11,fontWeight: FontWeight.w400,color:Color(0xff8F959E)),),
+                child: Text(price!,style: const TextStyle(fontSize: 11,fontWeight: FontWeight.w400,color:Color(0xff8F959E)),),
               ),
 
               Row(
@@ -58,10 +58,10 @@ class ShirtCard extends StatelessWidget {
                       shape: BoxShape.circle,
                       border: Border.all(
                         width: 1.0,
-                        color: Color(0xff8F959E)
+                        color: const Color(0xff8F959E)
                       )
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Icon(Icons.expand_more,size:15,color: Color(0xff8F959E),),
                     ),
                   ),
@@ -84,24 +84,24 @@ class ShirtCard extends StatelessWidget {
               shape: BoxShape.circle,
               border: Border.all(
                 width: 1.0,
-                color: Color(0xff8F959E)
+                color: const Color(0xff8F959E)
               )
             ),
-            child: Center(
+            child: const Center(
               child: Icon(Icons.expand_less,size:15,color: Color(0xff8F959E),),
             ),
           ),
          
-          Container(margin: EdgeInsets.only(left:115),
+          Container(margin: const EdgeInsets.only(left:115),
             width: 25,height: 25,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               border: Border.all(
                 width: 1.0,
-                color: Color(0xff8F959E)
+                color: const Color(0xff8F959E)
               )
             ),
-            child: Center(
+            child: const Center(
               child: Icon(CupertinoIcons.trash,size:15,color: Color(0xff8F959E),),
             ),
           ),

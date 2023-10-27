@@ -7,7 +7,7 @@ import 'package:laza/widgets/review_card.dart';
 import 'package:laza/widgets/size_card.dart';
 
 import '../consts/sizing_config.dart';
-import '../widgets/bottom_navigation_card.dart';
+import '../widgets/bottom_card.dart';
 import '../widgets/custom_back_button.dart';
 import '../widgets/custom_trailing_button.dart';
 

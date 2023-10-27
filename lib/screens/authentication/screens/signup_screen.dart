@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/widgets/bottom_navigation_card.dart';
 
-import '../widgets/auth_text_field.dart';
+import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
 import '../../../widgets/switch.dart';
+import '../widgets/auth_text_field.dart';
 
 class SignUpScreen extends StatelessWidget {
   static const routeName = '/signup';
