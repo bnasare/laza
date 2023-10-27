@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-import '../screens/user/screen/add_review_screen.dart';
 import '../screens/all_products_screen.dart';
-import '../screens/user/screen/cart_screen.dart';
 import '../screens/authentication/screens/code_verification_screen.dart';
 import '../screens/authentication/screens/forgot_password_screen.dart';
-import '../screens/home_screen.dart';
 import '../screens/authentication/screens/login_screen.dart';
-import '../screens/user/screen/new_payment_details_screen.dart';
-import '../screens/onboarding_screen.dart';
-import '../screens/order_confirmed_screen.dart';
-import '../screens/user/screen/payment_details_screen.dart';
-import '../screens/product_details_screen.dart';
 import '../screens/authentication/screens/reset_password_screen.dart';
-import '../screens/review_screen.dart';
 import '../screens/authentication/screens/signup_screen.dart';
 import '../screens/authentication/screens/social_auth_screen.dart';
+import '../screens/home_screen.dart';
+import '../screens/onboarding_screen.dart';
+import '../screens/order_confirmed_screen.dart';
+import '../screens/product_details_screen.dart';
+import '../screens/review_screen.dart';
+import '../screens/user/screen/add_review_screen.dart';
+import '../screens/user/screen/cart_screen.dart';
+import '../screens/user/screen/new_payment_details_screen.dart';
+import '../screens/user/screen/payment_details_screen.dart';
 import '../screens/user/screen/user_address_screen.dart';
 import '../screens/user/screen/wishlist_screen.dart';
 
