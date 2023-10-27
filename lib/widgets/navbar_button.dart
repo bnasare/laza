@@ -12,9 +12,7 @@ class NavBarButton extends StatelessWidget {
     final color = Theme.of(context).colorScheme;
 
     return BottomAppBar(
-      height: MediaQuery.of(context).size.height * 0.09,
-      // color: const Color(0xFF9775FA),
-      color: color.primary,
+<
       child: TextButton(
         onPressed: () {},
         child: Text(
@@ -23,7 +21,7 @@ class NavBarButton extends StatelessWidget {
             color: Color(0xFFFEFEFE),
             fontSize: 17,
             fontWeight: FontWeight.w500,
-            height: 0.06,
+            // height: 0.06,
           ),
         ),
       ),

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:laza/widgets/review_card.dart';
@@ -37,7 +36,7 @@ class ReviewScreen extends StatelessWidget {
           vertical: verticalConverter(context, 5),
           horizontal: horizontalConverter(context, 20),
         ),
-        child: ListView(
+        child: Column(
           children: [
             ListTile(
               title: Text(
@@ -80,7 +79,7 @@ class ReviewScreen extends StatelessWidget {
                 ],
               ),
               trailing: SizedBox(
-                width: horizontalConverter(context, 115),
+                width: horizontalConverter(context, 125),
                 height: verticalConverter(context, 35),
                 child: ElevatedButton(
                   onPressed: () {},
@@ -90,6 +89,7 @@ class ReviewScreen extends StatelessWidget {
                     elevation: 0,
                   ),
                   child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
                         Icons.edit_outlined,
@@ -107,32 +107,16 @@ class ReviewScreen extends StatelessWidget {
                 ),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 5)),
-              child: ReviewCard(
-                name: reviews[0]['name'].toString(),
-                assetName: reviews[0]['assetName'].toString(),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-              child: ReviewCard(
-                name: reviews[1]['name'].toString(),
-                assetName: reviews[1]['assetName'].toString(),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-              child: ReviewCard(
-                name: reviews[2]['name'].toString(),
-                assetName: reviews[2]['assetName'].toString(),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-              child: ReviewCard(
-                name: reviews[3]['name'].toString(),
-                assetName: reviews[3]['assetName'].toString(),
+            Expanded(
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                itemCount: 4,
+                itemBuilder: (context, index){
+                  return ReviewCard(
+                    name: reviews[index]['name'].toString(),
+                    assetName: reviews[index]['assetName'].toString(),
+                  );
+                },
               ),
             ),
           ],
