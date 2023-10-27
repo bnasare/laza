@@ -50,12 +50,11 @@ class ProductDetailsScreen extends StatelessWidget {
                       ),
                       Positioned(
                         bottom: 0,
-                        left: 170,
+                        left: 150,
+                        right: 150,
                         child: Image.asset(
                           'assets/images/nike_logo.png',
-                          width: horizontalConverter(context, 80),
-                          height: verticalConverter(context, 49),
-                          fit: BoxFit.cover,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       Positioned(
@@ -93,6 +92,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       0,
                     ),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +118,6 @@ class ProductDetailsScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        const Spacer(),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -169,9 +168,9 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.fromLTRB(
-                      horizontalConverter(context, 20),
+                      horizontalConverter(context, 10),
                       verticalConverter(context, 10),
-                      horizontalConverter(context, 20),
+                      horizontalConverter(context, 10),
                       0,
                     ),
                     child: const Row(
@@ -190,10 +189,13 @@ class ProductDetailsScreen extends StatelessWidget {
                       top: verticalConverter(context, 20),
                       left: horizontalConverter(context, 20),
                     ),
-                    child: const Text(
-                      'Description',
-                      style:
-                          TextStyle(fontWeight: FontWeight.w600, fontSize: 17),
+                    child: const Padding(
+                      padding: EdgeInsets.only(bottom: 5.0),
+                      child: Text(
+                        'Description',
+                        style: TextStyle(
+                            fontWeight: FontWeight.w600, fontSize: 17),
+                      ),
                     ),
                   ),
                   Padding(
@@ -206,6 +208,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           text:
                               'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel with',
                           style: TextStyle(
+                              height: 1.4,
                               color: color.tertiary,
                               fontWeight: FontWeight.w400,
                               fontSize: 15),

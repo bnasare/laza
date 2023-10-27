@@ -28,7 +28,7 @@ class LoginScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
                   padding: const EdgeInsets.only(bottom: 15),
@@ -57,70 +57,75 @@ class LoginScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Column(crossAxisAlignment: CrossAxisAlignment.end, children: [
-                  AuthTextField(
-                    controller: TextEditingController(),
-                    labelText: "Username",
-                    trailingWidget: const Icon(
-                      Icons.check_outlined,
-                    ),
-                  ),
-                  AuthTextField(
-                    controller: TextEditingController(),
-                    labelText: "Password",
-                    trailingText: "Strong",
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text(
-                      "Forgot password??",
-                      style: TextStyle(
-                        color: color.onBackground,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ),
-                ]),
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Remember me",
-                        style: GoogleFonts.manrope(
-                          color: color.tertiary,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
+                Center(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        AuthTextField(
+                          controller: TextEditingController(),
+                          labelText: "Username",
+                          trailingWidget: const Icon(
+                            Icons.check_outlined,
+                          ),
                         ),
-                      ),
-                      const CustomSwitch(initialState: false),
-                    ],
-                  ),
+                        AuthTextField(
+                          controller: TextEditingController(),
+                          labelText: "Password",
+                          trailingText: "Strong",
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25.0),
+                          child: Text(
+                            "Forgot password??",
+                            style: TextStyle(
+                              color: color.onBackground,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 35.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "Remember me",
+                                style: GoogleFonts.manrope(
+                                  color: color.tertiary,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                              const CustomSwitch(initialState: false),
+                            ],
+                          ),
+                        ),
+                      ]),
                 ),
-                RichText(
-                  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    text:
-                        "By connecting you account, confirm that you agree to our",
-                    style: TextStyle(
-                      color: color.tertiary,
-                      fontSize: 13,
-                      fontWeight: FontWeight.w400,
-                      height: 0,
-                    ),
-                    children: [
-                      TextSpan(
-                        text: " Terms and conditions",
-                        style: TextStyle(
-                          color: color.secondary,
-                          fontSize: 13,
-                          fontWeight: FontWeight.w500,
-                          height: 0,
-                        ),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 25.0),
+                  child: RichText(
+                    textAlign: TextAlign.center,
+                    text: TextSpan(
+                      text:
+                          "By connecting you account, confirm that you agree with our",
+                      style: TextStyle(
+                        color: color.tertiary,
+                        fontWeight: FontWeight.w400,
+                        height: 0,
                       ),
-                    ],
+                      children: [
+                        TextSpan(
+                          text: " Terms and conditions",
+                          style: TextStyle(
+                            color: color.secondary,
+                            fontWeight: FontWeight.w500,
+                            height: 0,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ]),

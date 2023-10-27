@@ -7,13 +7,17 @@ class CustomSwitch extends StatefulWidget {
   const CustomSwitch({Key? key, required this.initialState}) : super(key: key);
 
   @override
-  State<CustomSwitch> createState() => _CustomSwitchState(initialState);
+  _CustomSwitchState createState() => _CustomSwitchState();
 }
 
 class _CustomSwitchState extends State<CustomSwitch> {
-  bool state;
+  late bool state;
 
-  _CustomSwitchState(this.state);
+  @override
+  void initState() {
+    super.initState();
+    state = widget.initialState;
+  }
 
   @override
   Widget build(BuildContext context) {

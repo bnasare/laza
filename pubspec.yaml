@@ -86,7 +86,7 @@ flutter:
         - asset: assets/fonts/Inter-Regular.ttf
     - family: Manrope
       fonts:
-        - asset: assets/fonts/Manrope-Regular.ttf
+        - asset: assets/fonts/Manrope-Medium.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

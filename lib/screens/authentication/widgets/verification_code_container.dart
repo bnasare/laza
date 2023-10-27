@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import the services library
 
 class CodeContainer extends StatelessWidget {
   const CodeContainer({super.key});
@@ -6,27 +7,27 @@ class CodeContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // height: MediaQuery.of(context).size.height * 0.12,
-      // width: MediaQuery.of(context).size.width * 0.2,
       width: 77,
       height: 98,
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-            side: const BorderSide(
-                width: 1, color: Color.fromRGBO(143, 149, 158, 1))),
-        // color: Colors.green
+          borderRadius: BorderRadius.circular(10),
+          side: BorderSide(color: Theme.of(context).colorScheme.tertiary),
+        ),
       ),
-      // child: const Text("7"),
-      child: const Center(
+      child: Center(
         child: TextField(
+          keyboardType: TextInputType.number,
+          inputFormatters: <TextInputFormatter>[
+            FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+          ],
           style: TextStyle(
-            color: Color(0xFF1D1E20),
+            color: Theme.of(context).colorScheme.secondary,
             fontSize: 22,
             fontWeight: FontWeight.w500,
           ),
           textAlign: TextAlign.center,
-          decoration: InputDecoration(border: InputBorder.none),
+          decoration: const InputDecoration(border: InputBorder.none),
         ),
       ),
     );

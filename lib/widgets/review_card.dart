@@ -109,6 +109,7 @@ class ReviewCard extends StatelessWidget {
           child: Text(
             'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget vitae amet...',
             style: TextStyle(
+              height: 1.4,
               fontSize: 15,
               fontWeight: FontWeight.w400,
               color: color.tertiary,

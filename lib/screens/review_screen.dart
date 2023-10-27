@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:laza/widgets/review_card.dart';
 
@@ -80,7 +81,7 @@ class ReviewScreen extends StatelessWidget {
               ),
               trailing: SizedBox(
                 width: horizontalConverter(context, 125),
-                height: verticalConverter(context, 35),
+                height: verticalConverter(context, 37),
                 child: ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
@@ -92,9 +93,10 @@ class ReviewScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Icon(
-                        Icons.edit_outlined,
+                        IconlyLight.edit,
                         size: 15,
                       ),
+                      SizedBox(width: 3),
                       Text(
                         'Add Review',
                         style: TextStyle(
@@ -108,10 +110,13 @@ class ReviewScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView.builder(
+              child: ListView.separated(
+                physics: const BouncingScrollPhysics(),
                 scrollDirection: Axis.vertical,
                 itemCount: 4,
-                itemBuilder: (context, index){
+                separatorBuilder: (context, index) =>
+                    const SizedBox(height: 5.0),
+                itemBuilder: (context, index) {
                   return ReviewCard(
                     name: reviews[index]['name'].toString(),
                     assetName: reviews[index]['assetName'].toString(),
@@ -126,21 +131,9 @@ class ReviewScreen extends StatelessWidget {
   }
 
   static const reviews = [
-    {
-      'name': 'Jenny Wilson',
-      'assetName': 'face_1'
-    },
-    {
-      'name': 'Ronald Richards',
-      'assetName': 'face_3'
-    },
-    {
-      'name': 'Guy Hawkins',
-      'assetName': 'face_4'
-    },
-    {
-      'name': 'Savannah Nguyen',
-      'assetName': 'face_2'
-    },
+    {'name': 'Jenny Wilson', 'assetName': 'face_1'},
+    {'name': 'Ronald Richards', 'assetName': 'face_3'},
+    {'name': 'Guy Hawkins', 'assetName': 'face_4'},
+    {'name': 'Savannah Nguyen', 'assetName': 'face_2'},
   ];
 }

@@ -34,103 +34,61 @@ class CartScreen extends StatelessWidget {
         ),
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(20.0),
-          child: Column(
-            children: [
-              const ShirtCard(
-                assetName: 'IMG',
-                firstLine: 'Men\'s Tie-Dye T-Shirt',
-                secondLine: 'Nike Sportswear',
-                price: '\$45(-\$4.00 Tax)',
-                numItems: 1,
-                cardColor: 0xffFEFEFE,
-              ),
-              const ShirtCard(
-                assetName: 'image',
-                firstLine: 'Men\'s Tie-Dye T-Shirt',
-                secondLine: 'Nike Sportswear',
-                price: '\$45(-\$4.00 Tax)',
-                numItems: 1,
-                cardColor: 0xffF5F6FA,
-              ),
-              const addressCard(
-                assetName: 'map',
-                heading: 'Delivery Address',
-                firstLine: 'Chhatak, Sunamgonj 12/8AB',
-                secondLine: 'Sylhet',
-              ),
-              const addressCard(
-                assetName: 'Frame',
-                heading: 'Payment Method',
-                firstLine: 'Visa Classic',
-                secondLine: '**** 7690',
-              ),
-              Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Text(
-                    'Order Info',
-                    style: TextStyle(
-                        fontSize: 17,
-                        fontWeight: FontWeight.w600,
-                        color: color.secondary),
-                  )),
-              Padding(
-                padding: const EdgeInsets.only(top: 12.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Subtotal',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: color.tertiary),
-                    ),
-                    Text(
-                      '\$100',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: color.secondary),
-                    ),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Shipping Cost',
-                      style: TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w400,
-                          color: color.tertiary),
-                    ),
-                    Text(
-                      '\$10',
-                      style: TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                          color: color.secondary),
-                    ),
-                  ],
-                ),
-              ),
-              Row(
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
+        child: Column(
+          children: [
+            ShirtCard(
+              assetName: 'IMG',
+              productName: 'Men\'s Tie-Dye T-Shirt',
+              brandType: 'Nike Sportswear',
+              price: '\$45(-\$4.00 Tax)',
+              numItems: 1,
+              cardColor: color.onPrimary,
+            ),
+            const SizedBox(height: 10),
+            ShirtCard(
+              assetName: 'image',
+              productName: 'Men\'s Tie-Dye T-Shirt',
+              brandType: 'Nike Sportswear',
+              price: '\$45(-\$4.00 Tax)',
+              numItems: 1,
+              cardColor: color.background,
+            ),
+            const addressCard(
+              assetName: 'map',
+              heading: 'Delivery Address',
+              firstLine: 'Chhatak, Sunamgonj 12/8AB',
+              secondLine: 'Sylhet',
+            ),
+            const addressCard(
+              assetName: 'Frame',
+              heading: 'Payment Method',
+              firstLine: 'Visa Classic',
+              secondLine: '**** 7690',
+            ),
+            Align(
+                alignment: Alignment.bottomLeft,
+                child: Text(
+                  'Order Info',
+                  style: TextStyle(
+                      fontSize: 17,
+                      fontWeight: FontWeight.w600,
+                      color: color.secondary),
+                )),
+            Padding(
+              padding: const EdgeInsets.only(top: 12.0),
+              child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Total',
+                    'Subtotal',
                     style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.w400,
                         color: color.tertiary),
                   ),
                   Text(
-                    '\$120',
+                    '\$100',
                     style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.w500,
@@ -138,8 +96,49 @@ class CartScreen extends StatelessWidget {
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Shipping Cost',
+                    style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w400,
+                        color: color.tertiary),
+                  ),
+                  Text(
+                    '\$10',
+                    style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w500,
+                        color: color.secondary),
+                  ),
+                ],
+              ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Total',
+                  style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w400,
+                      color: color.tertiary),
+                ),
+                Text(
+                  '\$120',
+                  style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.w500,
+                      color: color.secondary),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: NavigationCard(text: 'Save Address', onTap: () {}),
