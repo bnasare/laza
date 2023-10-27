@@ -42,11 +42,13 @@ class CodeVerificationScreen extends StatelessWidget {
                   ),
                 ),
                 SvgPicture.asset("assets/images/cloud.svg"),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).size.height * 0.2),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    // bottom: MediaQuery.of(context).size.height * 0.2
+                    bottom: 150,
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       CodeContainer(),
                       CodeContainer(),
