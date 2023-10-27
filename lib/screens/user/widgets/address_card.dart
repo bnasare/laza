@@ -18,90 +18,80 @@ class addressCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
 
-    return Container(
-        padding: const EdgeInsets.all(8.0),
-        width: MediaQuery.of(context).size.width,
-        height: 120,
-        decoration: BoxDecoration(
-          color: const Color(0xffFEFEFE),
-          borderRadius: BorderRadius.circular(10),
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              heading!,
+              style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                  color: color.secondary),
+            ),
+            Icon(Icons.arrow_forward_ios, size: 13, color: color.secondary),
+          ],
         ),
-        child: Column(
+        const SizedBox(height: 13),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  heading!,
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w500,
-                      color: color.secondary),
+                Padding(
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: Image.asset(
+                    'assets/images/$assetName.png',
+                    height: 50,
+                    width: 50,
+                  ),
                 ),
-                IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.arrow_forward_ios,
-                        size: 13, color: color.secondary))
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(right: 16.0),
-                      child: Image.asset(
-                        'assets/images/$assetName.png',
-                        height: 50,
-                        width: 50,
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: Text(
+                        firstLine!,
+                        style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: color.secondary),
                       ),
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 8.0),
-                          child: Text(
-                            firstLine!,
-                            style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.w400,
-                                color: color.secondary),
-                          ),
-                        ),
-                        Text(
-                          secondLine!,
-                          style: TextStyle(
-                              fontSize: 13,
-                              fontWeight: FontWeight.w400,
-                              color: color.secondary),
-                        ),
-                      ],
+                    Text(
+                      secondLine!,
+                      style: TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w400,
+                          color: color.secondary),
                     ),
                   ],
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0),
-                  child: Container(
-                    width: 25,
-                    height: 25,
-                    decoration: const BoxDecoration(
-                      color: Color.fromARGB(255, 105, 222, 109),
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Center(
-                      child: Icon(
-                        Icons.check,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0),
+              child: Container(
+                width: 25,
+                height: 25,
+                decoration: BoxDecoration(
+                  color: color.onSecondary,
+                  shape: BoxShape.circle,
+                ),
+                child: Center(
+                  child: Icon(
+                    Icons.check,
+                    size: 15,
+                    color: color.onPrimary,
+                  ),
+                ),
+              ),
+            ),
           ],
-        ));
+        ),
+      ],
+    );
   }
 }

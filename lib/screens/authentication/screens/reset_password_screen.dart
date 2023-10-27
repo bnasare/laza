@@ -79,7 +79,7 @@ class ResetPasswordScreen extends StatelessWidget {
               ),
             ),
           ),
-          Expanded(child: Container()),
+          const Spacer(),
           Padding(
             padding: EdgeInsets.only(bottom: verticalConverter(25)),
             child: Text(

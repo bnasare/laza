@@ -36,23 +36,30 @@ class CartScreen extends StatelessWidget {
       body: SingleChildScrollView(
         padding: const EdgeInsets.fromLTRB(20, 10, 20, 20),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ShirtCard(
-              assetName: 'IMG',
-              productName: 'Men\'s Tie-Dye T-Shirt',
-              brandType: 'Nike Sportswear',
-              price: '\$45(-\$4.00 Tax)',
-              numItems: 1,
-              cardColor: color.onPrimary,
+            Card(
+              elevation: 10,
+              shadowColor: Colors.white,
+              child: ShirtCard(
+                assetName: 'IMG',
+                productName: 'Men\'s Tie-Dye T-Shirt',
+                brandType: 'Nike Sportswear',
+                price: '\$45(-\$4.00 Tax)',
+                numItems: 1,
+                cardColor: color.onPrimary,
+              ),
             ),
-            const SizedBox(height: 10),
-            ShirtCard(
-              assetName: 'image',
-              productName: 'Men\'s Tie-Dye T-Shirt',
-              brandType: 'Nike Sportswear',
-              price: '\$45(-\$4.00 Tax)',
-              numItems: 1,
-              cardColor: color.background,
+            Padding(
+              padding: const EdgeInsets.only(top: 20.0, bottom: 20),
+              child: ShirtCard(
+                assetName: 'image',
+                productName: 'Men\'s Tie-Dye T-Shirt',
+                brandType: 'Nike Sportswear',
+                price: '\$45(-\$4.00 Tax)',
+                numItems: 1,
+                cardColor: color.background,
+              ),
             ),
             const addressCard(
               assetName: 'map',
@@ -60,21 +67,22 @@ class CartScreen extends StatelessWidget {
               firstLine: 'Chhatak, Sunamgonj 12/8AB',
               secondLine: 'Sylhet',
             ),
-            const addressCard(
-              assetName: 'Frame',
-              heading: 'Payment Method',
-              firstLine: 'Visa Classic',
-              secondLine: '**** 7690',
+            const Padding(
+              padding: EdgeInsets.only(top: 20.0, bottom: 20),
+              child: addressCard(
+                assetName: 'Frame',
+                heading: 'Payment Method',
+                firstLine: 'Visa Classic',
+                secondLine: '**** 7690',
+              ),
             ),
-            Align(
-                alignment: Alignment.bottomLeft,
-                child: Text(
-                  'Order Info',
-                  style: TextStyle(
-                      fontSize: 17,
-                      fontWeight: FontWeight.w600,
-                      color: color.secondary),
-                )),
+            Text(
+              'Order Info',
+              style: TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w600,
+                  color: color.secondary),
+            ),
             Padding(
               padding: const EdgeInsets.only(top: 12.0),
               child: Row(

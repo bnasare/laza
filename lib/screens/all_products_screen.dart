@@ -28,6 +28,7 @@ class AllProductsScreen extends StatelessWidget {
         ),
         centerTitle: true,
         title: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 5),
           width: 68,
           height: 45,
           decoration: BoxDecoration(
@@ -56,6 +57,7 @@ class AllProductsScreen extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
+                contentPadding: const EdgeInsets.all(0),
                 title: Text(
                   '365 Items',
                   style: TextStyle(
@@ -71,13 +73,13 @@ class AllProductsScreen extends StatelessWidget {
                       color: color.tertiary),
                 ),
                 trailing: Container(
-                  width: horizontalConverter(context, 80),
+                  width: horizontalConverter(context, 70),
                   height: verticalConverter(context, 37),
                   decoration: BoxDecoration(
                       color: color.background,
                       borderRadius: BorderRadius.circular(10)),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Icon(
                         CupertinoIcons.sort_down,
