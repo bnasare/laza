@@ -13,17 +13,17 @@ class PaymentDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    TextEditingController OwnerController = TextEditingController();
-    TextEditingController CardNumberController = TextEditingController();
-    TextEditingController ExpController = TextEditingController();
-    TextEditingController CvvController = TextEditingController();
+    TextEditingController ownerController = TextEditingController();
+    TextEditingController cardNumberController = TextEditingController();
+    TextEditingController expiryDateController = TextEditingController();
+    TextEditingController cvvController = TextEditingController();
 
     @override
     void dispose() {
-      OwnerController.dispose();
-      CardNumberController.dispose();
-      ExpController.dispose();
-      CvvController.dispose();
+      ownerController.dispose();
+      cardNumberController.dispose();
+      expiryDateController.dispose();
+      cvvController.dispose();
     }
 
     return Scaffold(
@@ -129,7 +129,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: CustomTextfield(
-                        controller: OwnerController,
+                        controller: ownerController,
                         hintText: 'Mrh Raju',
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 15),
@@ -146,7 +146,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                     child: SizedBox(
                       width: double.infinity,
                       child: CustomTextfield(
-                        controller: CardNumberController,
+                        controller: cardNumberController,
                         hintText: '5254 7634 8734 7690',
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 15),
@@ -171,7 +171,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                               height: 10,
                             ),
                             CustomTextfield(
-                              controller: ExpController,
+                              controller: expiryDateController,
                               hintText: '24/24',
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 15),
@@ -198,7 +198,7 @@ class PaymentDetailsScreen extends StatelessWidget {
                               height: 10,
                             ),
                             CustomTextfield(
-                              controller: CvvController,
+                              controller: cvvController,
                               hintText: '7763',
                               contentPadding:
                                   const EdgeInsets.symmetric(horizontal: 15),
