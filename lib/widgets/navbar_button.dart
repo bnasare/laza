@@ -10,7 +10,8 @@ class NavBarButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomAppBar(
-      height: MediaQuery.of(context).size.height * 0.09,
+      // height: MediaQuery.of(context).size.height * 0.09,
+      height: 70,
       color: const Color(0xFF9775FA),
       child: TextButton(
         onPressed: () {},
@@ -20,7 +21,7 @@ class NavBarButton extends StatelessWidget {
             color: Color(0xFFFEFEFE),
             fontSize: 17,
             fontWeight: FontWeight.w500,
-            height: 0.06,
+            // height: 0.06,
           ),
         ),
       ),
