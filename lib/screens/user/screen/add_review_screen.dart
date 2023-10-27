@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/review_screen.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
@@ -134,7 +135,9 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
       ),
       bottomNavigationBar: NavigationCard(
         text: 'Submit Review',
-        onTap: () {},
+        onTap: () {
+          Navigator.pushNamed(context, ReviewScreen.routeName);
+        },
       ),
     );
   }

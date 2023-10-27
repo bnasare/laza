@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/home_screen.dart';
+import 'package:laza/screens/user/screen/cart_screen.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../widgets/custom_back_button.dart';
@@ -25,7 +27,7 @@ class OrderConfirmedScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage('assets/images/mask_group.png'),
-            fit: BoxFit.fill,
+            fit: BoxFit.cover,
           ),
         ),
         child: Column(
@@ -39,7 +41,7 @@ class OrderConfirmedScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                 image: DecorationImage(
                   image: AssetImage('assets/images/confirmed_screen.png'),
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
@@ -64,7 +66,10 @@ class OrderConfirmedScreen extends StatelessWidget {
             Column(
               children: [
                 GestureDetector(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.pushReplacementNamed(
+                        context, CartScreen.routeName);
+                  },
                   child: Container(
                     margin:
                         const EdgeInsets.only(left: 10, right: 10, bottom: 27),
@@ -82,7 +87,12 @@ class OrderConfirmedScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                NavigationCard(text: 'Continue Shopping', onTap: () {}),
+                NavigationCard(
+                    text: 'Continue Shopping',
+                    onTap: () {
+                      Navigator.pushReplacementNamed(
+                          context, HomeScreen.routeName);
+                    }),
               ],
             ),
           ],

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:laza/screens/authentication/screens/forgot_password_screen.dart';
+import 'package:laza/screens/home_screen.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
@@ -75,14 +77,19 @@ class LoginScreen extends StatelessWidget {
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 25.0),
-                          child: Text(
-                            "Forgot password??",
-                            style: TextStyle(
-                              color: color.onBackground,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
+                          child: TextButton(
+                              onPressed: () {
+                                Navigator.pushNamed(
+                                    context, ForgotPasswordScreen.routeName);
+                              },
+                              child: Text(
+                                "Forgot password?",
+                                style: TextStyle(
+                                  color: color.onBackground,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 35.0),
@@ -92,12 +99,10 @@ class LoginScreen extends StatelessWidget {
                               Text(
                                 "Remember me",
                                 style: GoogleFonts.manrope(
-                                  color: color.tertiary,
-                                  fontSize: 13,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const CustomSwitch(initialState: false),
+                              const CustomSwitch(initialState: true),
                             ],
                           ),
                         ),
@@ -113,7 +118,6 @@ class LoginScreen extends StatelessWidget {
                       style: TextStyle(
                         color: color.tertiary,
                         fontWeight: FontWeight.w400,
-                        height: 0,
                       ),
                       children: [
                         TextSpan(
@@ -130,6 +134,10 @@ class LoginScreen extends StatelessWidget {
                 ),
               ]),
         ),
-        bottomNavigationBar: NavigationCard(text: 'Login', onTap: () {}));
+        bottomNavigationBar: NavigationCard(
+            text: 'Login',
+            onTap: () {
+              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            }));
   }
 }

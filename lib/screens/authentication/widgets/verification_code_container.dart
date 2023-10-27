@@ -17,6 +17,7 @@ class CodeContainer extends StatelessWidget {
       ),
       child: Center(
         child: TextField(
+          textInputAction: TextInputAction.next,
           keyboardType: TextInputType.number,
           inputFormatters: <TextInputFormatter>[
             FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),

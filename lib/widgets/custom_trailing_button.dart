@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/user/screen/cart_screen.dart';
 
 class CustomTrailingButton extends StatelessWidget {
   final Color backgroundColor;
@@ -14,7 +15,9 @@ class CustomTrailingButton extends StatelessWidget {
     final color = Theme.of(context).colorScheme;
 
     return GestureDetector(
-      onTap: () {},
+      onTap: () {
+        Navigator.pushNamed(context, CartScreen.routeName);
+      },
       child: Material(
         shape: const CircleBorder(),
         color: backgroundColor,

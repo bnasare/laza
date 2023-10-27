@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:laza/screens/authentication/screens/login_screen.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
@@ -73,8 +74,6 @@ class SignUpScreen extends StatelessWidget {
                     Text(
                       "Remember me",
                       style: GoogleFonts.manrope(
-                        color: color.secondary,
-                        fontSize: 13,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -85,6 +84,10 @@ class SignUpScreen extends StatelessWidget {
             ],
           ),
         ),
-        bottomNavigationBar: NavigationCard(text: 'Sign Up', onTap: () {}));
+        bottomNavigationBar: NavigationCard(
+            text: 'Sign Up',
+            onTap: () {
+              Navigator.pushNamed(context, LoginScreen.routeName);
+            }));
   }
 }

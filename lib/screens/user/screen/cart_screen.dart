@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:laza/screens/user/widgets/address_card.dart';
+import 'package:laza/screens/order_confirmed_screen.dart';
+import 'package:laza/screens/user/widgets/delivery_address_card.dart';
 import 'package:laza/widgets/shirtCard.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
+import '../widgets/payment_method_card.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
@@ -61,19 +63,19 @@ class CartScreen extends StatelessWidget {
                 cardColor: color.background,
               ),
             ),
-            const addressCard(
+            const DeliveryAddressCard(
               assetName: 'map',
-              heading: 'Delivery Address',
-              firstLine: 'Chhatak, Sunamgonj 12/8AB',
-              secondLine: 'Sylhet',
+              label: 'Delivery Address',
+              address: 'Chhatak, Sunamgonj 12/8AB',
+              city: 'Sylhet',
             ),
             const Padding(
               padding: EdgeInsets.only(top: 20.0, bottom: 20),
-              child: addressCard(
-                assetName: 'Frame',
-                heading: 'Payment Method',
-                firstLine: 'Visa Classic',
-                secondLine: '**** 7690',
+              child: PaymentMethodCard(
+                cardTypeImage: 'Frame',
+                label: 'Payment Method',
+                cardType: 'Visa Classic',
+                truncatedCardNo: '**** 7690',
               ),
             ),
             Text(
@@ -149,7 +151,11 @@ class CartScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationCard(text: 'Save Address', onTap: () {}),
+      bottomNavigationBar: NavigationCard(
+          text: 'Checkout',
+          onTap: () {
+            Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+          }),
     );
   }
 }

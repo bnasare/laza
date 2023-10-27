@@ -191,7 +191,9 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
       ),
       bottomNavigationBar: NavigationCard(
         text: 'Save Address',
-        onTap: () {},
+        onTap: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }

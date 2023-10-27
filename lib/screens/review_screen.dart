@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
+import 'package:laza/screens/user/screen/add_review_screen.dart';
 import 'package:laza/widgets/review_card.dart';
 
 import '../widgets/custom_back_button.dart';
@@ -35,7 +36,7 @@ class ReviewScreen extends StatelessWidget {
       body: Padding(
         padding: EdgeInsets.symmetric(
           vertical: verticalConverter(context, 5),
-          horizontal: horizontalConverter(context, 20),
+          horizontal: horizontalConverter(context, 3),
         ),
         child: Column(
           children: [
@@ -83,7 +84,9 @@ class ReviewScreen extends StatelessWidget {
                 width: horizontalConverter(context, 125),
                 height: verticalConverter(context, 37),
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AddReviewScreen.routeName);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color.fromRGBO(255, 112, 67, 1),
                     foregroundColor: color.onPrimary,

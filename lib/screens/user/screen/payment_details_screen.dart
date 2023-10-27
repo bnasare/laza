@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/user/screen/new_payment_details_screen.dart';
 import 'package:laza/screens/user/widgets/custom_textfield.dart';
 import 'package:laza/widgets/switch.dart';
 
@@ -90,39 +91,45 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.only(bottom: 15.0),
-                    child: Container(
-                      height: 50,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          color: const Color(0xffF6F2FF),
-                          border: Border.all(width: 1, color: color.primary),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: 15,
-                            width: 15,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(3),
-                                border: Border.all(color: color.primary)),
-                            child: const Icon(
-                              Icons.add,
-                              size: 12,
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.pushNamed(
+                            context, NewPaymentDetailsScreen.routeName);
+                      },
+                      child: Container(
+                        height: 50,
+                        width: double.infinity,
+                        decoration: BoxDecoration(
+                            color: const Color(0xffF6F2FF),
+                            border: Border.all(color: color.primary),
+                            borderRadius: BorderRadius.circular(10)),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              height: 15,
+                              width: 15,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(3),
+                                  border: Border.all(color: color.primary)),
+                              child: const Icon(
+                                Icons.add,
+                                size: 12,
+                              ),
                             ),
-                          ),
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Text(
-                            'Add new card',
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.w500,
-                              color: color.primary,
+                            const SizedBox(
+                              width: 10,
                             ),
-                          )
-                        ],
+                            Text(
+                              'Add new card',
+                              style: TextStyle(
+                                fontSize: 17,
+                                fontWeight: FontWeight.w500,
+                                color: color.primary,
+                              ),
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -235,7 +242,11 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
           ],
         ),
       ),
-      bottomNavigationBar: NavigationCard(text: 'Save Card', onTap: () {}),
+      bottomNavigationBar: NavigationCard(
+          text: 'Save Card',
+          onTap: () {
+            Navigator.pop(context);
+          }),
     );
   }
 }

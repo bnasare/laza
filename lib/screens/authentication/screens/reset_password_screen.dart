@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/authentication/widgets/auth_text_field.dart';
 import 'package:laza/widgets/custom_back_button.dart';
 
@@ -81,7 +82,7 @@ class ResetPasswordScreen extends StatelessWidget {
           ),
           const Spacer(),
           Padding(
-            padding: EdgeInsets.only(bottom: verticalConverter(25)),
+            padding: EdgeInsets.only(bottom: verticalConverter(22)),
             child: Text(
               'Please write your new password',
               style: TextStyle(color: color.tertiary),
@@ -89,7 +90,9 @@ class ResetPasswordScreen extends StatelessWidget {
           ),
           NavigationCard(
             text: 'Reset Password',
-            onTap: () {},
+            onTap: () {
+              Navigator.pushReplacementNamed(context, LoginScreen.routeName);
+            },
           ),
         ],
       ),

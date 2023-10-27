@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:laza/screens/authentication/screens/code_verification_screen.dart';
 
 import '../../../widgets/bottom_card.dart';
 import '../../../widgets/custom_back_button.dart';
@@ -27,7 +28,7 @@ class ForgotPasswordScreen extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               Text(
                 "Forgot password",
@@ -52,14 +53,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   color: color.tertiary,
-                  fontSize: 13,
                   fontWeight: FontWeight.w400,
                 ),
               )
             ],
           ),
         ),
-        bottomNavigationBar:
-            NavigationCard(text: 'Confirm Mail', onTap: () {}));
+        bottomNavigationBar: NavigationCard(
+            text: 'Confirm Mail',
+            onTap: () {
+              Navigator.pushNamed(context, CodeVerificationScreen.routeName);
+            }));
   }
 }

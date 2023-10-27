@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/screens/review_screen.dart';
+import 'package:laza/screens/user/screen/cart_screen.dart';
 import 'package:laza/widgets/double_header_widget.dart';
 import 'package:laza/widgets/other_product_images_widget.dart';
 import 'package:laza/widgets/review_card.dart';
@@ -282,7 +283,11 @@ class ProductDetailsScreen extends StatelessWidget {
           ),
         ],
       ),
-      bottomNavigationBar: NavigationCard(text: 'Add to Cart', onTap: () {}),
+      bottomNavigationBar: NavigationCard(
+          text: 'Add to Cart',
+          onTap: () {
+            Navigator.pushNamed(context, CartScreen.routeName);
+          }),
     );
   }
 }

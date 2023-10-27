@@ -224,6 +224,10 @@ class _NewPaymentDetailsScreenState extends State<NewPaymentDetailsScreen> {
             ),
           ],
         ),
-        bottomNavigationBar: NavigationCard(text: 'Add Card', onTap: () {}));
+        bottomNavigationBar: NavigationCard(
+            text: 'Add Card',
+            onTap: () {
+              Navigator.pop(context);
+            }));
   }
 }
