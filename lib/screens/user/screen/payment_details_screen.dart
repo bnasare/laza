@@ -67,7 +67,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                       child: ClipRRect(
                           borderRadius: BorderRadius.circular(20),
                           child: Image.asset(
-                            "assets/images/debitCard 2.jpg",
+                            "assets/images/visaCard.jpg",
                             width: 300,
                             height: 185,
                           )),
@@ -75,7 +75,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
                     ClipRRect(
                         borderRadius: BorderRadius.circular(10),
                         child: Image.asset(
-                          "assets/images/debit Card.png",
+                          "assets/images/visaCard1.png",
                           width: 300,
                           height: 185,
                         )),
