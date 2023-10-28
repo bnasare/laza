@@ -18,6 +18,7 @@ void main() {
         builder: (context) => const MyApp(),
       ),
     );
+    // whenever your initialization is completed, remove the splash screen:
   });
 }
 
