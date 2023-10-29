@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:laza/widgets/bottom_appbar.dart';
+import 'package:laza/widgets/bottom%20appbar/bottom_appbar.dart';
 
 import '../../../consts/product_data.dart';
 import '../../../consts/sizing_config.dart';
-import '../../../widgets/custom_back_button.dart';
-import '../../../widgets/custom_trailing_button.dart';
-import '../../../widgets/product_card.dart';
+import '../../../widgets/cards/product_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
+import '../../../widgets/custom icons/custom_trailing_button.dart';
 
 class WishlistScreen extends StatelessWidget {
   static const routeName = '/wishlist';

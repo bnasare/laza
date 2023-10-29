@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:laza/screens/order_confirmed_screen.dart';
 import 'package:laza/screens/user/widgets/delivery_address_card.dart';
-import 'package:laza/widgets/shirtCard.dart';
+import 'package:laza/widgets/cards/shirtCard.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/cards/bottom_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 import '../widgets/payment_method_card.dart';
 
 class CartScreen extends StatelessWidget {

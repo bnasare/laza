@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/authentication/widgets/auth_text_field.dart';
-import 'package:laza/widgets/custom_back_button.dart';
+import 'package:laza/widgets/custom%20icons/custom_back_button.dart';
 
-import '../../../widgets/bottom_card.dart';
+import '../../../widgets/cards/bottom_card.dart';
 
 class ResetPasswordScreen extends StatelessWidget {
   static const routeName = '/reset_password';

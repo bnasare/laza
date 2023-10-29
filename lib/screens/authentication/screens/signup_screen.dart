@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/cards/bottom_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
 

@@ -4,7 +4,7 @@ import 'package:laza/screens/user/screen/cart_screen.dart';
 import 'package:laza/screens/user/screen/payment_details_screen.dart';
 import 'package:laza/screens/user/screen/wishlist_screen.dart';
 
-import '../screens/home_screen.dart';
+import '../../screens/home_screen.dart';
 import 'bottom_tab_item.dart';
 
 class CustomBottomNavigation extends StatelessWidget {

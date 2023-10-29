@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/product_data.dart';
 import 'package:laza/screens/all_products_screen.dart';
-import 'package:laza/widgets/brand_card.dart';
+import 'package:laza/widgets/cards/brand_card.dart';
+import 'package:laza/widgets/cards/product_card.dart';
 import 'package:laza/widgets/drawer.dart';
-import 'package:laza/widgets/product_card.dart';
 
 import '../consts/sizing_config.dart';
-import '../widgets/bottom_appbar.dart';
-import '../widgets/custom_trailing_button.dart';
+import '../widgets/bottom appbar/bottom_appbar.dart';
+import '../widgets/custom icons/custom_trailing_button.dart';
 
 class HomeScreen extends StatefulWidget {
   static const routeName = '/home';
@@ -24,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List <Map<String, String>> products = ProductData.products;
+    List<Map<String, String>> products = ProductData.products;
     final TextEditingController searchController = TextEditingController();
     return Scaffold(
       key: _scaffoldKey,
@@ -192,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   GestureDetector(
-                    onTap: (){
+                    onTap: () {
                       Navigator.pushNamed(context, AllProductsScreen.routeName);
                     },
                     child: Text(

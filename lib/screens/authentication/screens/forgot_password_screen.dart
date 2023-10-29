@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:laza/screens/authentication/screens/code_verification_screen.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/cards/bottom_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 import '../widgets/auth_text_field.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {

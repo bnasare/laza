@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:laza/screens/home_screen.dart';
 import 'package:laza/screens/user/screen/cart_screen.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../widgets/custom_back_button.dart';
+import '../widgets/cards/bottom_card.dart';
+import '../widgets/custom icons/custom_back_button.dart';
 
 class OrderConfirmedScreen extends StatelessWidget {
   static const routeName = '/order_confirmed';

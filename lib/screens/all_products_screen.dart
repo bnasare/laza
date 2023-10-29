@@ -2,11 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
-import 'package:laza/widgets/product_card.dart';
+import 'package:laza/widgets/cards/product_card.dart';
 
 import '../consts/product_data.dart';
-import '../widgets/custom_back_button.dart';
-import '../widgets/custom_trailing_button.dart';
+import '../widgets/custom icons/custom_back_button.dart';
+import '../widgets/custom icons/custom_trailing_button.dart';
 
 class AllProductsScreen extends StatelessWidget {
   static const routeName = '/all_products';

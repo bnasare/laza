@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../consts/sizing_config.dart';
+import '../../consts/sizing_config.dart';
 
 class SizeCard extends StatelessWidget {
   const SizeCard({super.key, required this.size});

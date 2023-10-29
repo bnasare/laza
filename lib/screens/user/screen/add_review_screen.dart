@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:laza/screens/review_screen.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/cards/bottom_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom_textfield.dart';
 
 class AddReviewScreen extends StatefulWidget {

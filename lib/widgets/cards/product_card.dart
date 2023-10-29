@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/screens/product_details_screen.dart';
 
-import '../consts/sizing_config.dart';
+import '../../consts/sizing_config.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({

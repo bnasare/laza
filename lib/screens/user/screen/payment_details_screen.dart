@@ -3,8 +3,8 @@ import 'package:laza/screens/user/screen/new_payment_details_screen.dart';
 import 'package:laza/screens/user/widgets/custom_textfield.dart';
 import 'package:laza/widgets/switch.dart';
 
-import '../../../widgets/bottom_card.dart';
-import '../../../widgets/custom_back_button.dart';
+import '../../../widgets/cards/bottom_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 
 class PaymentDetailsScreen extends StatefulWidget {
   static const routeName = '/payment_details';
@@ -60,6 +60,7 @@ class _PaymentDetailsScreenState extends State<PaymentDetailsScreen> {
               child: SizedBox(
                 height: 200,
                 child: ListView(
+                  physics: const PageScrollPhysics(),
                   scrollDirection: Axis.horizontal,
                   children: [
                     Padding(

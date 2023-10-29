@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/screens/review_screen.dart';
 import 'package:laza/screens/user/screen/cart_screen.dart';
+import 'package:laza/widgets/cards/review_card.dart';
+import 'package:laza/widgets/cards/size_card.dart';
 import 'package:laza/widgets/double_header_widget.dart';
 import 'package:laza/widgets/other_product_images_widget.dart';
-import 'package:laza/widgets/review_card.dart';
-import 'package:laza/widgets/size_card.dart';
 
 import '../consts/sizing_config.dart';
-import '../widgets/bottom_card.dart';
-import '../widgets/custom_back_button.dart';
-import '../widgets/custom_trailing_button.dart';
+import '../widgets/cards/bottom_card.dart';
+import '../widgets/custom icons/custom_back_button.dart';
+import '../widgets/custom icons/custom_trailing_button.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   static const routeName = '/product_details';
