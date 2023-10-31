@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:laza/screens/review_screen.dart';
-import 'package:laza/screens/user/screen/cart_screen.dart';
-import 'package:laza/widgets/cards/review_card.dart';
-import 'package:laza/widgets/cards/size_card.dart';
-import 'package:laza/widgets/double_header_widget.dart';
-import 'package:laza/widgets/other_product_images_widget.dart';
 
 import '../consts/sizing_config.dart';
 import '../widgets/cards/bottom_card.dart';
+import '../widgets/cards/review_card.dart';
+import '../widgets/cards/size_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
+import '../widgets/double_header_widget.dart';
+import '../widgets/other_product_images_widget.dart';
+import 'review_screen.dart';
+import 'user/screen/cart_screen.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   static const routeName = '/product_details';
@@ -153,11 +153,10 @@ class ProductDetailsScreen extends StatelessWidget {
                       right: horizontalConverter(context, 20),
                     ),
                     child: const ProductImage(
-                      firstImage: 'pic_1',
-                      secondImage: 'pic_2',
-                      thirdImage: 'card_5',
-                      fourthImage: 'pic_4',
-                    ),
+                        firstImage: 'pic_1',
+                        secondImage: 'pic_2',
+                        thirdImage: 'card_5',
+                        fourthImage: 'pic_4'),
                   ),
                   Padding(
                     padding:
