@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
@@ -7,15 +8,30 @@ import '../../../widgets/custom icons/custom_back_button.dart';
 import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   static const routeName = '/signup';
 
   const SignUpScreen({Key? key}) : super(key: key);
 
   @override
+  State<SignUpScreen> createState() => _SignUpScreenState();
+}
+
+class _SignUpScreenState extends State<SignUpScreen> {
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      // Handle Errors
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-
+    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -52,12 +68,12 @@ class SignUpScreen extends StatelessWidget {
                     ),
                   ),
                   AuthTextField(
-                    controller: TextEditingController(),
+                    controller: passwordController,
                     labelText: "Password",
                     trailingText: "Strong",
                   ),
                   AuthTextField(
-                    controller: TextEditingController(),
+                    controller: emailController,
                     labelText: "Email Address",
                     trailingWidget: Icon(
                       Icons.check_outlined,
@@ -87,6 +103,8 @@ class SignUpScreen extends StatelessWidget {
         bottomNavigationBar: NavigationCard(
             text: 'Sign Up',
             onTap: () {
+              signUpWithEmailAndPassword(
+                  emailController.text, passwordController.text);
               Navigator.pushNamed(context, LoginScreen.routeName);
             }));
   }
