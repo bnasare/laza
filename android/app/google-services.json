@@ -12,7 +12,20 @@
           "package_name": "com.example.laza"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1015803081083-akddt82ka6fqfvqdih1dsi1d7teai8no.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.laza",
+            "certificate_hash": "621bb928cd671f40791b80ab3b74b46dfe406dd9"
+          }
+        },
+        {
+          "client_id": "1015803081083-nfjq72udqipg3uq2g97j5gtf0gefsvak.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDLPkaTAyXTQoAKohE0LfwEXhMI3AfZUqQ"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1015803081083-8c39qo874vrrl1rvabju6jdf533t2868.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1015803081083-i26rogfdf37dk0lin5kpsp7qkt87rdmf.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.laza"
+              }
+            }
+          ]
         }
       }
     }
