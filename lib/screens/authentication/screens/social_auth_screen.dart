@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +23,7 @@ class SocialAuthScreen extends StatefulWidget {
 class _SocialAuthScreenState extends State<SocialAuthScreen> {
   Future<UserCredential?> signInWithGoogle(context) async {
     try {
-      print("Google Sign-In started");
+      log("Google Sign-In started");
       final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
 
       final GoogleSignInAuthentication? googleAuth =
@@ -50,16 +52,16 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
         });
       }
 
-      print("Google Sign-In successful");
+      log("Google Sign-In successful");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (context) => const HomeScreen()));
       return userCredential;
     } on FirebaseException catch (error) {
-      print("FirebaseException: ${error.message}");
+      log("FirebaseException: ${error.message}");
       AlertDialogs.errorDialog(subtitle: '${error.message}', context: context);
       return null;
     } catch (error) {
-      print("Error: $error");
+      log("Error: $error");
       AlertDialogs.errorDialog(subtitle: '$error', context: context);
       return null;
     }
