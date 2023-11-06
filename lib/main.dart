@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/firebase_options.dart';
-import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
+import 'package:laza/screens/home_screen.dart';
 
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
             theme: themeData(),
             debugShowCheckedModeBanner: false,
             routes: AppRoutes().getRoutes(),
-            initialRoute: SocialAuthScreen.routeName,
+            initialRoute: HomeScreen.routeName,
           );
         });
   }
