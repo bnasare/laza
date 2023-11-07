@@ -14,15 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1015803081083-akddt82ka6fqfvqdih1dsi1d7teai8no.apps.googleusercontent.com",
+          "client_id": "1015803081083-n01dku01e8a808hjafol4l7afvak7hal.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.example.laza",
-            "certificate_hash": "621bb928cd671f40791b80ab3b74b46dfe406dd9"
+            "certificate_hash": "4b37d4e6980280c365a110bf2654d37f1a839ae9"
           }
         },
         {
-          "client_id": "1015803081083-nfjq72udqipg3uq2g97j5gtf0gefsvak.apps.googleusercontent.com",
+          "client_id": "1015803081083-guc5lu0rs2kvpsck2kqm7qjpda4up7ul.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
