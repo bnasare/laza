@@ -1,17 +1,99 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/forgot_password_screen.dart';
 import 'package:laza/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
 
-  const LoginScreen({Key? key}) : super(key: key);
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+//const LoginScreen({Key? key}) : super(key: key);
+TextEditingController emailController=TextEditingController();
+TextEditingController passwordController=TextEditingController();
+
+  bool rememberMe = false;
+
+
+  @override
+  void initState() {
+    super.initState();
+    loadSavedCredentials(emailController, passwordController, rememberMe);
+  }
+
+void loadSavedCredentials( emailController,
+     passwordController,  rememberMe) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  String? email = prefs.getString('email');
+  String? password = prefs.getString('password');
+  bool? remember = prefs.getBool('remember');
+
+  if (email != null && password != null && remember != null) {
+    emailController.text = email;
+    passwordController.text = password;
+    rememberMe = remember;
+  }
+}
+
+void saveCredentials(String email, String password, bool rememberMe) async {
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  if (rememberMe) {
+    await prefs.setString('email', email);
+    await prefs.setString('password', password);
+    await prefs.setBool('remember', true);
+  } else {
+    await prefs.remove('email');
+    await prefs.remove('password');
+    await prefs.setBool('remember', false);
+  }
+}
+
+
+void signUsersIn() async {
+   
+  showDialog(context: context, builder:(context){
+return const Center(
+  child: CircularProgressIndicator(),
+);
+  });
+
+  try {
+    await FirebaseAuth.instance.signInWithEmailAndPassword(
+      email: emailController.text,
+      password: passwordController.text,
+    );
+
+    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+
+     if (rememberMe) {
+          saveCredentials(
+            emailController.text,
+            passwordController.text,
+            rememberMe,
+          );}
+  } catch (e) {
+    Navigator.pop(context);
+   
+   showDialog(context: context, builder:(context){
+return const AlertDialog(
+  title: Text('Sign-In error'),
+);
+  });
+   
+  }
+}
+
 
   @override
   Widget build(BuildContext context) {
@@ -64,14 +146,14 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         AuthTextField(
-                          controller: TextEditingController(),
+                          controller: emailController,
                           labelText: "Username",
                           trailingWidget: const Icon(
                             Icons.check_outlined,
                           ),
                         ),
                         AuthTextField(
-                          controller: TextEditingController(),
+                          controller: passwordController,
                           labelText: "Password",
                           trailingText: "Strong",
                         ),
@@ -102,7 +184,7 @@ class LoginScreen extends StatelessWidget {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              const CustomSwitch(initialState: true),
+                               CustomSwitch(initialState:rememberMe ),
                             ],
                           ),
                         ),
@@ -136,8 +218,10 @@ class LoginScreen extends StatelessWidget {
         ),
         bottomNavigationBar: NavigationCard(
             text: 'Login',
-            onTap: () {
-              Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            onTap: () {signUsersIn();
+            
+           //   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
             }));
   }
+  
 }
