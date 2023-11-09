@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/product_data.dart';
+import 'package:laza/models/product_model.dart';
 import 'package:laza/screens/all_products_screen.dart';
 import 'package:laza/widgets/cards/brand_card.dart';
 import 'package:laza/widgets/cards/product_card.dart';
@@ -24,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List<Map<String, String>> products = ProductData.products;
+    List<Product> products = ProductData.productModels;
     final TextEditingController searchController = TextEditingController();
     return Scaffold(
       key: _scaffoldKey,
@@ -159,21 +160,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    BrandCard(
+                    const BrandCard(
                       assetName: 'adidas',
                       brandName: 'Adidas',
-                      width: horizontalConverter(context, 115),
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    BrandCard(
-                        assetName: 'nike',
-                        brandName: 'Nike',
-                        width: horizontalConverter(context, 98)),
+                    const BrandCard(
+                      assetName: 'nike',
+                      brandName: 'Nike',
+                    ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    BrandCard(
+                    const BrandCard(
                       assetName: 'fila',
                       brandName: 'Fila',
-                      width: horizontalConverter(context, 91),
+                    ),
+                    SizedBox(width: horizontalConverter(context, 10)),
+                    const BrandCard(
+                      assetName: 'puma',
+                      brandName: 'Puma',
+                    ),
+                    SizedBox(width: horizontalConverter(context, 10)),
+                    const BrandCard(
+                      assetName: 'ua',
+                      brandName: 'Under Armour',
+                    ),
+                    SizedBox(width: horizontalConverter(context, 10)),
+                    const BrandCard(
+                      assetName: 'jordan',
+                      brandName: 'Jordan',
                     ),
                   ],
                 ),
@@ -223,12 +237,12 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisSpacing: 10.0,
                       childAspectRatio: 0.62,
                     ),
-                    itemCount: products.length,
+                    itemCount: 4,
                     itemBuilder: (context, index) {
                       return ProductCard(
-                        assetName: products[index]['productAsset'].toString(),
-                        productName: products[index]['productName'].toString(),
-                        price: 99,
+                        assetName: products[index].imagePath,
+                        productName: products[index].productName,
+                        price: products[index].price,
                       );
                     },
                   ),
