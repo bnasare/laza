@@ -4,6 +4,7 @@ import 'package:laza/widgets/bottom%20appbar/bottom_appbar.dart';
 
 import '../../../consts/product_data.dart';
 import '../../../consts/sizing_config.dart';
+import '../../../models/product_model.dart';
 import '../../../widgets/cards/product_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 import '../../../widgets/custom icons/custom_trailing_button.dart';
@@ -15,7 +16,7 @@ class WishlistScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Map<String, String>> products = ProductData.products;
+    List<Product> products = ProductData.productModels;
     final color = Theme.of(context).colorScheme;
 
     return Scaffold(
@@ -109,10 +110,7 @@ class WishlistScreen extends StatelessWidget {
                       itemCount: products.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
-                          assetName: products[index]['productAsset'].toString(),
-                          productName:
-                              products[index]['productName'].toString(),
-                          price: 99,
+                          product: products[index],
                         );
                       },
                     ),

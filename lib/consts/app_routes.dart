@@ -10,7 +10,6 @@ import '../screens/authentication/screens/social_auth_screen.dart';
 import '../screens/home_screen.dart';
 import '../screens/onboarding_screen.dart';
 import '../screens/order_confirmed_screen.dart';
-import '../screens/product_details_screen.dart';
 import '../screens/review_screen.dart';
 import '../screens/user/screen/add_review_screen.dart';
 import '../screens/user/screen/cart_screen.dart';
@@ -31,7 +30,6 @@ class AppRoutes {
       ResetPasswordScreen.routeName: (context) => const ResetPasswordScreen(),
       CodeVerificationScreen.routeName: (context) =>
           const CodeVerificationScreen(),
-      ProductDetailsScreen.routeName: (context) => const ProductDetailsScreen(),
       ReviewScreen.routeName: (context) => const ReviewScreen(),
       AddReviewScreen.routeName: (context) => const AddReviewScreen(),
       CartScreen.routeName: (context) => const CartScreen(),

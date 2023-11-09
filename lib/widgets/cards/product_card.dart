@@ -3,18 +3,15 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/screens/product_details_screen.dart';
 
 import '../../consts/sizing_config.dart';
+import '../../models/product_model.dart';
 
 class ProductCard extends StatefulWidget {
   const ProductCard({
     super.key,
-    required this.assetName,
-    required this.productName,
-    required this.price,
+    required this.product,
   });
 
-  final String assetName;
-  final String productName;
-  final int price;
+  final Product product;
 
   @override
   State<ProductCard> createState() => _ProductCardState();
@@ -28,7 +25,14 @@ class _ProductCardState extends State<ProductCard> {
     final color = Theme.of(context).colorScheme;
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return ProductDetailsScreen(product: widget.product);
+            },
+          ),
+        );
       },
       child: SizedBox(
         height: verticalConverter(context, 257),
@@ -47,7 +51,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   child: ClipRRect(
                     child: Image.asset(
-                      widget.assetName,
+                      widget.product.imagePath,
                       height: verticalConverter(context, 203),
                       width: horizontalConverter(context, 160),
                       fit: BoxFit.cover,
@@ -79,7 +83,7 @@ class _ProductCardState extends State<ProductCard> {
               ],
             ),
             Text(
-              widget.productName,
+              widget.product.productName,
               softWrap: true,
               maxLines: 2,
               style: const TextStyle(
@@ -88,7 +92,7 @@ class _ProductCardState extends State<ProductCard> {
               ),
             ),
             Text(
-              '\$ ${widget.price}',
+              '\$ ${widget.product.price}',
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
