@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/product_data.dart';
 import 'package:laza/models/product_model.dart';
+import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/all_products_screen.dart';
 import 'package:laza/widgets/cards/brand_card.dart';
 import 'package:laza/widgets/cards/product_card.dart';
@@ -143,12 +144,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 17,
                     ),
                   ),
-                  Text(
-                    'View All',
-                    style: TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, AllBrandsScreen.routeName);
+                    },
+                    child: Text(
+                      'View All',
+                      style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 13,
-                        color: color.tertiary),
+                        color: color.tertiary,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -182,7 +189,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SizedBox(width: horizontalConverter(context, 10)),
                     const BrandCard(
                       assetName: 'ua',
-                      brandName: 'Under Armour',
+                      brandName: 'UA',
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
                     const BrandCard(

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../screens/brand_screen.dart';
+
 class BrandCard extends StatelessWidget {
   const BrandCard({
     super.key,
@@ -28,10 +30,19 @@ class BrandCard extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: null,
+      onTap: (){
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) {
+              return BrandScreen(brand: assetName);
+            },
+          ),
+        );
+      },
       child: Container(
         height: verticalConverter(50),
-        width: horizontalConverter(155),
+        width: horizontalConverter(118),
         decoration: BoxDecoration(
             color: color.background, borderRadius: BorderRadius.circular(10)),
         child: Row(
