@@ -103,9 +103,7 @@ class AllProductsScreen extends StatelessWidget {
                       itemCount: products.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
-                          assetName: products[index].imagePath,
-                          productName: products[index].productName,
-                          price: products[index].price,
+                          product: products[index],
                         );
                       },
                     ),

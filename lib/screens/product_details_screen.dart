@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 
 import '../consts/sizing_config.dart';
+import '../models/product_model.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/cards/review_card.dart';
 import '../widgets/cards/size_card.dart';
@@ -15,7 +16,9 @@ import 'user/screen/cart_screen.dart';
 class ProductDetailsScreen extends StatelessWidget {
   static const routeName = '/product_details';
 
-  const ProductDetailsScreen({Key? key}) : super(key: key);
+  const ProductDetailsScreen({Key? key, required this.product}) : super(key: key);
+
+  final Product product;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +46,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         left: 10,
                         right: 10,
                         child: Image.asset(
-                          'assets/images/card_5.png',
+                          product.imagePath,
                           width: horizontalConverter(context, 310),
                           height: verticalConverter(context, 387),
                           fit: BoxFit.cover,
@@ -53,9 +56,14 @@ class ProductDetailsScreen extends StatelessWidget {
                         bottom: 0,
                         left: 150,
                         right: 150,
-                        child: Image.asset(
-                          'assets/images/nike_logo.png',
-                          fit: BoxFit.fill,
+                        child: Container(
+                          height: verticalConverter(context, 49),
+                          width: horizontalConverter(context, 80),
+                          color: const Color.fromRGBO(255, 255, 255, 0.5),
+                          child: Image.asset(
+                            'assets/images/${product.categoryName}.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       Positioned(
