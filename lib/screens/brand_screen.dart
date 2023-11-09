@@ -124,9 +124,7 @@ class BrandScreen extends StatelessWidget {
                       itemCount: brandProducts.length,
                       itemBuilder: (context, index) {
                         return ProductCard(
-                          assetName: brandProducts[index].imagePath,
-                          productName: brandProducts[index].productName,
-                          price: brandProducts[index].price,
+                          product: brandProducts[index],
                         );
                       },
                     ),
