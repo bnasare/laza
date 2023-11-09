@@ -5,12 +5,10 @@ class BrandCard extends StatelessWidget {
     super.key,
     required this.assetName,
     required this.brandName,
-    required this.width,
   });
 
   final String assetName;
   final String brandName;
-  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -29,35 +27,38 @@ class BrandCard extends StatelessWidget {
       return newValue;
     }
 
-    return Container(
-      height: verticalConverter(50),
-      width: width,
-      decoration: BoxDecoration(
-          color: color.background, borderRadius: BorderRadius.circular(10)),
-      child: Row(
-        children: [
-          Padding(
-            padding: EdgeInsets.only(left: horizontalConverter(10)),
-            child: Container(
-              width: horizontalConverter(40),
-              height: verticalConverter(40),
-              decoration: BoxDecoration(
-                  color: color.onPrimary,
-                  borderRadius: BorderRadius.circular(10)),
-              child: Image.asset('assets/images/$assetName.png'),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(left: horizontalConverter(10)),
-            child: Text(
-              brandName,
-              style: const TextStyle(
-                fontSize: 15,
-                fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: null,
+      child: Container(
+        height: verticalConverter(50),
+        width: horizontalConverter(155),
+        decoration: BoxDecoration(
+            color: color.background, borderRadius: BorderRadius.circular(10)),
+        child: Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: horizontalConverter(10)),
+              child: Container(
+                width: horizontalConverter(40),
+                height: verticalConverter(40),
+                decoration: BoxDecoration(
+                    color: color.onPrimary,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Image.asset('assets/images/$assetName.png'),
               ),
             ),
-          )
-        ],
+            Padding(
+              padding: EdgeInsets.only(left: horizontalConverter(10)),
+              child: Text(
+                brandName,
+                style: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

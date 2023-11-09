@@ -47,7 +47,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   child: ClipRRect(
                     child: Image.asset(
-                      'assets/images/${widget.assetName}.png',
+                      widget.assetName,
                       height: verticalConverter(context, 203),
                       width: horizontalConverter(context, 160),
                       fit: BoxFit.cover,
@@ -81,6 +81,7 @@ class _ProductCardState extends State<ProductCard> {
             Text(
               widget.productName,
               softWrap: true,
+              maxLines: 2,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 11,
