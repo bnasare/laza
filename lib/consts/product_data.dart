@@ -157,7 +157,7 @@ class ProductData {
     ),
     Product(
       imagePath: 'assets/images/product_15.png',
-      productName: "PUMA x LAMELO BALL Toxic Men's Basketball Shorts II",
+      productName: "PUMA x LAMELO BALL Toxic Basketball Shorts",
       price: 70,
       description:
           "As the disruptive and unique as LaMelo Ball, these MELO x TOXIC shorts will help you get wild on and off the court. With an all-over print that's pure MELO, there is not stopping, no mercy.",
@@ -166,7 +166,7 @@ class ProductData {
     ),
     Product(
       imagePath: 'assets/images/product_16.png',
-      productName: "PUMA x LAMELO BALL Toxic Men's Long Sleeve Basketball Tee",
+      productName: "PUMA x LAMELO BALL Toxic Long Sleeve Tee",
       price: 50,
       description:
           "As the disruptive and unique as LaMelo Ball, this MELO X TOXIC long sleeve tee will help you get wild on and off the court. With a print that's pure MELO, there is not stopping, no mercy.",
@@ -175,7 +175,7 @@ class ProductData {
     ),
     Product(
       imagePath: 'assets/images/product_17.png',
-      productName: "Manchester City 23/24 Third Authentic Men's Jersey",
+      productName: "Manchester City 23/24 Third Jersey",
       price: 140,
       description:
           "Manchester is buzzing with energy. It’s vibrant, it’s exciting, it’s electric. At the heart of that is Manchester City, a team that’s changing the way soccer is played, coached, and understood. Their 2023/24 Third Kit is powered by the team’s lightning-fast style of play and the atmosphere it creates between the fans, players, and staff. The jersey features an electric spark pattern throughout, along with neon green takes on the club crest and sponsor logos. When you watch City play, you can feel the electricity, and now, you can see it too.",
@@ -202,7 +202,7 @@ class ProductData {
     ),
     Product(
       imagePath: 'assets/images/product_20.png',
-      productName: "PRIMEGREEN ESSENTIALS WARM-UP SLIM 3-STRIPES TRACK JACKET",
+      productName: "Primegreen Essentials 3-Stripes Track Jacket",
       price: 33,
       description:
           "Dash out the door feeling ready for it all. This track jacket has a slim cut with raglan sleeves for a distraction-free feel while warming up or recovering later on. Side pockets keep a bus pass and music player within reach. This product is made with Primegreen, a series of high-performance recycled materials.",
@@ -211,7 +211,7 @@ class ProductData {
     ),
     Product(
       imagePath: 'assets/images/product_21.png',
-      productName: "ADICOLOR CLASSICS SST TRACK JACKET",
+      productName: "Adicolor Classics SST Track Jacket",
       price: 72,
       description:
           "Adicolor Classics Track Jacket, The classic track jacket, revamped with recycled materials. The heart of adidas Originals, Adicolor is for the purist and the pioneer. It celebrates the power and authenticity of adidas' DNA, and when you slip on this Firebird track jacket, you're doing the same. The iconic look of the classic tracksuit is just the same as the original, but recreated with recycled materials. A show of our love of the ocean, and part of adidas' commitment to help",
@@ -220,7 +220,7 @@ class ProductData {
     ),
     Product(
       imagePath: 'assets/images/product_22.png',
-      productName: "ESSENTIALS 3-STRIPES OPEN HEM FLEECE PANTS",
+      productName: "Essentials 3-Stripes Open Hem Pants",
       price: 25,
       description:
           "Keep Up With Your Fitness Goals In These Comfortable Pants. They're Cut For A Regular Fit And Feature Open Hems And A Drawcord Elastic Waist For A Versatile Fit. Side Pockets Provide A Spot To Stash Your Workout Essentials. Primegreen This Product Is Made With Primegreen, A Series Of High-Performance Recycled Materials.",

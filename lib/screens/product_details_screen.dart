@@ -16,7 +16,8 @@ import 'user/screen/cart_screen.dart';
 class ProductDetailsScreen extends StatelessWidget {
   static const routeName = '/product_details';
 
-  const ProductDetailsScreen({Key? key, required this.product}) : super(key: key);
+  const ProductDetailsScreen({Key? key, required this.product})
+      : super(key: key);
 
   final Product product;
 
@@ -107,7 +108,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              "Men's Full Zip Jacket",
+                              product.gender.toUpperCase(),
                               style: TextStyle(
                                 color: color.tertiary,
                                 fontSize: 13,
@@ -116,12 +117,18 @@ class ProductDetailsScreen extends StatelessWidget {
                             ),
                             Padding(
                               padding: EdgeInsets.only(
-                                  top: verticalConverter(context, 8)),
-                              child: const Text(
-                                "Nike Tech Fleece",
+                                top: verticalConverter(context, 8),
+                              ),
+                              child: Text(
+                                product.productName,
+                                overflow: TextOverflow.clip,
+                                softWrap: true,
+                                maxLines: 2,
                                 style: TextStyle(
-                                  fontSize: 22,
+                                  height: 1.5,
+                                  fontSize: 14,
                                   fontWeight: FontWeight.w600,
+                                  color: color.secondary,
                                 ),
                               ),
                             ),
@@ -141,9 +148,9 @@ class ProductDetailsScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(
                                   top: verticalConverter(context, 8)),
-                              child: const Text(
-                                "\$120",
-                                style: TextStyle(
+                              child: Text(
+                                "\$${product.price}",
+                                style: const TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -213,8 +220,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       textAlign: TextAlign.left,
                       text: TextSpan(children: [
                         TextSpan(
-                          text:
-                              'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel with',
+                          text: product.description,
                           style: TextStyle(
                               height: 1.4,
                               color: color.tertiary,
@@ -274,7 +280,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '\$125',
+                          '\$${product.price}',
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
