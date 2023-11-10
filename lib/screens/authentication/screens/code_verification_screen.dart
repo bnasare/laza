@@ -1,3 +1,5 @@
+import 'package:email_otp/email_otp.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laza/screens/authentication/screens/reset_password_screen.dart';
@@ -10,11 +12,19 @@ import '../widgets/verification_code_container.dart';
 class CodeVerificationScreen extends StatelessWidget {
   static const routeName = '/code_verification';
 
-  const CodeVerificationScreen({Key? key}) : super(key: key);
+  CodeVerificationScreen({Key? key}) : super(key: key);
+  final TextEditingController codeOne = TextEditingController();
+  final TextEditingController codeTwo = TextEditingController();
+  final TextEditingController codeThree = TextEditingController();
+  final TextEditingController codeFour = TextEditingController();
+  bool verified = false;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final routeArgs = ModalRoute.of(context)?.settings.arguments as Map;
+    final String email = routeArgs["email"];
+    final EmailOTP? auth = routeArgs["auth"];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -40,17 +50,17 @@ class CodeVerificationScreen extends StatelessWidget {
             ),
           ),
           SvgPicture.asset("assets/images/cloud.svg"),
-          const Padding(
-            padding: EdgeInsets.only(
+          Padding(
+            padding: const EdgeInsets.only(
               bottom: 150,
             ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                CodeContainer(),
-                CodeContainer(),
-                CodeContainer(),
-                CodeContainer()
+                CodeContainer(controller: codeOne),
+                CodeContainer(controller: codeTwo),
+                CodeContainer(controller: codeThree),
+                CodeContainer(controller: codeFour)
               ],
             ),
           ),
@@ -65,12 +75,20 @@ class CodeVerificationScreen extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                    text: " resend confirmation code",
-                    style: TextStyle(
-                      color: color.tertiary,
-                      fontWeight: FontWeight.w400,
-                    ),
-                  )
+                      text: " resend confirmation code",
+                      style: TextStyle(
+                        color: color.tertiary,
+                        fontWeight: FontWeight.w400,
+                      ),
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () async {
+                          if (await sendOTP(auth)) {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              content: Text("OTP has been sent"),
+                            ));
+                          }
+                        })
                 ],
               ),
             ),
@@ -80,8 +98,30 @@ class CodeVerificationScreen extends StatelessWidget {
       bottomNavigationBar: NavigationCard(
           text: 'Confirm Code',
           onTap: () {
-            Navigator.pushNamed(context, ResetPasswordScreen.routeName);
+            String code =
+                codeOne.text + codeTwo.text + codeThree.text + codeFour.text;
+            //todo: add spinner to verification call back
+            verifyOTP(code, auth);
+            if (verified) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text("Verification successful"),
+                ),
+              );
+            }
+            Navigator.pushNamed(context, ResetPasswordScreen.routeName,
+                arguments: {"email": email});
           }),
     );
+  }
+
+  Future verifyOTP(verificationCode, auth) async {
+    bool res = await auth?.verifyOTP(otp: verificationCode);
+    verified = res;
+  }
+
+  Future<bool> sendOTP(auth) async {
+    bool res = await auth?.sendOTP();
+    return res;
   }
 }

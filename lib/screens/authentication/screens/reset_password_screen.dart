@@ -8,13 +8,16 @@ import '../../../widgets/cards/bottom_card.dart';
 class ResetPasswordScreen extends StatelessWidget {
   static const routeName = '/reset_password';
 
-  const ResetPasswordScreen({Key? key}) : super(key: key);
-
+  ResetPasswordScreen({
+    Key? key,
+  }) : super(key: key);
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    final TextEditingController passwordController = TextEditingController();
-    final TextEditingController confirmController = TextEditingController();
     final color = Theme.of(context).colorScheme;
+    final routeArgs = ModalRoute.of(context)?.settings.arguments as Map;
+    final String email = routeArgs["email"];
 
     double verticalConverter(double value) {
       double height = MediaQuery.of(context).size.height;
@@ -91,11 +94,20 @@ class ResetPasswordScreen extends StatelessWidget {
           NavigationCard(
             text: 'Reset Password',
             onTap: () {
+              // updatePassword();
               Navigator.pushReplacementNamed(context, LoginScreen.routeName);
             },
           ),
         ],
       ),
     );
+  }
+}
+
+void updatePassword(String newPassword, String confirmPassword, String email) {
+  if (newPassword == confirmPassword) {
+    try {
+      // todo:implement change password functionality
+    } catch (e) {}
   }
 }
