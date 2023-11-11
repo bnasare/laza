@@ -23,7 +23,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController passwordController = TextEditingController();
   TextEditingController fullNameController = TextEditingController();
 
-  void _submitFormOnRegister() async {
+  Future<void> signUp() async {
     if (emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         fullNameController.text.isEmpty) {
@@ -139,11 +139,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
       bottomNavigationBar: NavigationCard(
-        text: 'Sign Up',
-        onTap: () {
-          _submitFormOnRegister();
-        },
-      ),
+          text: 'Sign Up',
+          onTap: () async {
+            await signUp();
+          }),
     );
   }
 }
