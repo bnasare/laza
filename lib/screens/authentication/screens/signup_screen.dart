@@ -1,9 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:laza/provider/internet_provider.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/home_screen.dart';
-
+import 'package:laza/provider/sign_in_provider.dart';
+import 'package:laza/utils/snack_bar.dart';
+import 'package:provider/provider.dart';
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 import '../../../widgets/switch.dart';
@@ -19,15 +22,6 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  Future<void> signUpWithEmailAndPassword(String email, String password) async {
-    try {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-    } catch (e) {
-      // Handle Errors
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
@@ -104,9 +98,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
         bottomNavigationBar: NavigationCard(
             text: 'Sign Up',
             onTap: () {
-              signUpWithEmailAndPassword(
-                  emailController.text, passwordController.text);
+              handleEmailSignUp(
+                  emailController.text, passwordController.text, context);
               Navigator.pushNamed(context, HomeScreen.routeName);
             }));
   }
+}
+
+Future<void> handleEmailSignUp(
+    String email, String password, BuildContext context) async {
+  final sp = context.read<SignInProvider>();
+  final ip = context.read<InternetProvider>();
+  await ip.checkInternetConnection();
+
+  if (ip.hasInternet == false) {
+    openSnackbar(context, "Check your Internet connection", Colors.red);
+    // Reset your form controllers or UI elements
+  } else {
+    try {
+      await sp.signUpWithEmailAndPassword(email, password);
+
+      if (sp.hasError == true) {
+        openSnackbar(context, sp.errorCode.toString(), Colors.red);
+        // Reset your form controllers or UI elements
+      } else {
+        // User signed up successfully
+        handleAfterSignUp(context);
+      }
+    } catch (e) {
+      // Handle sign-up errors here
+      openSnackbar(context, e.toString(), Colors.red);
+      // Reset your form controllers or UI elements
+    }
+  }
+}
+
+handleAfterSignUp(BuildContext context) {
+  Future.delayed(const Duration(milliseconds: 1000)).then((value) {
+    // Navigate to the desired screen after successful sign-up
+    Navigator.pushNamed(context, HomeScreen.routeName);
+  });
 }

@@ -85,7 +85,9 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                   child: RoundedLoadingButton(
                     controller: twitterController,
                     color: const Color(0xFF1DA1F2),
-                    onPressed: () {},
+                    onPressed: () {
+                      handleTwitterAuth();
+                    },
                     child: const SocialAuthCard(
                       text: "Twitter",
                       cardColor: Color(0xFF1DA1F2),
@@ -146,8 +148,48 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
     );
   }
 
+// handling twitter auth
+  Future handleTwitterAuth() async {
+    final sp = context.read<SignInProvider>();
+    final ip = context.read<InternetProvider>();
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      openSnackbar(context, "Check your Internet connection", Colors.red);
+      googleController.reset();
+    } else {
+      await sp.signInWithTwitter().then((value) {
+        if (sp.hasError == true) {
+          openSnackbar(context, sp.errorCode.toString(), Colors.red);
+          twitterController.reset();
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromFirestore(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        twitterController.success();
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToFirestore().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        twitterController.success();
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
   // handling facebookauth
-  // handling google sigin in
+
   Future handleFacebookAuth() async {
     final sp = context.read<SignInProvider>();
     final ip = context.read<InternetProvider>();

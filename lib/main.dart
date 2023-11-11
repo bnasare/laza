@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/firebase_options.dart';
 import 'package:laza/provider/internet_provider.dart';
 import 'package:laza/provider/sign_in_provider.dart';
+import 'package:laza/screens/authentication/screens/signup_screen.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
