@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:laza/consts/product_data.dart';
 import 'package:laza/models/product_model.dart';
 import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/all_products_screen.dart';
 import 'package:laza/widgets/cards/brand_card.dart';
 import 'package:laza/widgets/cards/product_card.dart';
 import 'package:laza/widgets/drawer.dart';
+import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
+import '../providers/product_provider.dart';
 import '../widgets/bottom appbar/bottom_appbar.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 
@@ -26,8 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List<Product> products = ProductData.productModels;
     final TextEditingController searchController = TextEditingController();
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<ProductModel> allProducts = productProvider.getProducts;
+
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: true,
@@ -244,11 +247,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisSpacing: 10.0,
                       childAspectRatio: 0.62,
                     ),
-                    itemCount: 4,
+                    itemCount: allProducts.length < 6 ? allProducts.length : 6,
                     itemBuilder: (context, index) {
-                      return ProductCard(
-                        product: products[index],
-                      );
+                      return ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: const ProductCard());
                     },
                   ),
                 );

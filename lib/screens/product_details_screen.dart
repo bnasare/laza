@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
-import '../models/product_model.dart';
+import '../providers/product_provider.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/cards/review_card.dart';
 import '../widgets/cards/size_card.dart';
@@ -13,17 +14,24 @@ import '../widgets/other_product_images_widget.dart';
 import 'review_screen.dart';
 import 'user/screen/cart_screen.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product_details';
 
-  const ProductDetailsScreen({Key? key, required this.product})
-      : super(key: key);
+  const ProductDetailsScreen({Key? key}) : super(key: key);
 
-  final Product product;
+  @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  bool showFullDescription = false;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final productProvider = Provider.of<ProductProvider>(context);
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final getCurrentProduct = productProvider.findProdById(productId);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -47,7 +55,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         left: 10,
                         right: 10,
                         child: Image.asset(
-                          product.imagePath,
+                          getCurrentProduct.imagePath,
                           width: horizontalConverter(context, 310),
                           height: verticalConverter(context, 387),
                           fit: BoxFit.cover,
@@ -58,11 +66,16 @@ class ProductDetailsScreen extends StatelessWidget {
                         left: 150,
                         right: 150,
                         child: Container(
-                          height: verticalConverter(context, 49),
+                          decoration: const BoxDecoration(
+                              color: Color.fromRGBO(255, 255, 255, 0.5),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(60),
+                                topRight: Radius.circular(60),
+                              )),
+                          height: verticalConverter(context, 50),
                           width: horizontalConverter(context, 80),
-                          color: const Color.fromRGBO(255, 255, 255, 0.5),
                           child: Image.asset(
-                            'assets/images/${product.categoryName}.png',
+                            'assets/images/${getCurrentProduct.category}.png',
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -104,35 +117,36 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              product.gender.toUpperCase(),
-                              style: TextStyle(
-                                color: color.tertiary,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                top: verticalConverter(context, 8),
-                              ),
-                              child: Text(
-                                product.productName,
-                                overflow: TextOverflow.clip,
-                                softWrap: true,
-                                maxLines: 2,
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                getCurrentProduct.gender.toUpperCase(),
                                 style: TextStyle(
-                                  height: 1.5,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: color.secondary,
+                                  color: color.tertiary,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: verticalConverter(context, 8),
+                                ),
+                                child: Text(
+                                  getCurrentProduct.name,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: color.secondary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -149,7 +163,7 @@ class ProductDetailsScreen extends StatelessWidget {
                               padding: EdgeInsets.only(
                                   top: verticalConverter(context, 8)),
                               child: Text(
-                                "\$${product.price}",
+                                "\$${getCurrentProduct.price.toStringAsFixed(2)}",
                                 style: const TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600,
@@ -170,7 +184,7 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: const ProductImage(
                         firstImage: 'pic_1',
                         secondImage: 'pic_2',
-                        thirdImage: 'card_5',
+                        thirdImage: 'pic_1',
                         fourthImage: 'pic_4'),
                   ),
                   Padding(
@@ -216,25 +230,45 @@ class ProductDetailsScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: horizontalConverter(context, 20)),
-                    child: RichText(
-                      textAlign: TextAlign.left,
-                      text: TextSpan(children: [
-                        TextSpan(
-                          text: product.description,
-                          style: TextStyle(
-                              height: 1.4,
-                              color: color.tertiary,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.left,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: showFullDescription
+                                    ? getCurrentProduct.description
+                                    : getCurrentProduct.description
+                                        .substring(0, 100),
+                                style: TextStyle(
+                                  height: 1.4,
+                                  color: color.tertiary,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                        TextSpan(
-                          text: ' Read More..',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: color.secondary),
-                        )
-                      ]),
+                        if (!showFullDescription)
+                          GestureDetector(
+                            onTap: () {
+                              setState(() {
+                                showFullDescription = true;
+                              });
+                            },
+                            child: Text(
+                              ' Read More..',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontSize: 15,
+                                color: color.secondary,
+                              ),
+                            ),
+                          ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -280,7 +314,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '\$${product.price}',
+                          '\$${getCurrentProduct.price.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w600,

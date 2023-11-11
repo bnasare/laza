@@ -4,8 +4,9 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:laza/models/product_model.dart';
 import 'package:laza/widgets/cards/product_card.dart';
+import 'package:provider/provider.dart';
 
-import '../consts/product_data.dart';
+import '../providers/product_provider.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 
@@ -17,7 +18,8 @@ class AllProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List<Product> products = ProductData.productModels;
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<ProductModel> allProducts = productProvider.getProducts;
 
     return Scaffold(
       appBar: AppBar(
@@ -46,7 +48,7 @@ class AllProductsScreen extends StatelessWidget {
             ListTile(
                 contentPadding: const EdgeInsets.all(0),
                 title: Text(
-                  '${products.length} Items',
+                  '${allProducts.length} Items',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: color.secondary,
@@ -100,10 +102,11 @@ class AllProductsScreen extends StatelessWidget {
                         crossAxisSpacing: 10.0,
                         childAspectRatio: 0.62,
                       ),
-                      itemCount: products.length,
+                      itemCount: allProducts.length,
                       itemBuilder: (context, index) {
-                        return ProductCard(
-                          product: products[index],
+                        return ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: const ProductCard(),
                         );
                       },
                     ),

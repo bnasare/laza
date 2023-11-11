@@ -4,8 +4,9 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:laza/models/product_model.dart';
 import 'package:laza/widgets/cards/product_card.dart';
+import 'package:provider/provider.dart';
 
-import '../consts/product_data.dart';
+import '../providers/product_provider.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 
@@ -19,10 +20,11 @@ class BrandScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List<Product> products = ProductData.productModels;
-    List<Product> brandProducts = [];
-    for (Product product in products) {
-      if (product.categoryName == brand) {
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<ProductModel> products = productProvider.getProducts;
+    List<ProductModel> brandProducts = [];
+    for (ProductModel product in products) {
+      if (product.category == brand) {
         brandProducts.add(product);
       }
     }
@@ -123,9 +125,9 @@ class BrandScreen extends StatelessWidget {
                       ),
                       itemCount: brandProducts.length,
                       itemBuilder: (context, index) {
-                        return ProductCard(
-                          product: brandProducts[index],
-                        );
+                        return ChangeNotifierProvider.value(
+                            value: brandProducts[index],
+                            child: const ProductCard());
                       },
                     ),
                   );
