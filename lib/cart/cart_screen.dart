@@ -10,7 +10,7 @@ import '../screens/user/widgets/payment_method_card.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/empty_widget.dart';
-import 'card_widget.dart';
+import 'cart_widget.dart';
 
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';

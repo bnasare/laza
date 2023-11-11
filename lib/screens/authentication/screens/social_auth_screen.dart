@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +12,7 @@ import 'package:laza/screens/home_screen.dart';
 import 'package:laza/utils/snack_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
+
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 import '../widgets/social_auth_card.dart';
@@ -25,13 +27,52 @@ class SocialAuthScreen extends StatefulWidget {
 }
 
 class _SocialAuthScreenState extends State<SocialAuthScreen> {
-  final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
-  final RoundedLoadingButtonController googleController =
-      RoundedLoadingButtonController();
-  final RoundedLoadingButtonController facebookController =
-      RoundedLoadingButtonController();
-  final RoundedLoadingButtonController twitterController =
-      RoundedLoadingButtonController();
+  Future<UserCredential?> signInWithGoogle(context) async {
+    try {
+      log("Google Sign-In started");
+      final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+
+      final GoogleSignInAuthentication? googleAuth =
+          await googleUser?.authentication;
+
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+
+      // signInWithCredential returns a UserCredential object
+      final UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithCredential(credential);
+
+      // Now you can access the user property
+      final user = userCredential.user;
+
+      if (userCredential.additionalUserInfo!.isNewUser) {
+        await FirebaseFirestore.instance
+            .collection('users')
+            .doc(user!.uid)
+            .set({
+          'id': user.uid,
+          'name': user.displayName,
+          'email': user.email,
+        });
+      }
+
+      log("Google Sign-In successful");
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      return userCredential;
+    } on FirebaseException catch (error) {
+      log("FirebaseException: ${error.message}");
+      AlertDialogs.errorDialog(subtitle: '${error.message}', context: context);
+      return null;
+    } catch (error) {
+      log("Error: $error");
+      AlertDialogs.errorDialog(subtitle: '$error', context: context);
+      return null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;

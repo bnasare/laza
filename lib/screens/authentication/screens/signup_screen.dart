@@ -1,10 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/screens/home_screen.dart';
 import 'package:laza/provider/sign_in_provider.dart';
+import 'package:laza/screens/home_screen.dart';
 import 'package:laza/utils/snack_bar.dart';
 import 'package:provider/provider.dart';
+
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 import '../../../widgets/switch.dart';
@@ -20,11 +22,19 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
+  Future<void> signUpWithEmailAndPassword(String email, String password) async {
+    try {
+      FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: email, password: password);
+    } catch (e) {
+      // Handle Errors
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
+
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -96,6 +106,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         bottomNavigationBar: NavigationCard(
             text: 'Sign Up',
             onTap: () {
+              signUpWithEmailAndPassword(
+                  emailController.text, passwordController.text);
               Navigator.pushNamed(context, HomeScreen.routeName);
             }));
   }

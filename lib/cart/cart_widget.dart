@@ -160,8 +160,9 @@ class _CartWidgetState extends State<CartWidget> {
                         const Spacer(),
                         Expanded(
                           child: GestureDetector(
-                            onTap: () {
-                              cartProvider.removeOneItem(cartModel.productId);
+                            onTap: () async {
+                              await cartProvider
+                                  .removeOneItem(cartModel.productId);
                             },
                             child: Container(
                               width: 25,

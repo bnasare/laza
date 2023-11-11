@@ -45,6 +45,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   bottom: 150,
                 ),
                 child: AuthTextField(
+                    textInputAction: TextInputAction.done,
                     controller: TextEditingController(),
                     labelText: "Email Address"),
               ),
