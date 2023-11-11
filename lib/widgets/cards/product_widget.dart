@@ -7,16 +7,16 @@ import '../../consts/sizing_config.dart';
 import '../../models/product_model.dart';
 import '../../providers/wishlist_provider.dart';
 
-class ProductCard extends StatefulWidget {
-  const ProductCard({
+class ProductWidget extends StatefulWidget {
+  const ProductWidget({
     super.key,
   });
 
   @override
-  State<ProductCard> createState() => _ProductCardState();
+  State<ProductWidget> createState() => _ProductWidgetState();
 }
 
-class _ProductCardState extends State<ProductCard> {
+class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;

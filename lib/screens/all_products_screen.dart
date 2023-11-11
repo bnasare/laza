@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:laza/models/product_model.dart';
-import 'package:laza/widgets/cards/product_card.dart';
+import 'package:laza/widgets/cards/product_widget.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/product_provider.dart';
@@ -106,7 +106,7 @@ class AllProductsScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                           value: allProducts[index],
-                          child: const ProductCard(),
+                          child: const ProductWidget(),
                         );
                       },
                     ),

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import '../../screens/brand_screen.dart';
 
-class BrandCard extends StatelessWidget {
-  const BrandCard({
+class BrandWidget extends StatelessWidget {
+  const BrandWidget({
     super.key,
     required this.assetName,
     required this.brandName,
@@ -30,7 +30,7 @@ class BrandCard extends StatelessWidget {
     }
 
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.push(
           context,
           MaterialPageRoute(

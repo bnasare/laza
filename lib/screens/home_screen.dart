@@ -4,7 +4,7 @@ import 'package:laza/models/product_model.dart';
 import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/all_products_screen.dart';
 import 'package:laza/widgets/cards/brand_card.dart';
-import 'package:laza/widgets/cards/product_card.dart';
+import 'package:laza/widgets/cards/product_widget.dart';
 import 'package:laza/widgets/drawer.dart';
 import 'package:provider/provider.dart';
 
@@ -170,32 +170,32 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    const BrandCard(
+                    const BrandWidget(
                       assetName: 'adidas',
                       brandName: 'Adidas',
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    const BrandCard(
+                    const BrandWidget(
                       assetName: 'nike',
                       brandName: 'Nike',
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    const BrandCard(
+                    const BrandWidget(
                       assetName: 'fila',
                       brandName: 'Fila',
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    const BrandCard(
+                    const BrandWidget(
                       assetName: 'puma',
                       brandName: 'Puma',
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    const BrandCard(
+                    const BrandWidget(
                       assetName: 'ua',
                       brandName: 'UA',
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    const BrandCard(
+                    const BrandWidget(
                       assetName: 'jordan',
                       brandName: 'Jordan',
                     ),
@@ -251,7 +251,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
                           value: allProducts[index],
-                          child: const ProductCard());
+                          child: const ProductWidget());
                     },
                   ),
                 );
