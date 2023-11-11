@@ -10,6 +10,7 @@ import 'package:laza/screens/authentication/screens/signup_screen.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:laza/screens/home_screen.dart';
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
 
@@ -30,21 +31,30 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => SignInProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => InternetProvider(),
-        )
-      ],
-      child: MaterialApp(
-        theme: themeData(),
-        debugShowCheckedModeBanner: false,
-        routes: AppRoutes().getRoutes(),
-        initialRoute: SocialAuthScreen.routeName,
-      ),
-    );
+    return FutureBuilder<FirebaseApp>(
+        future: firebaseInitialization,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            return const Center(
+              child: Text('Something went wrong!'),
+            );
+          }
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(
+                create: (context) => SignInProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => InternetProvider(),
+              )
+            ],
+            child: MaterialApp(
+              theme: themeData(),
+              debugShowCheckedModeBanner: false,
+              routes: AppRoutes().getRoutes(),
+              initialRoute: SocialAuthScreen.routeName,
+            ),
+          );
+        });
   }
 }

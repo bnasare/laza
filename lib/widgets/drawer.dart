@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/widgets/switch.dart';
 
 class Drawers extends StatefulWidget {
@@ -17,6 +19,7 @@ class Drawers extends StatefulWidget {
 }
 
 class _DrawersState extends State<Drawers> {
+  final User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
@@ -98,14 +101,22 @@ class _DrawersState extends State<Drawers> {
             ListTile(
               contentPadding: const EdgeInsets.only(bottom: 20, left: 20),
               leading: Icon(
-                IconlyLight.logout,
+                user == null ? IconlyLight.login : IconlyLight.logout,
                 color: color.onBackground,
               ),
               title: Text(
-                'Logout',
+                user == null ? 'Login' : 'Logout',
                 style: TextStyle(color: color.onBackground),
               ),
-              onTap: () {},
+              onTap: () async {
+                if (user == null) {
+                  Navigator.pushNamed(context, SocialAuthScreen.routeName);
+                  return;
+                }
+                await FirebaseAuth.instance.signOut();
+                Navigator.pushReplacementNamed(
+                    context, SocialAuthScreen.routeName);
+              },
             ),
           ],
         ),

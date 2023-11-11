@@ -208,37 +208,6 @@ class SignInProvider extends ChangeNotifier {
     }
   }
 
-  //sign up with email and password
-  Future<void> signUpWithEmailAndPassword(String email, String password) async {
-    try {
-      FirebaseAuth.instance
-          .createUserWithEmailAndPassword(email: email, password: password);
-      final User? userDetails = firebaseAuth.currentUser;
-      if (userDetails != null) {
-        // Save user information to Firestore
-        await saveDataToFirestore();
-        await setSignIn();
-      }
-    } on FirebaseAuthException catch (e) {
-      switch (e.code) {
-        case "account-exists-with-different-credential":
-          _errorCode =
-              "You already have an account with us. Use correct provider";
-          _hasError = true;
-          break;
-
-        case "null":
-          _errorCode = "Some unexpected error while trying to sign in";
-          _hasError = true;
-          break;
-        default:
-          _errorCode = e.toString();
-          _hasError = true;
-      }
-      notifyListeners();
-    }
-  }
-
   // ENTRY FOR CLOUDFIRESTORE
   Future getUserDataFromFirestore(uid) async {
     await FirebaseFirestore.instance
