@@ -1,34 +1,34 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/screens/product_details_screen.dart';
+import 'package:laza/widgets/heart_button.dart';
+import 'package:provider/provider.dart';
 
 import '../../consts/sizing_config.dart';
+import '../../models/product_model.dart';
+import '../../providers/wishlist_provider.dart';
 
-class ProductCard extends StatefulWidget {
-  const ProductCard({
+class ProductWidget extends StatefulWidget {
+  const ProductWidget({
     super.key,
-    required this.assetName,
-    required this.productName,
-    required this.price,
   });
 
-  final String assetName;
-  final String productName;
-  final int price;
-
   @override
-  State<ProductCard> createState() => _ProductCardState();
+  State<ProductWidget> createState() => _ProductWidgetState();
 }
 
-class _ProductCardState extends State<ProductCard> {
-  bool _isLiked = false;
-
+class _ProductWidgetState extends State<ProductWidget> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final productModel = Provider.of<ProductModel>(context);
+    final wishListProvider = Provider.of<WishlistProvider>(context);
+    bool? isInWishList =
+        wishListProvider.getWishlistItems.containsKey(productModel.id);
+
     return GestureDetector(
       onTap: () {
-        Navigator.pushNamed(context, ProductDetailsScreen.routeName);
+        Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+            arguments: productModel.id);
       },
       child: SizedBox(
         height: verticalConverter(context, 257),
@@ -47,7 +47,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   child: ClipRRect(
                     child: Image.asset(
-                      'assets/images/${widget.assetName}.png',
+                      productModel.imagePath,
                       height: verticalConverter(context, 203),
                       width: horizontalConverter(context, 160),
                       fit: BoxFit.cover,
@@ -57,37 +57,24 @@ class _ProductCardState extends State<ProductCard> {
                 Positioned(
                   top: 5,
                   right: 5,
-                  child: IconButton(
-                    icon: _isLiked == false
-                        ? Icon(
-                            IconlyLight.heart,
-                            color: color.tertiary,
-                            size: 25,
-                          )
-                        : Icon(
-                            IconlyLight.heart,
-                            color: color.onBackground,
-                            size: 25,
-                          ),
-                    onPressed: () {
-                      setState(() {
-                        _isLiked = !_isLiked;
-                      });
-                    },
+                  child: HeartButton(
+                    productId: productModel.id,
+                    isInWishlist: isInWishList,
                   ),
                 ),
               ],
             ),
             Text(
-              widget.productName,
+              productModel.name,
               softWrap: true,
+              maxLines: 2,
               style: const TextStyle(
                 fontWeight: FontWeight.w500,
                 fontSize: 11,
               ),
             ),
             Text(
-              '\$ ${widget.price}',
+              '\$ ${productModel.price.toStringAsFixed(2)}',
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,

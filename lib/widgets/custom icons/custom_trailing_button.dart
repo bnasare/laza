@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laza/screens/user/screen/cart_screen.dart';
+import 'package:laza/cart/cart_screen.dart';
 
 class CustomTrailingButton extends StatelessWidget {
   final Color backgroundColor;

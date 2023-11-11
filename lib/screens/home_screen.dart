@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:laza/consts/product_data.dart';
+import 'package:laza/models/product_model.dart';
+import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/all_products_screen.dart';
 import 'package:laza/widgets/cards/brand_card.dart';
-import 'package:laza/widgets/cards/product_card.dart';
+import 'package:laza/widgets/cards/product_widget.dart';
 import 'package:laza/widgets/drawer.dart';
+import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
+import '../providers/product_provider.dart';
 import '../widgets/bottom appbar/bottom_appbar.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 
@@ -24,8 +27,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List<Map<String, String>> products = ProductData.products;
     final TextEditingController searchController = TextEditingController();
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<ProductModel> allProducts = productProvider.getProducts;
+
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: true,
@@ -142,12 +147,18 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontSize: 17,
                     ),
                   ),
-                  Text(
-                    'View All',
-                    style: TextStyle(
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.pushNamed(context, AllBrandsScreen.routeName);
+                    },
+                    child: Text(
+                      'View All',
+                      style: TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 13,
-                        color: color.tertiary),
+                        color: color.tertiary,
+                      ),
+                    ),
                   ),
                 ],
               ),
@@ -159,21 +170,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: [
-                    BrandCard(
+                    const BrandWidget(
                       assetName: 'adidas',
                       brandName: 'Adidas',
-                      width: horizontalConverter(context, 115),
                     ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    BrandCard(
-                        assetName: 'nike',
-                        brandName: 'Nike',
-                        width: horizontalConverter(context, 98)),
+                    const BrandWidget(
+                      assetName: 'nike',
+                      brandName: 'Nike',
+                    ),
                     SizedBox(width: horizontalConverter(context, 10)),
-                    BrandCard(
+                    const BrandWidget(
                       assetName: 'fila',
                       brandName: 'Fila',
-                      width: horizontalConverter(context, 91),
+                    ),
+                    SizedBox(width: horizontalConverter(context, 10)),
+                    const BrandWidget(
+                      assetName: 'puma',
+                      brandName: 'Puma',
+                    ),
+                    SizedBox(width: horizontalConverter(context, 10)),
+                    const BrandWidget(
+                      assetName: 'ua',
+                      brandName: 'UA',
+                    ),
+                    SizedBox(width: horizontalConverter(context, 10)),
+                    const BrandWidget(
+                      assetName: 'jordan',
+                      brandName: 'Jordan',
                     ),
                   ],
                 ),
@@ -223,13 +247,11 @@ class _HomeScreenState extends State<HomeScreen> {
                       crossAxisSpacing: 10.0,
                       childAspectRatio: 0.62,
                     ),
-                    itemCount: products.length,
+                    itemCount: allProducts.length < 6 ? allProducts.length : 6,
                     itemBuilder: (context, index) {
-                      return ProductCard(
-                        assetName: products[index]['productAsset'].toString(),
-                        productName: products[index]['productName'].toString(),
-                        price: 99,
-                      );
+                      return ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: const ProductWidget());
                     },
                   ),
                 );

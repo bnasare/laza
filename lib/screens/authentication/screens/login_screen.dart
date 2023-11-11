@@ -1,6 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/forgot_password_screen.dart';
@@ -14,51 +12,47 @@ import '../widgets/auth_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
-const LoginScreen({Key? key}) : super(key: key);
+  const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
-TextEditingController emailController=TextEditingController();
-TextEditingController passwordController=TextEditingController();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
   bool rememberMe = true;
-final String switchKey = 'switchState';
-
+  final String switchKey = 'switchState';
 
   @override
-  void initState (){
+  void initState() {
     super.initState();
     loadLogins();
-   
   }
 
   saveSwitchState(bool value) async {
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setBool(switchKey, value);
-}
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(switchKey, value);
+  }
 
-saveLogins ()async{
-  final prefs = await SharedPreferences.getInstance();
-  await prefs.setString('email', emailController.text);
-   await prefs.setString('password', passwordController.text);
- 
-  print('saved!!!');
-}
+  saveLogins() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setString('email', emailController.text);
+    await prefs.setString('password', passwordController.text);
 
- loadLogins() async {
+    print('saved!!!');
+  }
+
+  loadLogins() async {
     if (rememberMe) {
       final prefs = await SharedPreferences.getInstance();
       final String savedEmail = prefs.getString('email') ?? "";
       final String savedPassword = prefs.getString('password') ?? "";
 
-
       setState(() {
         emailController = TextEditingController(text: savedEmail);
         passwordController = TextEditingController(text: savedPassword);
-       rememberMe = prefs.getBool(switchKey) ?? false;
+        rememberMe = prefs.getBool(switchKey) ?? false;
       });
 
       print(savedEmail);
@@ -66,36 +60,34 @@ saveLogins ()async{
     }
   }
 
+  void signUsersIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
 
-void signUsersIn() async {
-   
-  showDialog(context: context, builder:(context){
-return const Center(
-  child: CircularProgressIndicator(),
-);
-  });
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
 
-  try {
-    await FirebaseAuth.instance.signInWithEmailAndPassword(
-      email: emailController.text,
-      password: passwordController.text,
-    );
+      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+    } catch (e) {
+      Navigator.pop(context);
 
-    Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-
-   
-  } catch (e) {
-    Navigator.pop(context);
-   
-   showDialog(context: context, builder:(context){
-return const AlertDialog(
-  title: Text('Sign-In error'),
-);
-  });
-   
+      showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text('Sign-In error'),
+            );
+          });
+    }
   }
-}
-
 
   @override
   Widget build(BuildContext context) {
@@ -148,14 +140,14 @@ return const AlertDialog(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         AuthTextField(
-                          controller: emailController,
+                          controller: TextEditingController(),
                           labelText: "Username",
                           trailingWidget: const Icon(
                             Icons.check_outlined,
                           ),
                         ),
                         AuthTextField(
-                          controller: passwordController,
+                          controller: TextEditingController(),
                           labelText: "Password",
                           trailingText: "Strong",
                         ),
@@ -186,8 +178,9 @@ return const AlertDialog(
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                               CustomSwitch(initialState:rememberMe,
-                               ),
+                              CustomSwitch(
+                                initialState: rememberMe,
+                              ),
                             ],
                           ),
                         ),
@@ -221,11 +214,11 @@ return const AlertDialog(
         ),
         bottomNavigationBar: NavigationCard(
             text: 'Login',
-            onTap: () {signUsersIn();
-            saveLogins();
-            loadLogins();
-           //   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+            onTap: () {
+              signUsersIn();
+              saveLogins();
+              loadLogins();
+              //   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
             }));
   }
-  
 }
