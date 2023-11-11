@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 class CustomSwitch extends StatefulWidget {
   final bool initialState;
 
+
   const CustomSwitch({Key? key, required this.initialState}) : super(key: key);
 
   @override
@@ -12,6 +13,7 @@ class CustomSwitch extends StatefulWidget {
 
 class _CustomSwitchState extends State<CustomSwitch> {
   late bool state;
+  bool rememberMe = false;
 
   @override
   void initState() {
@@ -22,13 +24,16 @@ class _CustomSwitchState extends State<CustomSwitch> {
   @override
   Widget build(BuildContext context) {
     return CupertinoSwitch(
-      value: state,
+      value: rememberMe,
       activeColor: Theme.of(context).colorScheme.onSecondary,
       onChanged: (bool value) {
         setState(() {
-          state = value;
+         rememberMe= value;
         });
+        
       },
     );
   }
+  
+  
 }
