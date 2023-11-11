@@ -145,11 +145,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           trailingWidget: const Icon(
                             Icons.check_outlined,
                           ),
+                          textInputAction: TextInputAction.next,
                         ),
                         AuthTextField(
                           controller: TextEditingController(),
                           labelText: "Password",
                           trailingText: "Strong",
+                          textInputAction: TextInputAction.done,
                         ),
                         Padding(
                           padding: const EdgeInsets.only(top: 25.0),
