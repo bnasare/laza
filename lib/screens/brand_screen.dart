@@ -67,45 +67,46 @@ class BrandScreen extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-                contentPadding: const EdgeInsets.all(0),
-                title: Text(
-                  '${brandProducts.length} Items',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w600,
+              contentPadding: const EdgeInsets.all(0),
+              title: Text(
+                '${brandProducts.length} Items',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: color.secondary,
+                    fontSize: 17),
+              ),
+              subtitle: Text(
+                'Available in stock',
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: color.tertiary),
+              ),
+              trailing: Container(
+                width: horizontalConverter(context, 70),
+                height: verticalConverter(context, 37),
+                decoration: BoxDecoration(
+                    color: color.background,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      CupertinoIcons.sort_down,
+                      size: 20,
                       color: color.secondary,
-                      fontSize: 17),
+                    ),
+                    Text(
+                      'Sort',
+                      style: TextStyle(
+                          color: color.secondary,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                    )
+                  ],
                 ),
-                subtitle: Text(
-                  'Available in stock',
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: color.tertiary),
-                ),
-                trailing: Container(
-                  width: horizontalConverter(context, 70),
-                  height: verticalConverter(context, 37),
-                  decoration: BoxDecoration(
-                      color: color.background,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        CupertinoIcons.sort_down,
-                        size: 20,
-                        color: color.secondary,
-                      ),
-                      Text(
-                        'Sort',
-                        style: TextStyle(
-                            color: color.secondary,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                      )
-                    ],
-                  ),
-                )),
+              ),
+            ),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,

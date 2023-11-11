@@ -96,9 +96,6 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-Regular.ttf
     - family: Manrope
       fonts:
         - asset: assets/fonts/Manrope-Medium.ttf

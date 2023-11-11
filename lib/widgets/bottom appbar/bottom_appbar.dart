@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:laza/screens/user/screen/cart_screen.dart';
+import 'package:laza/cart/cart_screen.dart';
 import 'package:laza/screens/user/screen/payment_details_screen.dart';
 import 'package:laza/wishlist/wishlist_screen.dart';
 

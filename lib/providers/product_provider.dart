@@ -3,6 +3,7 @@ import 'package:laza/models/product_model.dart';
 
 class ProductProvider with ChangeNotifier {
   List<ProductModel> get getProducts {
+    productsList.shuffle();
     return productsList;
   }
 

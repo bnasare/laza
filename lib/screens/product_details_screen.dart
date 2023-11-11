@@ -4,6 +4,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
+import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/cards/review_card.dart';
@@ -13,7 +14,6 @@ import '../widgets/custom icons/custom_trailing_button.dart';
 import '../widgets/double_header_widget.dart';
 import '../widgets/other_product_images_widget.dart';
 import 'review_screen.dart';
-import 'user/screen/cart_screen.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product_details';
@@ -33,6 +33,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final productProvider = Provider.of<ProductProvider>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final getCurrentProduct = productProvider.findProdById(productId);
+    final cartProvider = Provider.of<CartProvider>(context);
+    bool? isInCart =
+        cartProvider.getCartItems.containsKey(getCurrentProduct.id);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -351,9 +354,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ],
       ),
       bottomNavigationBar: NavigationCard(
-          text: 'Add to Cart',
+          text: isInCart ? 'Added to Cart' : 'Add to Cart',
           onTap: () {
-            Navigator.pushNamed(context, CartScreen.routeName);
+            cartProvider.addProductsToCart(productId: productId, quantity: 1);
           }),
     );
   }

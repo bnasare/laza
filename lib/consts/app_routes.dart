@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/product_details_screen.dart';
 
+import '../cart/cart_screen.dart';
 import '../screens/all_products_screen.dart';
 import '../screens/authentication/screens/code_verification_screen.dart';
 import '../screens/authentication/screens/forgot_password_screen.dart';
@@ -14,7 +15,6 @@ import '../screens/onboarding_screen.dart';
 import '../screens/order_confirmed_screen.dart';
 import '../screens/review_screen.dart';
 import '../screens/user/screen/add_review_screen.dart';
-import '../screens/user/screen/cart_screen.dart';
 import '../screens/user/screen/new_payment_details_screen.dart';
 import '../screens/user/screen/payment_details_screen.dart';
 import '../screens/user/screen/user_address_screen.dart';

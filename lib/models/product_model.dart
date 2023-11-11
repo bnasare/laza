@@ -5,7 +5,7 @@ class ProductModel with ChangeNotifier {
   final String imagePath;
   final String name;
   final String category;
-  final int price;
+  final double price;
   final String description;
   final String gender;
 
