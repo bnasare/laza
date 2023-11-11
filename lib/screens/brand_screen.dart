@@ -10,16 +10,24 @@ import '../providers/product_provider.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 
-class AllProductsScreen extends StatelessWidget {
-  static const routeName = '/all_products';
+class BrandScreen extends StatelessWidget {
+  static const routeName = '/brand_screen';
 
-  const AllProductsScreen({Key? key}) : super(key: key);
+  const BrandScreen({Key? key, required this.brand}) : super(key: key);
+
+  final String brand;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
     final productProvider = Provider.of<ProductProvider>(context);
-    List<ProductModel> allProducts = productProvider.getProducts;
+    List<ProductModel> products = productProvider.getProducts;
+    List<ProductModel> brandProducts = [];
+    for (ProductModel product in products) {
+      if (product.category == brand) {
+        brandProducts.add(product);
+      }
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -29,6 +37,19 @@ class AllProductsScreen extends StatelessWidget {
             backgroundColor: color.background,
           ),
         ),
+        title: Container(
+          height: verticalConverter(context, 45),
+          width: horizontalConverter(context, 68),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10),
+            color: color.background,
+          ),
+          child: Image.asset(
+            'assets/images/$brand.png',
+            fit: BoxFit.contain,
+          ),
+        ),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 12.0),
@@ -46,45 +67,46 @@ class AllProductsScreen extends StatelessWidget {
         child: Column(
           children: [
             ListTile(
-                contentPadding: const EdgeInsets.all(0),
-                title: Text(
-                  '${allProducts.length} Items',
-                  style: TextStyle(
-                      fontWeight: FontWeight.w500,
+              contentPadding: const EdgeInsets.all(0),
+              title: Text(
+                '${brandProducts.length} Items',
+                style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                    color: color.secondary,
+                    fontSize: 17),
+              ),
+              subtitle: Text(
+                'Available in stock',
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: color.tertiary),
+              ),
+              trailing: Container(
+                width: horizontalConverter(context, 70),
+                height: verticalConverter(context, 37),
+                decoration: BoxDecoration(
+                    color: color.background,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Icon(
+                      CupertinoIcons.sort_down,
+                      size: 20,
                       color: color.secondary,
-                      fontSize: 17),
+                    ),
+                    Text(
+                      'Sort',
+                      style: TextStyle(
+                          color: color.secondary,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                    )
+                  ],
                 ),
-                subtitle: Text(
-                  'Available in stock',
-                  style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w400,
-                      color: color.tertiary),
-                ),
-                trailing: Container(
-                  width: horizontalConverter(context, 70),
-                  height: verticalConverter(context, 37),
-                  decoration: BoxDecoration(
-                      color: color.background,
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        CupertinoIcons.sort_down,
-                        size: 20,
-                        color: color.secondary,
-                      ),
-                      Text(
-                        'Sort',
-                        style: TextStyle(
-                            color: color.secondary,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 15),
-                      )
-                    ],
-                  ),
-                )),
+              ),
+            ),
             Expanded(
               child: ListView.builder(
                 shrinkWrap: true,
@@ -102,12 +124,11 @@ class AllProductsScreen extends StatelessWidget {
                         crossAxisSpacing: 10.0,
                         childAspectRatio: 0.62,
                       ),
-                      itemCount: allProducts.length,
+                      itemCount: brandProducts.length,
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
-                          value: allProducts[index],
-                          child: const ProductCard(),
-                        );
+                            value: brandProducts[index],
+                            child: const ProductCard());
                       },
                     ),
                   );

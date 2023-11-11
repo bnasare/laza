@@ -1,3 +1,4 @@
+import 'package:device_preview/device_preview.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -9,8 +10,14 @@ import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:laza/screens/home_screen.dart';
+import 'package:provider/provider.dart';
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
+import 'firebase_options.dart';
+import 'providers/cart_provider.dart';
+import 'providers/product_provider.dart';
+import 'providers/wishlist_provider.dart';
+import 'screens/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,7 +26,10 @@ void main() async {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     GoogleFonts.config.allowRuntimeFetching = false;
     runApp(
-      const MyApp(),
+      DevicePreview(
+        enabled: true,
+        builder: (context) => const MyApp(),
+      ),
     );
   });
 }
@@ -38,20 +48,31 @@ class MyApp extends StatelessWidget {
             );
           }
           return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(
-          create: (context) => SignInProvider(),
-        ),
-        ChangeNotifierProvider(
-          create: (context) => InternetProvider(),
-        )
-      ],
-      child: MaterialApp(
-        theme: themeData(),
-        debugShowCheckedModeBanner: false,
-        routes: AppRoutes().getRoutes(),
-        initialRoute: SocialAuthScreen.routeName,
-      ),
-    );
+            providers: [
+              ChangeNotifierProvider(
+                create: (context) => SignInProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => InternetProvider(),
+             ),
+              ChangeNotifierProvider(
+                create: (context) => ProductProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => WishlistProvider(),
+              ),
+              ChangeNotifierProvider(
+                create: (context) => CartProvider(),
+              ),
+            ],
+            child: MaterialApp(
+              theme: themeData(),
+              debugShowCheckedModeBanner: false,
+              routes: AppRoutes().getRoutes(),
+              initialRoute: HomeScreen.routeName,
+            ),
+          );
+        });
+
   }
 }
