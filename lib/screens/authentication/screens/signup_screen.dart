@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/provider/internet_provider.dart';
 import 'package:laza/screens/home_screen.dart';
 import 'package:laza/provider/sign_in_provider.dart';
 import 'package:laza/utils/snack_bar.dart';

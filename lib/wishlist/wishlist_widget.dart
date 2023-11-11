@@ -4,31 +4,35 @@ import 'package:laza/widgets/heart_button.dart';
 import 'package:provider/provider.dart';
 
 import '../../consts/sizing_config.dart';
-import '../../models/product_model.dart';
-import '../../providers/wishlist_provider.dart';
+import '../models/wishlist_model.dart';
+import '../providers/product_provider.dart';
+import '../providers/wishlist_provider.dart';
 
-class ProductCard extends StatefulWidget {
-  const ProductCard({
+class WishlistWidget extends StatefulWidget {
+  const WishlistWidget({
     super.key,
   });
 
   @override
-  State<ProductCard> createState() => _ProductCardState();
+  State<WishlistWidget> createState() => _WishlistWidgetState();
 }
 
-class _ProductCardState extends State<ProductCard> {
+class _WishlistWidgetState extends State<WishlistWidget> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final productModel = Provider.of<ProductModel>(context);
-    final wishListProvider = Provider.of<WishlistProvider>(context);
-    bool? isInWishList =
-        wishListProvider.getWishlistItems.containsKey(productModel.id);
+    final productProvider = Provider.of<ProductProvider>(context);
+    final wishlistModel = Provider.of<WishListModel>(context);
+    final wishlistProvider = Provider.of<WishlistProvider>(context);
+    final getCurrProduct =
+        productProvider.findProdById(wishlistModel.productId);
+    bool? isInWishlist =
+        wishlistProvider.getWishlistItems.containsKey(getCurrProduct.id);
 
     return GestureDetector(
       onTap: () {
         Navigator.pushNamed(context, ProductDetailsScreen.routeName,
-            arguments: productModel.id);
+            arguments: getCurrProduct.id);
       },
       child: SizedBox(
         height: verticalConverter(context, 257),
@@ -47,7 +51,7 @@ class _ProductCardState extends State<ProductCard> {
                   ),
                   child: ClipRRect(
                     child: Image.asset(
-                      productModel.imagePath,
+                      getCurrProduct.imagePath,
                       height: verticalConverter(context, 203),
                       width: horizontalConverter(context, 160),
                       fit: BoxFit.cover,
@@ -58,14 +62,14 @@ class _ProductCardState extends State<ProductCard> {
                   top: 5,
                   right: 5,
                   child: HeartButton(
-                    productId: productModel.id,
-                    isInWishlist: isInWishList,
+                    productId: getCurrProduct.id,
+                    isInWishlist: isInWishlist,
                   ),
                 ),
               ],
             ),
             Text(
-              productModel.name,
+              getCurrProduct.name,
               softWrap: true,
               maxLines: 2,
               style: const TextStyle(
@@ -74,7 +78,7 @@ class _ProductCardState extends State<ProductCard> {
               ),
             ),
             Text(
-              '\$ ${productModel.price.toStringAsFixed(2)}',
+              '\$ ${getCurrProduct.price.toStringAsFixed(2)}',
               style: const TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.w600,
