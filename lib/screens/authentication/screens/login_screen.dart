@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/forgot_password_screen.dart';
@@ -13,51 +14,57 @@ import '../widgets/auth_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
   static const routeName = '/login';
+const LoginScreen({Key? key}) : super(key: key);
 
   @override
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-//const LoginScreen({Key? key}) : super(key: key);
+
 TextEditingController emailController=TextEditingController();
 TextEditingController passwordController=TextEditingController();
-
-  bool rememberMe = false;
+  bool rememberMe = true;
+final String switchKey = 'switchState';
 
 
   @override
-  void initState() {
+  void initState (){
     super.initState();
-    loadSavedCredentials(emailController, passwordController, rememberMe);
+    loadLogins();
+   
   }
 
-void loadSavedCredentials( emailController,
-     passwordController,  rememberMe) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  String? email = prefs.getString('email');
-  String? password = prefs.getString('password');
-  bool? remember = prefs.getBool('remember');
-
-  if (email != null && password != null && remember != null) {
-    emailController.text = email;
-    passwordController.text = password;
-    rememberMe = remember;
-  }
+  saveSwitchState(bool value) async {
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setBool(switchKey, value);
 }
 
-void saveCredentials(String email, String password, bool rememberMe) async {
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  if (rememberMe) {
-    await prefs.setString('email', email);
-    await prefs.setString('password', password);
-    await prefs.setBool('remember', true);
-  } else {
-    await prefs.remove('email');
-    await prefs.remove('password');
-    await prefs.setBool('remember', false);
-  }
+saveLogins ()async{
+  final prefs = await SharedPreferences.getInstance();
+  await prefs.setString('email', emailController.text);
+   await prefs.setString('password', passwordController.text);
+ 
+  print('saved!!!');
 }
+
+ loadLogins() async {
+    if (rememberMe) {
+      final prefs = await SharedPreferences.getInstance();
+      final String savedEmail = prefs.getString('email') ?? "";
+      final String savedPassword = prefs.getString('password') ?? "";
+
+
+      setState(() {
+        emailController = TextEditingController(text: savedEmail);
+        passwordController = TextEditingController(text: savedPassword);
+       rememberMe = prefs.getBool(switchKey) ?? false;
+      });
+
+      print(savedEmail);
+      // print(savedPassword);
+    }
+  }
 
 
 void signUsersIn() async {
@@ -76,12 +83,7 @@ return const Center(
 
     Navigator.pushReplacementNamed(context, HomeScreen.routeName);
 
-     if (rememberMe) {
-          saveCredentials(
-            emailController.text,
-            passwordController.text,
-            rememberMe,
-          );}
+   
   } catch (e) {
     Navigator.pop(context);
    
@@ -184,7 +186,8 @@ return const AlertDialog(
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                               CustomSwitch(initialState:rememberMe ),
+                               CustomSwitch(initialState:rememberMe,
+                               ),
                             ],
                           ),
                         ),
@@ -219,7 +222,8 @@ return const AlertDialog(
         bottomNavigationBar: NavigationCard(
             text: 'Login',
             onTap: () {signUsersIn();
-            
+            saveLogins();
+            loadLogins();
            //   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
             }));
   }

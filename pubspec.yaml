@@ -44,8 +44,7 @@ dependencies:
   firebase_auth: ^4.12.0
   flutter_facebook_auth: ^6.0.2
   shared_preferences: ^2.2.2
-  hive:
-  hive_flutter:
+
 
 
 dev_dependencies:

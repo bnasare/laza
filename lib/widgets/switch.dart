@@ -28,9 +28,12 @@ class _CustomSwitchState extends State<CustomSwitch> {
       activeColor: Theme.of(context).colorScheme.onSecondary,
       onChanged: (bool value) {
         setState(() {
-         rememberMe= !rememberMe;
+         rememberMe= value;
         });
+        
       },
     );
   }
+  
+  
 }

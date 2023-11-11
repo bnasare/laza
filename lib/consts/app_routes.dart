@@ -23,7 +23,7 @@ class AppRoutes {
   Map<String, WidgetBuilder> getRoutes() {
     return {
       OnboardingScreen.routeName: (context) => const OnboardingScreen(),
-      LoginScreen.routeName: (context) =>  LoginScreen(),
+      LoginScreen.routeName: (context) =>  const LoginScreen(),
       SignUpScreen.routeName: (context) => const SignUpScreen(),
       ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
       SocialAuthScreen.routeName: (context) => const SocialAuthScreen(),

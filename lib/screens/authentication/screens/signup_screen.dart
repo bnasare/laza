@@ -93,7 +93,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    const CustomSwitch(initialState: true),
+                const CustomSwitch(initialState: true),
                   ],
                 ),
               ),
