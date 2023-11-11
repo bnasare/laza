@@ -71,7 +71,7 @@ class BrandScreen extends StatelessWidget {
                 title: Text(
                   '${brandProducts.length} Items',
                   style: TextStyle(
-                      fontWeight: FontWeight.w500,
+                      fontWeight: FontWeight.w600,
                       color: color.secondary,
                       fontSize: 17),
                 ),

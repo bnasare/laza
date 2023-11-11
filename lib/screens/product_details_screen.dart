@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:provider/provider.dart';
@@ -231,17 +232,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     padding: EdgeInsets.symmetric(
                         horizontal: horizontalConverter(context, 20)),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         RichText(
-                          textAlign: TextAlign.left,
+                          textAlign: TextAlign.justify,
                           text: TextSpan(
                             children: [
                               TextSpan(
                                 text: showFullDescription
                                     ? getCurrentProduct.description
-                                    : getCurrentProduct.description
-                                        .substring(0, 100),
+                                    : getCurrentProduct.description.length <=
+                                            100
+                                        ? getCurrentProduct.description
+                                        : getCurrentProduct.description
+                                            .substring(0, 100),
                                 style: TextStyle(
                                   height: 1.4,
                                   color: color.tertiary,
@@ -249,25 +253,41 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   fontSize: 15,
                                 ),
                               ),
+                              if (!showFullDescription) ...[
+                                TextSpan(
+                                  text: ' Read More..',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: color.secondary,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      setState(() {
+                                        showFullDescription = true;
+                                      });
+                                    },
+                                ),
+                              ],
                             ],
                           ),
                         ),
-                        if (!showFullDescription)
-                          GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                showFullDescription = true;
-                              });
-                            },
-                            child: Text(
-                              ' Read More..',
-                              style: TextStyle(
-                                fontWeight: FontWeight.w600,
-                                fontSize: 15,
-                                color: color.secondary,
-                              ),
-                            ),
-                          ),
+                        // if (!showFullDescription)
+                        //   GestureDetector(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         showFullDescription = true;
+                        //       });
+                        //     },
+                        //     child: Text(
+                        //       ' Read More..',
+                        //       style: TextStyle(
+                        //         fontWeight: FontWeight.w600,
+                        //         fontSize: 15,
+                        //         color: color.secondary,
+                        //       ),
+                        //     ),
+                        //   ),
                       ],
                     ),
                   ),

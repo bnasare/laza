@@ -59,7 +59,7 @@ class AllBrandsScreen extends StatelessWidget {
               title: Text(
                 '${assets.length} Brands',
                 style: TextStyle(
-                  fontWeight: FontWeight.w500,
+                  fontWeight: FontWeight.w600,
                   color: color.secondary,
                   fontSize: 17,
                 ),
