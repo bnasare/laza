@@ -49,6 +49,9 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
           'id': user.uid,
           'name': user.displayName,
           'email': user.email,
+          'userWishList': [],
+          'userCartItems': [],
+          'createdAt': Timestamp.now(),
         });
       }
 

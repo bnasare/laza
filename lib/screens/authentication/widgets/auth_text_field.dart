@@ -6,6 +6,7 @@ class AuthTextField extends StatelessWidget {
     this.trailingWidget,
     this.trailingText,
     required this.controller,
+    required this.textInputAction,
     required this.labelText,
   });
 
@@ -13,12 +14,14 @@ class AuthTextField extends StatelessWidget {
   final String labelText;
   final Widget? trailingWidget;
   final String? trailingText;
+  final TextInputAction textInputAction;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
 
     return TextField(
+      textInputAction: textInputAction,
       style: const TextStyle(
         color: Color(0xFF1D1E20),
         fontSize: 15,

@@ -64,6 +64,7 @@ class LoginScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         AuthTextField(
+                          textInputAction: TextInputAction.next,
                           controller: TextEditingController(),
                           labelText: "Username",
                           trailingWidget: const Icon(
@@ -71,6 +72,7 @@ class LoginScreen extends StatelessWidget {
                           ),
                         ),
                         AuthTextField(
+                          textInputAction: TextInputAction.done,
                           controller: TextEditingController(),
                           labelText: "Password",
                           trailingText: "Strong",

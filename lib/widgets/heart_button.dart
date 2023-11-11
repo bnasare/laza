@@ -16,7 +16,7 @@ class HeartButton extends StatelessWidget {
     final wishlistProvider = Provider.of<WishlistProvider>(context);
     return GestureDetector(
       onTap: () {
-        wishlistProvider.addRemoveProductToWishlist(productId: productId);
+        wishlistProvider.toggleWishlist(productId: productId);
       },
       child: Icon(
         isInWishlist != null && isInWishlist == true
