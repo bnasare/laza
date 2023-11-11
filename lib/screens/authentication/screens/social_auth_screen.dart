@@ -55,6 +55,9 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
           'id': user.uid,
           'name': user.displayName,
           'email': user.email,
+          'userWishList': [],
+          'userCartItems': [],
+          'createdAt': Timestamp.now(),
         });
       }
 
@@ -64,14 +67,26 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
       return userCredential;
     } on FirebaseException catch (error) {
       log("FirebaseException: ${error.message}");
-      AlertDialogs.errorDialog(subtitle: '${error.message}', context: context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.message.toString())),
+      );
       return null;
     } catch (error) {
       log("Error: $error");
-      AlertDialogs.errorDialog(subtitle: '$error', context: context);
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.toString())),
+      );
       return null;
     }
   }
+
+  final GlobalKey _scaffoldKey = GlobalKey<ScaffoldState>();
+  final RoundedLoadingButtonController googleController =
+      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController facebookController =
+      RoundedLoadingButtonController();
+  final RoundedLoadingButtonController twitterController =
+      RoundedLoadingButtonController();
 
   @override
   Widget build(BuildContext context) {
