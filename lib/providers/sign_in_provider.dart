@@ -23,7 +23,7 @@ class SignInProvider extends ChangeNotifier {
   bool _isSignedIn = false;
   bool get isSignedIn => _isSignedIn;
 
-  //hasError, errorCode, provider,uid, email, name, imageUrl
+  //hasError, errorCode, provider,uid, email, name, imageUrl, userCartItems, userWishlist
   bool _hasError = false;
   bool get hasError => _hasError;
 
@@ -44,6 +44,12 @@ class SignInProvider extends ChangeNotifier {
 
   String? _imageUrl;
   String? get imageUrl => _imageUrl;
+
+  List<String>? _userCartItems;
+  List<String>? get userCartItems => _userCartItems;
+
+  List<String>? _userWishlist;
+  List<String>? get userWishList => _userWishlist;
 
   SignInProvider() {
     checkSignInUser();
@@ -87,6 +93,8 @@ class SignInProvider extends ChangeNotifier {
         _imageUrl = userDetails.photoURL;
         _provider = "GOOGLE";
         _uid = userDetails.uid;
+        _userCartItems = [];
+        _userWishlist = [];
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -132,6 +140,8 @@ class SignInProvider extends ChangeNotifier {
         _uid = userDetails.id.toString();
         _provider = "TWITTER";
         _hasError = false;
+        _userCartItems = [];
+        _userWishlist = [];
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -181,6 +191,8 @@ class SignInProvider extends ChangeNotifier {
         _uid = profile['id'];
         _hasError = false;
         _provider = "FACEBOOK";
+        _userCartItems = [];
+        _userWishlist = [];
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -220,6 +232,8 @@ class SignInProvider extends ChangeNotifier {
               _email = snapshot['email'],
               _imageUrl = snapshot['image_url'],
               _provider = snapshot['provider'],
+              _userCartItems = snapshot['user_cart_items'],
+              _userWishlist = snapshot['user_wishlist']
             });
   }
 
@@ -232,6 +246,8 @@ class SignInProvider extends ChangeNotifier {
       "uid": _uid,
       "image_url": _imageUrl,
       "provider": _provider,
+      "user_cart_items": _userCartItems,
+      "user_wishlist": _userWishlist
     });
     notifyListeners();
   }
@@ -243,6 +259,8 @@ class SignInProvider extends ChangeNotifier {
     await s.setString('uid', _uid!);
     await s.setString('image_url', _imageUrl!);
     await s.setString('provider', _provider!);
+    await s.setStringList('user_cart_items', _userCartItems!);
+    await s.setStringList('user_wishlist', _userWishlist!);
     notifyListeners();
   }
 
@@ -253,6 +271,8 @@ class SignInProvider extends ChangeNotifier {
     _imageUrl = s.getString('image_url');
     _uid = s.getString('uid');
     _provider = s.getString('provider');
+    _userCartItems = s.getStringList('user_cart_items');
+    _userWishlist = s.getStringList('user_wishlist');
     notifyListeners();
   }
 
