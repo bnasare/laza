@@ -186,11 +186,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       left: horizontalConverter(context, 20),
                       right: horizontalConverter(context, 20),
                     ),
-                    child: const ProductImage(
-                        firstImage: 'pic_1',
-                        secondImage: 'pic_2',
-                        thirdImage: 'pic_1',
-                        fourthImage: 'pic_4'),
+                    child: ProductImage(
+                      firstImage: '${getCurrentProduct.id}_1',
+                      secondImage: '${getCurrentProduct.id}_2',
+                      thirdImage: '${getCurrentProduct.id}_3',
+                      fourthImage: '${getCurrentProduct.id}_4',
+                    ),
                   ),
                   Padding(
                     padding:

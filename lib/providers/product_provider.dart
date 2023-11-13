@@ -14,8 +14,8 @@ class ProductProvider with ChangeNotifier {
   static final List<ProductModel> productsList = [
     ProductModel(
       id: '1',
-      imagePath: 'assets/images/product_1.png',
-      name: 'Nike Tech Fleece Lilac Purple Full Zip Jacket',
+      imagePath: 'assets/images/products/product_1.png',
+      name: 'Nike Tech Fleece Full Zip Jacket',
       price: 145,
       description:
           "Blending 2 of our most iconic looks, this full-zip hoodie draws design inspiration from our timeless Windrunner jacket as well as our Tech Fleece jacket. It's designed to feel relaxed through the shoulders, chest and body for an athletic fit you can layer. Our premium, smooth-on-both-sides fleece feels warmer and softer than ever, while keeping the same lightweight build you love.",
@@ -24,7 +24,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '2',
-      imagePath: 'assets/images/product_2.png',
+      imagePath: 'assets/images/products/product_2.png',
       name: 'Nike Sportswear Club Fleece Pullover Hoodie',
       price: 60,
       description:
@@ -34,7 +34,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '3',
-      imagePath: 'assets/images/product_3.png',
+      imagePath: 'assets/images/products/product_3.png',
       name: 'Nike Sportswear Club Fleece Mid-Rise Joggers',
       price: 60,
       description:
@@ -44,7 +44,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '4',
-      imagePath: 'assets/images/product_4.png',
+      imagePath: 'assets/images/products/product_4.png',
       name: 'Nike Sportswear Faux Fur Plush Printed Jacket',
       price: 90,
       description:
@@ -54,7 +54,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '5',
-      imagePath: 'assets/images/product_5.png',
+      imagePath: 'assets/images/products/product_5.png',
       name: "Nike Air Force 1 '07",
       price: 115,
       description:
@@ -64,7 +64,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '6',
-      imagePath: 'assets/images/product_6.png',
+      imagePath: 'assets/images/products/product_6.png',
       name: "Jordan Sport Jam Warm Up Pants",
       price: 100,
       description:
@@ -74,7 +74,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '7',
-      imagePath: 'assets/images/product_7.png',
+      imagePath: 'assets/images/products/product_7.png',
       name: "Jordan Essentials Men's Fleece Pants",
       price: 78,
       description:
@@ -84,7 +84,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '8',
-      imagePath: 'assets/images/product_8.png',
+      imagePath: 'assets/images/products/product_8.png',
       name: "Jordan Dri-FIT Sport Woven Diamond Shorts",
       price: 45,
       description:
@@ -94,7 +94,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '9',
-      imagePath: 'assets/images/product_9.png',
+      imagePath: 'assets/images/products/product_9.png',
       name: "Air Jordan 1 Retro High OG",
       price: 135,
       description:
@@ -104,7 +104,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '10',
-      imagePath: 'assets/images/product_10.png',
+      imagePath: 'assets/images/products/product_10.png',
       name: "Air Jordan 11 Retro Low 'Legend Blue'",
       price: 185,
       description:
@@ -114,7 +114,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '11',
-      imagePath: 'assets/images/product_11.png',
+      imagePath: 'assets/images/products/product_11.png',
       name: "Men's UA Essential Fleece Hoodie",
       price: 60,
       description:
@@ -124,7 +124,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '12',
-      imagePath: 'assets/images/product_12.png',
+      imagePath: 'assets/images/products/product_12.png',
       name: "Men's UA Unstoppable Fleece Joggers",
       price: 100,
       description:
@@ -134,7 +134,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '13',
-      imagePath: 'assets/images/product_13.png',
+      imagePath: 'assets/images/products/product_13.png',
       name: "Heritage Oversized V-Neck Pullover",
       price: 70,
       description:
@@ -144,7 +144,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '14',
-      imagePath: 'assets/images/product_14.png',
+      imagePath: 'assets/images/products/product_14.png',
       name: "Lorri Velour Hoodie",
       price: 72,
       description:
@@ -154,7 +154,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '15',
-      imagePath: 'assets/images/product_15.png',
+      imagePath: 'assets/images/products/product_15.png',
       name: "PUMA x LAMELO BALL Toxic Basketball Shorts",
       price: 70,
       description:
@@ -164,7 +164,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '16',
-      imagePath: 'assets/images/product_16.png',
+      imagePath: 'assets/images/products/product_16.png',
       name: "PUMA x LAMELO BALL Toxic Long Sleeve Tee",
       price: 50,
       description:
@@ -174,7 +174,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '17',
-      imagePath: 'assets/images/product_17.png',
+      imagePath: 'assets/images/products/product_17.png',
       name: "Manchester City 23/24 Third Jersey",
       price: 140,
       description:
@@ -184,7 +184,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '18',
-      imagePath: 'assets/images/product_18.png',
+      imagePath: 'assets/images/products/product_18.png',
       name: "EFS DriRelease Men's Training Tank Top",
       price: 40,
       description:
@@ -194,7 +194,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '19',
-      imagePath: 'assets/images/product_19.png',
+      imagePath: 'assets/images/products/product_19.png',
       name: "TIRO 23 LEAGUE PANTS",
       price: 30,
       description:
@@ -204,7 +204,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '20',
-      imagePath: 'assets/images/product_20.png',
+      imagePath: 'assets/images/products/product_20.png',
       name: "Primegreen Essentials 3-Stripes Track Jacket",
       price: 33,
       description:
@@ -214,7 +214,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '21',
-      imagePath: 'assets/images/product_21.png',
+      imagePath: 'assets/images/products/product_21.png',
       name: "Adicolor Classics SST Track Jacket",
       price: 72,
       description:
@@ -224,7 +224,7 @@ class ProductProvider with ChangeNotifier {
     ),
     ProductModel(
       id: '22',
-      imagePath: 'assets/images/product_22.png',
+      imagePath: 'assets/images/products/product_22.png',
       name: "Essentials 3-Stripes Open Hem Pants",
       price: 25,
       description:
