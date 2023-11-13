@@ -1,7 +1,8 @@
 import 'package:email_otp/email_otp.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:laza/screens/authentication/screens/code_verification_screen.dart';
+import 'package:laza/screens/authentication/screens/login_screen.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
@@ -13,7 +14,7 @@ class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({Key? key}) : super(key: key);
   final TextEditingController emailController = TextEditingController();
   final EmailOTP myAuth = EmailOTP();
-  bool sent = false;
+  // bool sent = false;
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +53,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                   controller: emailController, labelText: "Email Address"),
             ),
             Text(
-              "Please write your email to receive a confirmation code to set a new password",
+              "Please write your email to reset password",
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: color.tertiary,
@@ -64,29 +65,52 @@ class ForgotPasswordScreen extends StatelessWidget {
       ),
       bottomNavigationBar: NavigationCard(
           text: 'Confirm Mail',
-          onTap: () {
-            final String userEmail = emailController.value.text;
-            sendOTP();
-            if (sent) {
-              ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                content: Text("OTP has been sent"),
-              ));
+          onTap: () async {
+            // final String userEmail = emailController.value.text;
+            if (await resetPassword(emailController.value.text, context)) {
+              if (context.mounted) {
+                Navigator.of(context).pushNamed(LoginScreen.routeName);
+              }
             }
-            Navigator.pushNamed(context, CodeVerificationScreen.routeName,
-                arguments: {"email": userEmail, "auth": myAuth});
+
+            // sendOTP();
+            // if (sent) {
+            //   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+            //     content: Text("OTP has been sent"),
+            //   ));
+            // }
           }),
     );
   }
 
-  Future sendOTP() async {
-    myAuth.setConfig(
-        appEmail: "laza@gmail.com",
-        appName: "Laza",
-        userEmail: emailController.value.text,
-        otpLength: 4,
-        otpType: OTPType.digitsOnly);
+  // Future sendOTP() async {
+  //   myAuth.setConfig(
+  //       appEmail: "laza@gmail.com",
+  //       appName: "Laza",
+  //       userEmail: emailController.value.text,
+  //       otpLength: 4,
+  //       otpType: OTPType.digitsOnly);
+  //
+  //   bool res = await myAuth.sendOTP();
+  //   sent = res;
+  // }
+}
 
-    bool res = await myAuth.sendOTP();
-    sent = res;
+Future<bool> resetPassword(String email, ctx) async {
+  try {
+    await FirebaseAuth.instance.sendPasswordResetEmail(email: email);
+    ScaffoldMessenger.of(ctx).showSnackBar(
+      const SnackBar(
+        content: Text("Password Reset link sent. Check email!!"),
+      ),
+    );
+    return true;
+  } on FirebaseAuthException catch (e) {
+    ScaffoldMessenger.of(ctx).showSnackBar(
+      SnackBar(
+        content: Text("${e.message.toString()} \n Try again"),
+      ),
+    );
   }
+  return false;
 }

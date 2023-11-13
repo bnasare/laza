@@ -16,8 +16,8 @@ class ResetPasswordScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final routeArgs = ModalRoute.of(context)?.settings.arguments as Map;
-    final String email = routeArgs["email"];
+    // final routeArgs = ModalRoute.of(context)?.settings.arguments as Map;
+    // final String email = routeArgs["email"];
 
     double verticalConverter(double value) {
       double height = MediaQuery.of(context).size.height;

@@ -1,5 +1,3 @@
-import 'package:email_otp/email_otp.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:laza/screens/authentication/screens/reset_password_screen.dart';
@@ -17,14 +15,14 @@ class CodeVerificationScreen extends StatelessWidget {
   final TextEditingController codeTwo = TextEditingController();
   final TextEditingController codeThree = TextEditingController();
   final TextEditingController codeFour = TextEditingController();
-  bool verified = false;
+  // bool verified = false;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final routeArgs = ModalRoute.of(context)?.settings.arguments as Map;
-    final String email = routeArgs["email"];
-    final EmailOTP? auth = routeArgs["auth"];
+    // final routeArgs = ModalRoute.of(context)?.settings.arguments as Map;
+    // final String email = routeArgs["email"];
+    // final EmailOTP? auth = routeArgs["auth"];
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -75,20 +73,21 @@ class CodeVerificationScreen extends StatelessWidget {
                 ),
                 children: [
                   TextSpan(
-                      text: " resend confirmation code",
-                      style: TextStyle(
-                        color: color.tertiary,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      recognizer: TapGestureRecognizer()
-                        ..onTap = () async {
-                          if (await sendOTP(auth)) {
-                            ScaffoldMessenger.of(context)
-                                .showSnackBar(const SnackBar(
-                              content: Text("OTP has been sent"),
-                            ));
-                          }
-                        })
+                    text: " resend confirmation code",
+                    style: TextStyle(
+                      color: color.tertiary,
+                      fontWeight: FontWeight.w400,
+                    ),
+                    // recognizer: TapGestureRecognizer()
+                    //   ..onTap = () async {
+                    //     if (await sendOTP(auth)) {
+                    //       ScaffoldMessenger.of(context)
+                    //           .showSnackBar(const SnackBar(
+                    //         content: Text("OTP has been sent"),
+                    //       ));
+                    //     }
+                    //   }
+                  )
                 ],
               ),
             ),
@@ -98,30 +97,29 @@ class CodeVerificationScreen extends StatelessWidget {
       bottomNavigationBar: NavigationCard(
           text: 'Confirm Code',
           onTap: () {
-            String code =
-                codeOne.text + codeTwo.text + codeThree.text + codeFour.text;
+            // String code =
+            //     codeOne.text + codeTwo.text + codeThree.text + codeFour.text;
             //todo: add spinner to verification call back
-            verifyOTP(code, auth);
-            if (verified) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text("Verification successful"),
-                ),
-              );
-            }
-            Navigator.pushNamed(context, ResetPasswordScreen.routeName,
-                arguments: {"email": email});
+            // verifyOTP(code, auth);
+            // if (verified) {
+            //   ScaffoldMessenger.of(context).showSnackBar(
+            //     const SnackBar(
+            //       content: Text("Verification successful"),
+            //     ),
+            //   );
+            // }
+            Navigator.pushNamed(context, ResetPasswordScreen.routeName);
           }),
     );
   }
 
-  Future verifyOTP(verificationCode, auth) async {
-    bool res = await auth?.verifyOTP(otp: verificationCode);
-    verified = res;
-  }
-
-  Future<bool> sendOTP(auth) async {
-    bool res = await auth?.sendOTP();
-    return res;
-  }
+  // Future verifyOTP(verificationCode, auth) async {
+  //   bool res = await auth?.verifyOTP(otp: verificationCode);
+  //   verified = res;
+  // }
+  //
+  // Future<bool> sendOTP(auth) async {
+  //   bool res = await auth?.sendOTP();
+  //   return res;
+  // }
 }
