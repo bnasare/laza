@@ -86,6 +86,8 @@ flutter:
     - assets/splash_dark_2x.png
     - assets/splash_dark_3x.png
     - assets/splash_dark_4x.png
+    - assets/images/product_images/
+    - assets/images/products/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
