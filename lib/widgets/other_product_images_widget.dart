@@ -23,8 +23,8 @@ class ProductImage extends StatelessWidget {
             borderRadius: BorderRadius.circular(10),
           ),
           child: Image.asset(
-            'assets/images/$firstImage.png',
-            fit: BoxFit.cover,
+            'assets/images/product_images/$firstImage.png',
+            fit: BoxFit.contain,
             width: horizontalConverter(context, 77),
             height: verticalConverter(context, 77),
           ),
@@ -37,8 +37,8 @@ class ProductImage extends StatelessWidget {
               color: color.background,
               borderRadius: BorderRadius.circular(10)),
           child: Image.asset(
-            'assets/images/$secondImage.png',
-            fit: BoxFit.cover,
+            'assets/images/product_images/$secondImage.png',
+            fit: BoxFit.contain,
             width: horizontalConverter(context, 77),
             height: verticalConverter(context, 77),
           ),
@@ -51,8 +51,8 @@ class ProductImage extends StatelessWidget {
               color: color.background,
               borderRadius: BorderRadius.circular(10)),
           child: Image.asset(
-            'assets/images/$thirdImage.png',
-            fit: BoxFit.cover,
+            'assets/images/product_images/$thirdImage.png',
+            fit: BoxFit.contain,
             width: horizontalConverter(context, 77),
             height: verticalConverter(context, 77),
           ),
@@ -65,8 +65,8 @@ class ProductImage extends StatelessWidget {
               color: color.background,
               borderRadius: BorderRadius.circular(10)),
           child: Image.asset(
-            'assets/images/$fourthImage.png',
-            fit: BoxFit.cover,
+            'assets/images/product_images/$fourthImage.png',
+            fit: BoxFit.contain,
             width: horizontalConverter(context, 77),
             height: verticalConverter(context, 77),
           ),
