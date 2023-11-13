@@ -34,11 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _scaffoldKey,
       drawerEnableOpenDragGesture: true,
-      drawer: const Drawers(
-        username: 'Mrh Raju',
-        profile: 'assets/images/profile.png',
-        orders: '3 orders',
-      ),
+      drawer: const CustomDrawer(),
       appBar: AppBar(
         automaticallyImplyLeading: true,
         leading: GestureDetector(

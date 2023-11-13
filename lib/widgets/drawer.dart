@@ -4,21 +4,14 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/widgets/switch.dart';
 
-class Drawers extends StatefulWidget {
-  final String username;
-  final String profile;
-  final String orders;
-  const Drawers(
-      {super.key,
-      required this.username,
-      required this.profile,
-      required this.orders});
+class CustomDrawer extends StatefulWidget {
+  const CustomDrawer({super.key});
 
   @override
-  State<Drawers> createState() => _DrawersState();
+  State<CustomDrawer> createState() => _CustomDrawerState();
 }
 
-class _DrawersState extends State<Drawers> {
+class _CustomDrawerState extends State<CustomDrawer> {
   final User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
@@ -37,9 +30,14 @@ class _DrawersState extends State<Drawers> {
                     },
                     child: Image.asset('assets/images/drawer_vector.png'))),
             ListTile(
-              leading: Image.asset(widget.profile),
+              leading: CircleAvatar(
+                backgroundImage: NetworkImage(
+                  user?.photoURL ??
+                      'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541',
+                ),
+              ),
               title: Text(
-                widget.username,
+                user?.displayName ?? 'Username',
                 style:
                     const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
               ),
@@ -53,11 +51,10 @@ class _DrawersState extends State<Drawers> {
                 decoration: BoxDecoration(
                     color: color.background,
                     borderRadius: BorderRadius.circular(5)),
-                child: Center(
+                child: const Center(
                   child: Text(
-                    widget.orders,
-                    style: const TextStyle(
-                        fontSize: 11, fontWeight: FontWeight.w500),
+                    '3 Orders',
+                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
