@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class CustomSwitch extends StatefulWidget {
   final bool initialState;
 
-
   const CustomSwitch({Key? key, required this.initialState}) : super(key: key);
 
   @override
@@ -28,12 +27,9 @@ class _CustomSwitchState extends State<CustomSwitch> {
       activeColor: Theme.of(context).colorScheme.onSecondary,
       onChanged: (bool value) {
         setState(() {
-         rememberMe= value;
+          rememberMe = value;
         });
-        
       },
     );
   }
-  
-  
 }

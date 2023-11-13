@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/screens/home_screen.dart';
+import 'package:laza/screens/authentication/screens/login_screen.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
@@ -51,8 +51,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'userCartItems': [],
         'createdAt': Timestamp.now(),
       });
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()));
       log('Successfully registered');
     } on FirebaseException catch (error) {
       ScaffoldMessenger.of(context).showSnackBar(

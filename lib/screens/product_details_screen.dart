@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -33,7 +34,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final productProvider = Provider.of<ProductProvider>(context);
     final productId = ModalRoute.of(context)!.settings.arguments as String;
     final getCurrentProduct = productProvider.findProdById(productId);
-    final cartProvider = Provider.of<CartProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
     bool? isInCart =
         cartProvider.getCartItems.containsKey(getCurrentProduct.id);
 
@@ -185,11 +186,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       left: horizontalConverter(context, 20),
                       right: horizontalConverter(context, 20),
                     ),
-                    child: const ProductImage(
-                        firstImage: 'pic_1',
-                        secondImage: 'pic_2',
-                        thirdImage: 'pic_1',
-                        fourthImage: 'pic_4'),
+                    child: ProductImage(
+                      firstImage: '${getCurrentProduct.id}_1',
+                      secondImage: '${getCurrentProduct.id}_2',
+                      thirdImage: '${getCurrentProduct.id}_3',
+                      fourthImage: '${getCurrentProduct.id}_4',
+                    ),
                   ),
                   Padding(
                     padding:
@@ -354,10 +356,30 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ],
       ),
       bottomNavigationBar: NavigationCard(
-          text: isInCart ? 'Added to Cart' : 'Add to Cart',
-          onTap: () {
-            cartProvider.addProductsToCart(productId: productId, quantity: 1);
-          }),
+        text: isInCart ? 'Added to Cart' : 'Add to Cart',
+        onTap: () async {
+          final user = FirebaseAuth.instance.currentUser;
+          if (user == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content:
+                    Text('You need to be logged in to perform this action'),
+              ),
+            );
+            return;
+          }
+          final alreadyInCart =
+              cartProvider.getCartItems.containsKey(productId);
+          if (alreadyInCart) {
+            return;
+          }
+
+          await cartProvider.addProductsToCart(
+            productId: productId,
+            quantity: 1,
+          );
+        },
+      ),
     );
   }
 }

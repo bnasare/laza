@@ -14,7 +14,7 @@ class CartProvider with ChangeNotifier {
     return _cartItems;
   }
 
-  void addProductsToCart({
+  Future<void> addProductsToCart({
     required String productId,
     required int quantity,
   }) async {
