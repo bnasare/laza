@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:laza/providers/internet_provider.dart';
 import 'package:laza/providers/sign_in_provider.dart';
+import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/authentication/screens/signup_screen.dart';
 import 'package:laza/screens/home_screen.dart';
 import 'package:laza/utils/snack_bar.dart';
@@ -169,28 +170,35 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
             ),
             Padding(
               padding: const EdgeInsets.only(bottom: 15.0),
-              child: RichText(
-                text: TextSpan(
-                    text: "Already have an account? ",
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    "Already have an account? ",
                     style: TextStyle(
                       color: color.tertiary,
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                       height: 0,
                     ),
-                    children: [
-                      TextSpan(
-                        text: "Sign in",
+                  ),
+                  TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, LoginScreen.routeName);
+                      },
+                      child: Text(
+                        "Sign In",
                         style: TextStyle(
                           color: color.secondary,
                           fontSize: 15,
                           fontWeight: FontWeight.w500,
                           height: 0,
                         ),
-                      )
-                    ]),
+                      ))
+                ],
               ),
-            )
+            ),
           ],
         ),
       ),
