@@ -134,10 +134,10 @@ class SignInProvider extends ChangeNotifier {
 
         final userDetails = authResult.user;
         // save all the data
-        _name = userDetails!.name;
-        _email = firebaseAuth.currentUser!.email;
-        _imageUrl = userDetails.thumbnailImage;
-        _uid = userDetails.id.toString();
+        _name = userDetails?.name;
+        _email = firebaseAuth.currentUser?.email;
+        _imageUrl = userDetails?.thumbnailImage;
+        _uid = userDetails?.id.toString();
         _provider = "TWITTER";
         _hasError = false;
         _userCartItems = [];
@@ -232,8 +232,10 @@ class SignInProvider extends ChangeNotifier {
               _email = snapshot['email'],
               _imageUrl = snapshot['image_url'],
               _provider = snapshot['provider'],
-              _userCartItems = snapshot['user_cart_items'],
-              _userWishlist = snapshot['user_wishlist']
+              _userCartItems = (snapshot['user_cart_items'] as List<dynamic>?)
+                  ?.cast<String>(),
+              _userWishlist =
+                  (snapshot['user_wishlist'] as List<dynamic>?)?.cast<String>(),
             });
   }
 
@@ -241,26 +243,30 @@ class SignInProvider extends ChangeNotifier {
     final DocumentReference r =
         FirebaseFirestore.instance.collection("users").doc(uid);
     await r.set({
-      "name": _name,
-      "email": _email,
-      "uid": _uid,
-      "image_url": _imageUrl,
-      "provider": _provider,
-      "user_cart_items": _userCartItems,
-      "user_wishlist": _userWishlist
+      "name": _name ?? "",
+      "email": _email ?? "",
+      "uid": _uid ?? "",
+      "image_url": _imageUrl ?? "",
+      "provider": _provider ?? "",
+      "user_cart_items": _userCartItems ?? [],
+      "user_wishlist": _userWishlist ?? []
     });
+    await saveDataToSharedPreferences();
     notifyListeners();
   }
 
   Future saveDataToSharedPreferences() async {
     final SharedPreferences s = await SharedPreferences.getInstance();
-    await s.setString('name', _name!);
-    await s.setString('email', _email!);
-    await s.setString('uid', _uid!);
-    await s.setString('image_url', _imageUrl!);
-    await s.setString('provider', _provider!);
-    await s.setStringList('user_cart_items', _userCartItems!);
-    await s.setStringList('user_wishlist', _userWishlist!);
+    await s.setString(
+      'name',
+      _name ?? "",
+    );
+    await s.setString('email', _email ?? "");
+    await s.setString('uid', _uid ?? "");
+    await s.setString('image_url', _imageUrl ?? "");
+    await s.setString('provider', _provider ?? "");
+    await s.setStringList('user_cart_items', _userCartItems ?? []);
+    await s.setStringList('user_wishlist', _userWishlist ?? []);
     notifyListeners();
   }
 
