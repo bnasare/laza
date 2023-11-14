@@ -37,6 +37,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     bool? isInCart =
         cartProvider.getCartItems.containsKey(getCurrentProduct.id);
+    final List<String> productImages = getCurrentProduct.productImages;
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -79,6 +80,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               )),
                           height: verticalConverter(context, 50),
                           width: horizontalConverter(context, 80),
+                          padding: EdgeInsets.only(
+                            top: verticalConverter(context, 5),
+                          ),
                           child: Image.asset(
                             'assets/images/${getCurrentProduct.category}.png',
                             fit: BoxFit.contain,
@@ -187,10 +191,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       right: horizontalConverter(context, 20),
                     ),
                     child: ProductImage(
-                      firstImage: '${getCurrentProduct.id}_1',
-                      secondImage: '${getCurrentProduct.id}_2',
-                      thirdImage: '${getCurrentProduct.id}_3',
-                      fourthImage: '${getCurrentProduct.id}_4',
+                      firstImage: productImages[0],
+                      secondImage: productImages[1],
+                      thirdImage: productImages[2],
+                      fourthImage: productImages[3],
                     ),
                   ),
                   Padding(
