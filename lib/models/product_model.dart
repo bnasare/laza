@@ -8,6 +8,7 @@ class ProductModel with ChangeNotifier {
   final double price;
   final String description;
   final String gender;
+  final List<String> productImages;
 
   ProductModel({
     required this.id,
@@ -17,5 +18,6 @@ class ProductModel with ChangeNotifier {
     required this.price,
     required this.description,
     required this.gender,
+    required this.productImages,
   });
 }
