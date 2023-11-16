@@ -1,22 +1,33 @@
 import 'package:flutter/material.dart';
 import 'package:laza/consts/sizing_config.dart';
+import 'package:intl/intl.dart';
+import 'package:laza/widgets/rating_widget.dart';
 
 class ReviewCard extends StatelessWidget {
-  const ReviewCard({super.key, required this.assetName, required this.name});
+  const ReviewCard({
+    super.key,
+    required this.name,
+    required this.time,
+    required this.review,
+    required this.rating,
+  });
 
-  final String assetName;
   final String name;
+  final DateTime time;
+  final String review;
+  final double rating;
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    String formattedDate = DateFormat('dd MMM, yyyy').format(time);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         ListTile(
           leading: ClipOval(
             child: Image.asset(
-              'assets/images/$assetName.jpg',
+              'assets/images/user.jpg',
               width: horizontalConverter(context, 40),
               height: verticalConverter(context, 40),
               fit: BoxFit.cover,
@@ -38,7 +49,7 @@ class ReviewCard extends StatelessWidget {
                 color: color.tertiary,
               ),
               Text(
-                '  13 Sep, 2020',
+                '  $formattedDate',
                 style: TextStyle(
                   color: color.tertiary,
                   fontWeight: FontWeight.w500,
@@ -57,7 +68,7 @@ class ReviewCard extends StatelessWidget {
                     softWrap: true,
                     text: TextSpan(children: [
                       TextSpan(
-                        text: '4.8',
+                        text: '$rating',
                         style: TextStyle(
                           color: color.secondary,
                           fontSize: 15,
@@ -75,29 +86,9 @@ class ReviewCard extends StatelessWidget {
                     ])),
                 Row(
                   children: [
-                    Icon(
-                      Icons.star,
-                      size: 13,
-                      color: color.onTertiary,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 13,
-                      color: color.onTertiary,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 13,
-                      color: color.onTertiary,
-                    ),
-                    Icon(
-                      Icons.star,
-                      size: 13,
-                      color: color.onTertiary,
-                    ),
-                    const Icon(Icons.star_outline, size: 13),
+                    RatingDisplay(rating: rating),
                   ],
-                )
+                ),
               ],
             ),
           ),
@@ -107,13 +98,15 @@ class ReviewCard extends StatelessWidget {
             horizontal: horizontalConverter(context, 20),
           ),
           child: Text(
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque malesuada eget vitae amet...',
+            review,
             style: TextStyle(
               height: 1.4,
               fontSize: 15,
               fontWeight: FontWeight.w400,
               color: color.tertiary,
             ),
+            softWrap: true,
+            overflow: TextOverflow.ellipsis,
           ),
         )
       ],
