@@ -1,7 +1,12 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
+import '../providers/cart_provider.dart';
+import '../providers/product_provider.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/cards/review_card.dart';
 import '../widgets/cards/size_card.dart';
@@ -10,16 +15,28 @@ import '../widgets/custom icons/custom_trailing_button.dart';
 import '../widgets/double_header_widget.dart';
 import '../widgets/other_product_images_widget.dart';
 import 'review_screen.dart';
-import 'user/screen/cart_screen.dart';
 
-class ProductDetailsScreen extends StatelessWidget {
+class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product_details';
 
   const ProductDetailsScreen({Key? key}) : super(key: key);
 
   @override
+  State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
+}
+
+class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
+  bool showFullDescription = false;
+
+  @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final productProvider = Provider.of<ProductProvider>(context);
+    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final getCurrentProduct = productProvider.findProdById(productId);
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
+    bool? isInCart =
+        cartProvider.getCartItems.containsKey(getCurrentProduct.id);
 
     return Scaffold(
       resizeToAvoidBottomInset: false,
@@ -43,7 +60,7 @@ class ProductDetailsScreen extends StatelessWidget {
                         left: 10,
                         right: 10,
                         child: Image.asset(
-                          'assets/images/card_5.png',
+                          getCurrentProduct.imagePath,
                           width: horizontalConverter(context, 310),
                           height: verticalConverter(context, 387),
                           fit: BoxFit.cover,
@@ -53,9 +70,19 @@ class ProductDetailsScreen extends StatelessWidget {
                         bottom: 0,
                         left: 150,
                         right: 150,
-                        child: Image.asset(
-                          'assets/images/nike_logo.png',
-                          fit: BoxFit.fill,
+                        child: Container(
+                          decoration: const BoxDecoration(
+                              color: Color.fromRGBO(255, 255, 255, 0.5),
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(60),
+                                topRight: Radius.circular(60),
+                              )),
+                          height: verticalConverter(context, 50),
+                          width: horizontalConverter(context, 80),
+                          child: Image.asset(
+                            'assets/images/${getCurrentProduct.category}.png',
+                            fit: BoxFit.contain,
+                          ),
                         ),
                       ),
                       Positioned(
@@ -95,29 +122,36 @@ class ProductDetailsScreen extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Men's Full Zip Jacket",
-                              style: TextStyle(
-                                color: color.tertiary,
-                                fontSize: 13,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                  top: verticalConverter(context, 8)),
-                              child: const Text(
-                                "Nike Tech Fleece",
+                        Flexible(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                getCurrentProduct.gender.toUpperCase(),
                                 style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600,
+                                  color: color.tertiary,
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                            ),
-                          ],
+                              Padding(
+                                padding: EdgeInsets.only(
+                                  top: verticalConverter(context, 8),
+                                ),
+                                child: Text(
+                                  getCurrentProduct.name,
+                                  overflow: TextOverflow.ellipsis,
+                                  softWrap: true,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w600,
+                                    color: color.secondary,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,9 +167,9 @@ class ProductDetailsScreen extends StatelessWidget {
                             Padding(
                               padding: EdgeInsets.only(
                                   top: verticalConverter(context, 8)),
-                              child: const Text(
-                                "\$120",
-                                style: TextStyle(
+                              child: Text(
+                                "\$${getCurrentProduct.price.toStringAsFixed(2)}",
+                                style: const TextStyle(
                                   fontSize: 22,
                                   fontWeight: FontWeight.w600,
                                 ),
@@ -152,11 +186,12 @@ class ProductDetailsScreen extends StatelessWidget {
                       left: horizontalConverter(context, 20),
                       right: horizontalConverter(context, 20),
                     ),
-                    child: const ProductImage(
-                        firstImage: 'pic_1',
-                        secondImage: 'pic_2',
-                        thirdImage: 'card_5',
-                        fourthImage: 'pic_4'),
+                    child: ProductImage(
+                      firstImage: '${getCurrentProduct.id}_1',
+                      secondImage: '${getCurrentProduct.id}_2',
+                      thirdImage: '${getCurrentProduct.id}_3',
+                      fourthImage: '${getCurrentProduct.id}_4',
+                    ),
                   ),
                   Padding(
                     padding:
@@ -201,26 +236,64 @@ class ProductDetailsScreen extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: horizontalConverter(context, 20)),
-                    child: RichText(
-                      textAlign: TextAlign.left,
-                      text: TextSpan(children: [
-                        TextSpan(
-                          text:
-                              'The Nike Throwback Pullover Hoodie is made from premium French terry fabric that blends a performance feel with',
-                          style: TextStyle(
-                              height: 1.4,
-                              color: color.tertiary,
-                              fontWeight: FontWeight.w400,
-                              fontSize: 15),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        RichText(
+                          textAlign: TextAlign.justify,
+                          text: TextSpan(
+                            children: [
+                              TextSpan(
+                                text: showFullDescription
+                                    ? getCurrentProduct.description
+                                    : getCurrentProduct.description.length <=
+                                            100
+                                        ? getCurrentProduct.description
+                                        : getCurrentProduct.description
+                                            .substring(0, 100),
+                                style: TextStyle(
+                                  height: 1.4,
+                                  color: color.tertiary,
+                                  fontWeight: FontWeight.w400,
+                                  fontSize: 15,
+                                ),
+                              ),
+                              if (!showFullDescription) ...[
+                                TextSpan(
+                                  text: ' Read More..',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
+                                    color: color.secondary,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      setState(() {
+                                        showFullDescription = true;
+                                      });
+                                    },
+                                ),
+                              ],
+                            ],
+                          ),
                         ),
-                        TextSpan(
-                          text: ' Read More..',
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 15,
-                              color: color.secondary),
-                        )
-                      ]),
+                        // if (!showFullDescription)
+                        //   GestureDetector(
+                        //     onTap: () {
+                        //       setState(() {
+                        //         showFullDescription = true;
+                        //       });
+                        //     },
+                        //     child: Text(
+                        //       ' Read More..',
+                        //       style: TextStyle(
+                        //         fontWeight: FontWeight.w600,
+                        //         fontSize: 15,
+                        //         color: color.secondary,
+                        //       ),
+                        //     ),
+                        //   ),
+                      ],
                     ),
                   ),
                   Padding(
@@ -266,7 +339,7 @@ class ProductDetailsScreen extends StatelessWidget {
                           ],
                         ),
                         Text(
-                          '\$125',
+                          '\$${getCurrentProduct.price.toStringAsFixed(2)}',
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.w600,
@@ -283,10 +356,30 @@ class ProductDetailsScreen extends StatelessWidget {
         ],
       ),
       bottomNavigationBar: NavigationCard(
-          text: 'Add to Cart',
-          onTap: () {
-            Navigator.pushNamed(context, CartScreen.routeName);
-          }),
+        text: isInCart ? 'Added to Cart' : 'Add to Cart',
+        onTap: () async {
+          final user = FirebaseAuth.instance.currentUser;
+          if (user == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content:
+                    Text('You need to be logged in to perform this action'),
+              ),
+            );
+            return;
+          }
+          final alreadyInCart =
+              cartProvider.getCartItems.containsKey(productId);
+          if (alreadyInCart) {
+            return;
+          }
+
+          await cartProvider.addProductsToCart(
+            productId: productId,
+            quantity: 1,
+          );
+        },
+      ),
     );
   }
 }

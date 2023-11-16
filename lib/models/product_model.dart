@@ -1,46 +1,21 @@
-class Product {
-  final String imagePath;
-  final String productName;
-  final String brandName;
-  final int price;
-  final String description;
+import 'package:flutter/material.dart';
 
-  const Product({
+class ProductModel with ChangeNotifier {
+  final String id;
+  final String imagePath;
+  final String name;
+  final String category;
+  final double price;
+  final String description;
+  final String gender;
+
+  ProductModel({
+    required this.id,
     required this.imagePath,
-    required this.productName,
-    required this.brandName,
+    required this.name,
+    required this.category,
     required this.price,
     required this.description,
+    required this.gender,
   });
-
-  Product copy({
-    String? imagePath,
-    String? productName,
-    String? brandName,
-    int? price,
-    String? description,
-  }) =>
-      Product(
-        imagePath: imagePath ?? this.imagePath,
-        productName: productName ?? this.productName,
-        brandName: brandName ?? this.brandName,
-        price: price ?? this.price,
-        description: description ?? this.description,
-      );
-
-  Map<String, dynamic> toJson() => {
-        'imagePath': imagePath,
-        'productName': productName,
-        'brandName': brandName,
-        'price': price,
-        'description': description,
-      };
-
-  static Product fromJson(Map<String, dynamic> json) => Product(
-        imagePath: json['imagePath'],
-        productName: json['productName'],
-        brandName: json['brandName'],
-        price: json['price'],
-        description: json['description'],
-      );
 }

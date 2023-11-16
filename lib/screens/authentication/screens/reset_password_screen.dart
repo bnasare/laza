@@ -65,6 +65,7 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
             child: Center(
               child: AuthTextField(
+                textInputAction: TextInputAction.next,
                 controller: passwordController,
                 labelText: 'Password',
               ),
@@ -78,6 +79,7 @@ class ResetPasswordScreen extends StatelessWidget {
             ),
             child: Center(
               child: AuthTextField(
+                textInputAction: TextInputAction.done,
                 controller: confirmController,
                 labelText: 'Confirm Password',
               ),

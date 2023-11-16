@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 ThemeData themeData() {
   return ThemeData(
@@ -13,7 +12,6 @@ ThemeData themeData() {
         onTertiary: const Color.fromRGBO(255, 152, 31, 1),
         tertiary: const Color.fromRGBO(143, 149, 158, 1),
         onBackground: const Color.fromRGBO(255, 87, 87, 1)),
-    textTheme: GoogleFonts.interTextTheme(),
     appBarTheme: const AppBarTheme(
       color: Colors.white,
       elevation: 0,

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">com.example.laza</string>
+    <string name="facebook_app_id">308462485464645</string>
+    <string name="fb_login_protocol_scheme">fb308462485464645</string>
+    <string name="facebook_client_token">2b2ed6a52a986f523c6982207f0f6849</string>
+</resources>

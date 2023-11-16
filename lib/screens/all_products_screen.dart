@@ -2,9 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
-import 'package:laza/widgets/cards/product_card.dart';
+import 'package:laza/models/product_model.dart';
+import 'package:laza/widgets/cards/product_widget.dart';
+import 'package:provider/provider.dart';
 
-import '../consts/product_data.dart';
+import '../providers/product_provider.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 
@@ -16,7 +18,8 @@ class AllProductsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    List<Map<String, String>> products = ProductData.products;
+    final productProvider = Provider.of<ProductProvider>(context);
+    List<ProductModel> allProducts = productProvider.getProducts;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,20 +27,6 @@ class AllProductsScreen extends StatelessWidget {
           padding: const EdgeInsets.only(left: 13.0),
           child: CustomBackButton(
             backgroundColor: color.background,
-          ),
-        ),
-        centerTitle: true,
-        title: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 5),
-          width: 68,
-          height: 45,
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10), color: color.background),
-          child: Image.asset(
-            'assets/images/nike_title.png',
-            width: 48,
-            height: 25,
-            fit: BoxFit.contain,
           ),
         ),
         actions: [
@@ -59,7 +48,7 @@ class AllProductsScreen extends StatelessWidget {
             ListTile(
                 contentPadding: const EdgeInsets.all(0),
                 title: Text(
-                  '365 Items',
+                  '${allProducts.length} Items',
                   style: TextStyle(
                       fontWeight: FontWeight.w500,
                       color: color.secondary,
@@ -113,13 +102,11 @@ class AllProductsScreen extends StatelessWidget {
                         crossAxisSpacing: 10.0,
                         childAspectRatio: 0.62,
                       ),
-                      itemCount: products.length,
+                      itemCount: allProducts.length,
                       itemBuilder: (context, index) {
-                        return ProductCard(
-                          assetName: products[index]['productAsset'].toString(),
-                          productName:
-                              products[index]['productName'].toString(),
-                          price: 99,
+                        return ChangeNotifierProvider.value(
+                          value: allProducts[index],
+                          child: const ProductWidget(),
                         );
                       },
                     ),
