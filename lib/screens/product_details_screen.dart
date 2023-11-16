@@ -2,11 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/models/review_model.dart';
+import 'package:laza/screens/user/screen/add_review_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
 import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
+import '../providers/review_provider.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/cards/review_card.dart';
 import '../widgets/cards/size_card.dart';
@@ -37,6 +40,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     bool? isInCart =
         cartProvider.getCartItems.containsKey(getCurrentProduct.id);
+    final reviewProvider = Provider.of<ReviewProvider>(context);
+    reviewProvider.getReviews(int.parse(getCurrentProduct.id));
+    final List<ReviewModel> reviews = reviewProvider.reviews;
     final List<String> productImages = getCurrentProduct.productImages;
 
     return Scaffold(
@@ -307,14 +313,88 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       firstText: 'Reviews',
                       secondText: 'View All',
                       onTap: () {
-                        Navigator.pushNamed(context, ReviewScreen.routeName);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) {
+                              return ReviewScreen(
+                                productId: int.parse(getCurrentProduct.id),
+                              );
+                            },
+                          ),
+                        );
                       },
                     ),
                   ),
-                  const ReviewCard(
-                    assetName: 'face_3',
-                    name: 'Ronald Richards',
-                  ),
+                  reviews.isNotEmpty
+                      ? ReviewCard(
+                          name: reviews.first.name,
+                          time: reviews.first.time,
+                          review: reviews.first.review,
+                          rating: reviews.first.rating,
+                        )
+                      : Padding(
+                          padding: EdgeInsets.only(
+                            top: verticalConverter(context, 10),
+                          ),
+                          child: Center(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: [
+                                Text(
+                                  'There are no reviews for this product yet',
+                                  style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                    color: color.tertiary,
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: horizontalConverter(context, 125),
+                                  height: verticalConverter(context, 30),
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return AddReviewScreen(
+                                              productId: int.parse(
+                                                  getCurrentProduct.id),
+                                            );
+                                          },
+                                        ),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor: color.primary,
+                                      foregroundColor: color.onPrimary,
+                                      elevation: 0,
+                                    ),
+                                    child: const Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Icon(
+                                          IconlyLight.edit,
+                                          size: 15,
+                                        ),
+                                        SizedBox(width: 3),
+                                        Text(
+                                          'Add Review',
+                                          style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w500,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
                   Padding(
                     padding: EdgeInsets.symmetric(
                       vertical: verticalConverter(context, 20),
