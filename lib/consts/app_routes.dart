@@ -24,14 +24,13 @@ class AppRoutes {
   Map<String, WidgetBuilder> getRoutes() {
     return {
       OnboardingScreen.routeName: (context) => const OnboardingScreen(),
-      LoginScreen.routeName: (context) =>  const LoginScreen(),
+      LoginScreen.routeName: (context) => const LoginScreen(),
       SignUpScreen.routeName: (context) => const SignUpScreen(),
-      ForgotPasswordScreen.routeName: (context) => const ForgotPasswordScreen(),
+      ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
       SocialAuthScreen.routeName: (context) => const SocialAuthScreen(),
       HomeScreen.routeName: (context) => const HomeScreen(),
-      ResetPasswordScreen.routeName: (context) => const ResetPasswordScreen(),
-      CodeVerificationScreen.routeName: (context) =>
-          const CodeVerificationScreen(),
+      ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
+      CodeVerificationScreen.routeName: (context) => CodeVerificationScreen(),
       ReviewScreen.routeName: (context) => const ReviewScreen(),
       AddReviewScreen.routeName: (context) => const AddReviewScreen(),
       CartScreen.routeName: (context) => const CartScreen(),
