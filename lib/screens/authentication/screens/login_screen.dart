@@ -21,7 +21,7 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool rememberMe = false;
+  bool rememberMe = true;
   final String switchKey = 'switchState';
 
   @override
@@ -86,6 +86,8 @@ class _LoginScreenState extends State<LoginScreen> {
               title: Text('Sign-In error'),
             );
           });
+
+          
     }
   }
 
@@ -140,17 +142,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         AuthTextField(
-                          controller: TextEditingController(),
-                          labelText: "Username",
+                          controller: emailController,
+                          labelText: "Email",
                           trailingWidget: const Icon(
                             Icons.check_outlined,
                           ),
                           textInputAction: TextInputAction.next,
                         ),
                         AuthTextField(
-                          controller: TextEditingController(),
+                          controller: passwordController,
                           labelText: "Password",
-                          trailingText: "Strong",
+                         // trailingText: "Strong",
                           textInputAction: TextInputAction.done,
                         ),
                         Padding(

@@ -7,6 +7,7 @@ import 'package:laza/firebase_options.dart';
 import 'package:laza/providers/internet_provider.dart';
 import 'package:laza/providers/review_provider.dart';
 import 'package:laza/providers/sign_in_provider.dart';
+import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/home_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
         theme: themeData(),
         debugShowCheckedModeBanner: false,
         routes: AppRoutes().getRoutes(),
-        home: const HomeScreen(),
+        initialRoute: LoginScreen.routeName,
+       // home: const HomeScreen(),
       ),
     );
   }
