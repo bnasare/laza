@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:laza/models/review_model.dart';
-import 'package:laza/screens/review_screen.dart';
+import 'package:laza/screens/home_screen.dart';
 import 'package:laza/utils/snack_bar.dart';
 import 'package:provider/provider.dart';
 import '../../../providers/review_provider.dart';
@@ -74,7 +74,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                       hintText: 'Type your name',
                       maxLines: 1,
                       contentPadding:
-                      const EdgeInsets.symmetric(horizontal: 15),
+                          const EdgeInsets.symmetric(horizontal: 15),
                     ),
                   ),
                   const Text(
@@ -116,7 +116,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
                             thumbColor: color.primary,
                             inactiveColor: color.background,
                             value: sliderValue,
-                            activeColor: color.background,
+                            activeColor: color.primary,
                             min: 0.0,
                             max: 5.0,
                             divisions: 50,
@@ -155,14 +155,7 @@ class _AddReviewScreenState extends State<AddReviewScreen> {
             );
             reviewProvider.submitReview(newReview);
             openSnackbar(context, 'Review added successfully', color.primary);
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) {
-                  return ReviewScreen(productId: widget.productId);
-                },
-              ),
-            );
+            Navigator.pushReplacementNamed(context, HomeScreen.routeName);
           } catch (error) {
             openSnackbar(context, 'An error occurred: $error', color.primary);
           }
