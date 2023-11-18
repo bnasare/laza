@@ -1,4 +1,5 @@
 import 'package:device_preview/device_preview.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,8 +9,11 @@ import 'package:laza/providers/internet_provider.dart';
 import 'package:laza/providers/review_provider.dart';
 import 'package:laza/providers/sign_in_provider.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
+import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/screens/home_screen.dart';
+import 'package:laza/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
@@ -22,20 +26,25 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  bool firstLaunch = prefs.getBool("first_launch") ?? true;
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
     GoogleFonts.config.allowRuntimeFetching = false;
     runApp(
       DevicePreview(
         enabled: true,
-        builder: (context) => const MyApp(),
+        builder: (context) => MyApp(
+          firstLaunch: firstLaunch,
+        ),
       ),
     );
   });
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final bool firstLaunch;
+  const MyApp({Key? key, required this.firstLaunch}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -61,12 +70,25 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        theme: themeData(),
-        debugShowCheckedModeBanner: false,
-        routes: AppRoutes().getRoutes(),
-        initialRoute: LoginScreen.routeName,
-       // home: const HomeScreen(),
-      ),
+          theme: themeData(),
+          debugShowCheckedModeBanner: false,
+          routes: AppRoutes().getRoutes(),
+          initialRoute: firstRoute(firstLaunch)
+          // home: const HomeScreen(),
+          ),
     );
+  }
+}
+
+String firstRoute(bool firstLaunch) {
+  if (firstLaunch) {
+    return OnboardingScreen.routeName;
+  } else {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      return HomeScreen.routeName;
+    } else {
+      return SocialAuthScreen.routeName;
+    }
   }
 }
