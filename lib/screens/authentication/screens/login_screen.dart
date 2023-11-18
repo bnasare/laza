@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,12 +37,62 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setBool(switchKey, value);
   }
 
-  saveLogins() async {
-    final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('email', emailController.text);
-    await prefs.setString('password', passwordController.text);
+  void signUsersIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
 
-    print('saved!!!');
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      User? user = FirebaseAuth.instance.currentUser;
+      Navigator.pop(context);
+
+      if (user != null) {
+        if (rememberMe) {
+          saveLogins(); // Save login information if "Remember Me" is selected
+        }
+
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text('Sign-In error'),
+            );
+          },
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Sign-In error'),
+          );
+        },
+      );
+    }
+  }
+
+  saveLogins() async {
+    if (rememberMe) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('email', emailController.text);
+      await prefs.setString('password', passwordController.text);
+
+      print('saved!!!');
+    }
   }
 
   loadLogins() async {
@@ -57,37 +109,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
       print(savedEmail);
       // print(savedPassword);
-    }
-  }
-
-  void signUsersIn() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-
-      Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-    } catch (e) {
-      Navigator.pop(context);
-
-      showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              title: Text('Sign-In error'),
-            );
-          });
-
-          
     }
   }
 
@@ -152,7 +173,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         AuthTextField(
                           controller: passwordController,
                           labelText: "Password",
-                         // trailingText: "Strong",
+                          // trailingText: "Strong",
                           textInputAction: TextInputAction.done,
                         ),
                         Padding(
