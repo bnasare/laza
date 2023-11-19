@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:laza/screens/home_screen.dart';
 
 class EmptyScreen extends StatelessWidget {
-  const EmptyScreen(
-      {super.key,
-      required this.title,
-      required this.subtitle,
-      required this.buttonText});
+  const EmptyScreen({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.buttonText,
+    this.onPressed,
+  });
 
   final String title, subtitle, buttonText;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +35,7 @@ class EmptyScreen extends StatelessWidget {
               const SizedBox(height: 20),
               Text(
                 title,
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                     color: Colors.red,
                     fontSize: 25,
@@ -59,9 +63,10 @@ class EmptyScreen extends StatelessWidget {
                     vertical: 20,
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushNamed(context, HomeScreen.routeName);
-                },
+                onPressed: onPressed ??
+                    () {
+                      Navigator.pushNamed(context, HomeScreen.routeName);
+                    },
                 child: Text(
                   buttonText,
                   style: const TextStyle(

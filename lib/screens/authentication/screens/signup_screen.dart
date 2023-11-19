@@ -80,66 +80,48 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Text(
-              "Sign Up",
-              style: TextStyle(
-                color: color.secondary,
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
-                letterSpacing: -0.21,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 35),
-              child: Column(children: [
-                AuthTextField(
-                  textInputAction: TextInputAction.next,
-                  controller: fullNameController,
-                  labelText: "Username",
-                  trailingWidget: Icon(
-                    Icons.check_outlined,
-                    color: color.onSecondary,
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Sign Up",
+                  style: TextStyle(
+                    color: color.secondary,
+                    fontSize: 28,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: -0.21,
                   ),
                 ),
-                AuthTextField(
-                  textInputAction: TextInputAction.next,
-                  controller: passwordController,
-                  labelText: "Password",
-                  trailingText: "Strong",
-                ),
-                AuthTextField(
-                  textInputAction: TextInputAction.done,
-                  controller: emailController,
-                  labelText: "Email Address",
-                  trailingWidget: Icon(
-                    Icons.check_outlined,
-                    color: color.onSecondary,
-                  ),
-                ),
-              ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Remember me",
-                    style: GoogleFonts.manrope(
-                      fontWeight: FontWeight.w500,
+                Padding(
+                  padding: const EdgeInsets.only(top: 35),
+                  child: Column(children: [
+                    AuthTextField(
+                      textInputAction: TextInputAction.next,
+                      controller: fullNameController,
+                      labelText: "Username",
+                      trailingWidget: Icon(
+                        Icons.check_outlined,
+                        color: color.onSecondary,
+                      ),
                     ),
-                  ),
-                  const CustomSwitch(initialState: true),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+                    AuthTextField(
+                      textInputAction: TextInputAction.next,
+                      controller: passwordController,
+                      labelText: "Password",
+                    ),
+                    AuthTextField(
+                      textInputAction: TextInputAction.done,
+                      controller: emailController,
+                      labelText: "Email Address",
+                      trailingWidget: Icon(
+                        Icons.check_outlined,
+                        color: color.onSecondary,
+                      ),
+                    ),
+                  ]),
+                )
+              ])),
       bottomNavigationBar: NavigationCard(
           text: 'Sign Up',
           onTap: () async {

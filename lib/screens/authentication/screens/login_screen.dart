@@ -44,12 +44,58 @@ class _LoginScreenState extends State<LoginScreen> {
  
   }
 
+  void signUsersIn() async {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        });
+
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: emailController.text,
+        password: passwordController.text,
+      );
+
+      User? user = FirebaseAuth.instance.currentUser;
+      Navigator.pop(context);
+
+      if (user != null) {
+        if (rememberMe) {
+          saveLogins(); // Save login information if "Remember Me" is selected
+        }
+
+        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+      } else {
+        showDialog(
+          context: context,
+          builder: (context) {
+            return const AlertDialog(
+              title: Text('Sign-In error'),
+            );
+          },
+        );
+      }
+    } catch (e) {
+      Navigator.pop(context);
+
+      showDialog(
+        context: context,
+        builder: (context) {
+          return const AlertDialog(
+            title: Text('Sign-In error'),
+          );
+        },
+      );
+    }
+  }
+
   saveLogins() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', emailController.text);
     await prefs.setString('password', passwordController.text);
-
-    print('saved!!!');
   }
 
 
@@ -241,6 +287,5 @@ class _LoginScreenState extends State<LoginScreen> {
         emailController = TextEditingController(text: savedEmail);
         passwordController = TextEditingController(text: savedPassword);
       });
-      print(savedEmail);
   }
 }
