@@ -12,18 +12,18 @@ class Transaction {
 
   factory Transaction.fromJson(Map<String, dynamic> json) {
     return Transaction(
-        amount: json["amount"],
-        reference: json["reference"],
-        currency: json["currency"],
-        email: json["email"]);
+        amount: json['amount'],
+        reference: json['reference'],
+        currency: json['currency'],
+        email: json['email']);
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "amount": amount,
-      "reference": reference,
-      "currency": currency,
-      "email": email
+      'amount': amount,
+      'reference': reference,
+      'currency': currency,
+      'email': email
     };
   }
 }

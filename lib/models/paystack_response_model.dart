@@ -11,16 +11,16 @@ class PayStackResponse {
   factory PayStackResponse.fromJson(Map<String, dynamic> json) {
     return PayStackResponse(
       authorization_url: json['authorization_url'],
-      access_code: json["access_code"],
-      reference: json["reference"],
+      access_code: json['access_code'],
+      reference: json['reference'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      "authorization_url": authorization_url,
-      "access_code": access_code,
-      "reference": reference,
+      'authorization_url': authorization_url,
+      'access_code': access_code,
+      'reference': reference,
     };
   }
 }

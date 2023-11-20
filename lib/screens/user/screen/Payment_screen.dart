@@ -19,12 +19,18 @@ class PaymentPage extends StatefulWidget {
 }
 
 class _PaymentPageState extends State<PaymentPage> {
+  late Future futureInitTransaction;
   @override
+  void initState() {
+    super.initState();
+    futureInitTransaction = initTransaction();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder(
-            future: initTransaction(),
+            future: futureInitTransaction,
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final url = snapshot.data;
@@ -66,21 +72,22 @@ class _PaymentPageState extends State<PaymentPage> {
   Future<PayStackResponse> createTransaction(Transaction transaction) async {
     const String url = "https://api.paystack.co/transaction/initialize";
     final data = transaction.toJson();
-
     try {
-      final res = await http.post(Uri.parse(url),
-          headers: {
-            "Authorization": "Bearer ${ApiKey.secretKey}",
-            "Content-Type": "application/json"
-          },
-          body: jsonEncode(data));
-
+      final res = await http.post(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer ${ApiKey.secretKey}',
+          'Content-Type': 'application/json'
+        },
+        body: jsonEncode(data),
+      );
+      // print(res.statusCode);
+      // print("Res body: ${res.body}");
       if (res.statusCode == 200) {
         final resData = jsonDecode(res.body);
-        return PayStackResponse.fromJson(resData["data"]);
-      } else {
-        throw "Payment unsuccessful";
+        return PayStackResponse.fromJson(resData['data']);
       }
+      throw "Payment unsuccessful";
     } on Exception {
       throw "Payment unsuccessful";
     }
@@ -88,14 +95,16 @@ class _PaymentPageState extends State<PaymentPage> {
 
   Future<String> initTransaction() async {
     try {
+      print("Hey");
       // final price = total;
       final transaction = Transaction(
-        amount: "10000",
-        reference: "Laza Checkout",
-        currency: "GHS",
-        email: "muhammadismaaiil360@gmail.com",
+        amount: '10000',
+        reference: 'vbhjkdfghdfgghjdfgdfgfg',
+        currency: 'GHS',
+        email: 'muhammadismaaiil360@gmail.com',
       );
       final authRes = await createTransaction(transaction);
+      // print("Auth_url: ${authRes.authorization_url}");
       return authRes.authorization_url;
     } catch (e) {
       print("Error initializing transaction $e");
