@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/user/screen/reference_screen.dart';
 import 'package:laza/screens/user/widgets/delivery_address_card.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
 import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
-import '../screens/user/screen/Payment_screen.dart';
 import '../screens/user/widgets/payment_method_card.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
@@ -175,7 +175,7 @@ class CartScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentPage(),
+                      builder: (context) => PaymentReferenceScreen(amount: 200),
                     ),
                   );
                 }),

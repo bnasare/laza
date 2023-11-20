@@ -1,18 +1,23 @@
 import 'dart:convert';
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:laza/consts/api_keys.dart';
+import 'package:laza/screens/order_confirmed_screen.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../models/paystack_response_model.dart';
 import '../../../models/transaction_model.dart';
+import '../../../widgets/cards/bottom_card.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 
 class PaymentPage extends StatefulWidget {
-  PaymentPage({super.key});
-  // String? email = FirebaseAuth.instance.currentUser?.email;
-  // String api = ApiKey.secretKey;
-  // final double price;
+  static const routeName = '/Payment_screen';
+  PaymentPage({super.key, required this.price, required this.reference});
+  final String email = FirebaseAuth.instance.currentUser!.email!;
+  final double price;
+  final String reference;
 
   @override
   State<PaymentPage> createState() => _PaymentPageState();
@@ -26,8 +31,27 @@ class _PaymentPageState extends State<PaymentPage> {
     futureInitTransaction = initTransaction();
   }
 
+  @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).colorScheme;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 13.0),
+          child: CustomBackButton(
+            backgroundColor: color.background,
+          ),
+        ),
+        title: Text(
+          'Complete Payment',
+          style: TextStyle(
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+              color: color.secondary),
+        ),
+        centerTitle: true,
+      ),
       body: SafeArea(
         child: FutureBuilder(
             future: futureInitTransaction,
@@ -66,6 +90,12 @@ class _PaymentPageState extends State<PaymentPage> {
               }
             }),
       ),
+      bottomNavigationBar: NavigationCard(
+          text: 'Payment Done',
+          onTap: () {
+            // Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+            Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+          }),
     );
   }
 
@@ -98,10 +128,10 @@ class _PaymentPageState extends State<PaymentPage> {
       print("Hey");
       // final price = total;
       final transaction = Transaction(
-        amount: '10000',
-        reference: 'vbhjkdfghdfgghjdfgdfgfg',
+        amount: (widget.price * 100).toString(),
+        reference: widget.reference.replaceAll(" ", "_"),
         currency: 'GHS',
-        email: 'muhammadismaaiil360@gmail.com',
+        email: widget.email,
       );
       final authRes = await createTransaction(transaction);
       // print("Auth_url: ${authRes.authorization_url}");
