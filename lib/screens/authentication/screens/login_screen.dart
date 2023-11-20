@@ -1,13 +1,15 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/forgot_password_screen.dart';
 import 'package:laza/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter/cupertino.dart';
+
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
-import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -37,67 +39,19 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   loadlightState() async {
-      final prefs = await SharedPreferences.getInstance();
-      setState(() {
-        _lights = prefs.getBool(switchKey) ?? false;
-      });
- 
-  }
-
-  void signUsersIn() async {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        });
-
-    try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-
-      User? user = FirebaseAuth.instance.currentUser;
-      Navigator.pop(context);
-
-      if (user != null) {
-        if (rememberMe) {
-          saveLogins(); // Save login information if "Remember Me" is selected
-        }
-
-        Navigator.pushReplacementNamed(context, HomeScreen.routeName);
-      } else {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const AlertDialog(
-              title: Text('Sign-In error'),
-            );
-          },
-        );
-      }
-    } catch (e) {
-      Navigator.pop(context);
-
-      showDialog(
-        context: context,
-        builder: (context) {
-          return const AlertDialog(
-            title: Text('Sign-In error'),
-          );
-        },
-      );
-    }
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _lights = prefs.getBool(switchKey) ?? false;
+    });
   }
 
   saveLogins() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', emailController.text);
     await prefs.setString('password', passwordController.text);
-  }
 
+    print('saved!!!');
+  }
 
   void signUsersIn() async {
     showDialog(
@@ -125,8 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
               title: Text('Sign-In error'),
             );
           });
-
-          
     }
   }
 
@@ -191,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         AuthTextField(
                           controller: passwordController,
                           labelText: "Password",
-                         // trailingText: "Strong",
+                          // trailingText: "Strong",
                           textInputAction: TextInputAction.done,
                         ),
                         Padding(
@@ -221,20 +173,17 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              
-                  CupertinoSwitch(
-                              value: _lights,
-                             activeColor: Theme.of(context).colorScheme.onSecondary,
-                             onChanged: (bool value) {
-                            
-                            setState(() {
-                            _lights = value;
-                            saveSwitchState(value);
-                            
-                                   });
+                              CupertinoSwitch(
+                                value: _lights,
+                                activeColor:
+                                    Theme.of(context).colorScheme.onSecondary,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    _lights = value;
+                                    saveSwitchState(value);
+                                  });
                                 },
-                                
-                                 ),
+                              ),
                             ],
                           ),
                         ),
@@ -270,22 +219,22 @@ class _LoginScreenState extends State<LoginScreen> {
             text: 'Login',
             onTap: () {
               signUsersIn();
-              if(_lights==true){
-                              saveLogins();
-                              loadLogins();
-                            }
-             
+              if (_lights == true) {
+                saveLogins();
+                loadLogins();
+              }
             }));
   }
 
-    loadLogins() async {
-      final prefs = await SharedPreferences.getInstance();
-      final String savedEmail = prefs.getString('email') ?? "";
-      final String savedPassword = prefs.getString('password') ?? "";
+  loadLogins() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String savedEmail = prefs.getString('email') ?? "";
+    final String savedPassword = prefs.getString('password') ?? "";
 
-      setState(() {
-        emailController = TextEditingController(text: savedEmail);
-        passwordController = TextEditingController(text: savedPassword);
-      });
+    setState(() {
+      emailController = TextEditingController(text: savedEmail);
+      passwordController = TextEditingController(text: savedPassword);
+    });
+    log(savedEmail);
   }
 }
