@@ -50,12 +50,20 @@ class _PaymentReferenceScreenState extends State<PaymentReferenceScreen> {
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 15.0),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               AuthTextField(
                   controller: referenceController,
                   textInputAction: TextInputAction.done,
-                  labelText: "Reference")
+                  labelText: "Reference"),
+              Text(
+                "Enter a unique reference for your checkout",
+                style: TextStyle(
+                  color: color.tertiary,
+                  fontWeight: FontWeight.w400,
+                ),
+              )
             ],
           ),
         ),

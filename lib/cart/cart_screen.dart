@@ -175,7 +175,8 @@ class CartScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => PaymentReferenceScreen(amount: 200),
+                      builder: (context) =>
+                          PaymentReferenceScreen(amount: total),
                     ),
                   );
                 }),
