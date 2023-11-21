@@ -34,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
                 bottom: 0,
                 child: Container(
                   padding: const EdgeInsets.only(
-                      top: 25.0, bottom: 5, left: 12, right: 12),
+                      top: 20.0, bottom: 5, left: 12, right: 12),
                   width: horizontalConverter(context, 345),
                   height: 244,
                   decoration: BoxDecoration(
