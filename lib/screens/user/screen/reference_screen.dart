@@ -47,14 +47,17 @@ class _PaymentReferenceScreenState extends State<PaymentReferenceScreen> {
           ),
           centerTitle: true,
         ),
-        body: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            AuthTextField(
-                controller: referenceController,
-                textInputAction: TextInputAction.done,
-                labelText: "Reference")
-          ],
+        body: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              AuthTextField(
+                  controller: referenceController,
+                  textInputAction: TextInputAction.done,
+                  labelText: "Reference")
+            ],
+          ),
         ),
         bottomNavigationBar: NavigationCard(
             text: 'Proceed to payment',
