@@ -8,7 +8,6 @@ import 'package:laza/firebase_options.dart';
 import 'package:laza/providers/internet_provider.dart';
 import 'package:laza/providers/review_provider.dart';
 import 'package:laza/providers/sign_in_provider.dart';
-import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/screens/home_screen.dart';
 import 'package:laza/screens/onboarding_screen.dart';
@@ -18,6 +17,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
 import 'providers/cart_provider.dart';
+import 'providers/order_provider.dart';
 import 'providers/product_provider.dart';
 import 'providers/wishlist_provider.dart';
 
@@ -68,6 +68,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ReviewProvider(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => OrdersProvider(),
+        )
       ],
       child: MaterialApp(
           theme: themeData(),

@@ -1,8 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/orders/orders_screen.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/widgets/switch.dart';
+import 'package:provider/provider.dart';
+
+import '../providers/order_provider.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -16,6 +20,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final ordersProvider = Provider.of<OrdersProvider>(context);
+    final ordersList = ordersProvider.getOrders;
 
     return Drawer(
       width: 300,
@@ -51,10 +57,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 decoration: BoxDecoration(
                     color: color.background,
                     borderRadius: BorderRadius.circular(5)),
-                child: const Center(
+                child: Center(
                   child: Text(
-                    '3 Orders',
-                    style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500),
+                    '${ordersList.length} Orders',
+                    style: const TextStyle(
+                        fontSize: 13, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
@@ -77,7 +84,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ListTile(
               leading: const Icon(IconlyLight.bag),
               title: const Text('Order'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, OrdersScreen.routeName);
+              },
             ),
             ListTile(
               leading: const Icon(IconlyLight.wallet),
@@ -87,7 +96,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ListTile(
               leading: const Icon(IconlyLight.heart),
               title: const Text('Wishlist'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, '/wishlist');
+              },
             ),
             ListTile(
               leading: const Icon(IconlyLight.setting),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:laza/providers/order_provider.dart';
 import 'package:laza/screens/order_confirmed_screen.dart';
 import 'package:laza/screens/user/widgets/delivery_address_card.dart';
 import 'package:provider/provider.dart';
@@ -25,13 +26,12 @@ class CartScreen extends StatelessWidget {
         cartProvider.getCartItems.values.toList().reversed.toList();
     final productProvider =
         Provider.of<ProductProvider>(context, listen: false);
-    double subtotal = 0.0;
+    double total = 0.0;
     cartProvider.getCartItems.forEach((key, value) {
       final getCurrProduct = productProvider.findProdById(key);
-      subtotal += (getCurrProduct.price) * value.quantity;
+      total += (getCurrProduct.price) * value.quantity;
     });
-    double shippingCost = 30.0;
-    double total = subtotal + shippingCost;
+    final ordersProvider = Provider.of<OrdersProvider>(context);
 
     return cartItemsList.isEmpty
         ? const EmptyScreen(
@@ -114,7 +114,7 @@ class CartScreen extends StatelessWidget {
                               color: color.tertiary),
                         ),
                         Text(
-                          '\$${subtotal.toStringAsFixed(2)}',
+                          '\$${total.toStringAsFixed(2)}',
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -136,7 +136,7 @@ class CartScreen extends StatelessWidget {
                               color: color.tertiary),
                         ),
                         Text(
-                          '\$30',
+                          '\$0.00',
                           style: TextStyle(
                               fontSize: 15,
                               fontWeight: FontWeight.w500,
@@ -169,8 +169,10 @@ class CartScreen extends StatelessWidget {
             ),
             bottomNavigationBar: NavigationCard(
                 text: 'Checkout',
-                onTap: () {
+                onTap: () async {
+                  await ordersProvider.placeOrder(context);
                   Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+                  await cartProvider.clearCart();
                 }),
           );
   }

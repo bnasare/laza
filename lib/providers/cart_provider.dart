@@ -144,6 +144,18 @@ class CartProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> clearCart() async {
+    final User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'userCartItems': [],
+      });
+      _cartItems.clear();
+      notifyListeners();
+    }
+  }
+
   // void removeOneItem(String productId) {
   //   _cartItems.remove(productId);
   //   notifyListeners();
