@@ -350,8 +350,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                   ),
                                 ),
                                 SizedBox(
-                                  width: horizontalConverter(context, 125),
-                                  height: verticalConverter(context, 30),
+                                  width: 150, // Set your desired width here
                                   child: ElevatedButton(
                                     onPressed: () {
                                       Navigator.push(
@@ -390,7 +389,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                                       ],
                                     ),
                                   ),
-                                ),
+                                )
                               ],
                             ),
                           ),
@@ -452,16 +451,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             );
             return;
           }
+
           final alreadyInCart =
               cartProvider.getCartItems.containsKey(productId);
           if (alreadyInCart) {
+            print('Product is already in the cart.');
             return;
           }
 
-          await cartProvider.addProductsToCart(
-            productId: productId,
-            quantity: 1,
-          );
+          try {
+            await cartProvider.addProductsToCart(
+              productId: productId,
+              quantity: 1,
+            );
+            print('Product added to the cart successfully.');
+          } catch (error) {
+            print('Error adding product to cart: $error');
+          }
         },
       ),
     );

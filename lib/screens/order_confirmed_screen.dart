@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:laza/cart/cart_screen.dart';
+import 'package:laza/orders/orders_screen.dart';
 import 'package:laza/screens/home_screen.dart';
 
 import '../widgets/cards/bottom_card.dart';
-import '../widgets/custom icons/custom_back_button.dart';
 
 class OrderConfirmedScreen extends StatelessWidget {
   static const routeName = '/order_confirmed';
@@ -16,12 +15,7 @@ class OrderConfirmedScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 13.0),
-          child: CustomBackButton(
-            backgroundColor: color.background,
-          ),
-        ),
+        automaticallyImplyLeading: false,
       ),
       body: Container(
         decoration: const BoxDecoration(
@@ -68,7 +62,7 @@ class OrderConfirmedScreen extends StatelessWidget {
                 GestureDetector(
                   onTap: () {
                     Navigator.pushReplacementNamed(
-                        context, CartScreen.routeName);
+                        context, OrdersScreen.routeName);
                   },
                   child: Container(
                     margin:

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:laza/orders/orders_screen.dart';
 import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/product_details_screen.dart';
+
 import '../cart/cart_screen.dart';
 import '../screens/all_products_screen.dart';
 import '../screens/authentication/screens/code_verification_screen.dart';
@@ -38,6 +40,7 @@ class AppRoutes {
       WishlistScreen.routeName: (context) => const WishlistScreen(),
       AllBrandsScreen.routeName: (context) => const AllBrandsScreen(),
       ProductDetailsScreen.routeName: (context) => const ProductDetailsScreen(),
+      OrdersScreen.routeName: (context) => const OrdersScreen(),
     };
   }
 }

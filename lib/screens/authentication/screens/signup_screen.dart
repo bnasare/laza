@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
-import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -26,6 +24,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
   TextEditingController fullNameController = TextEditingController();
 
   Future<void> signUp() async {
+    if (!mounted) {
+      return; // Check if the widget is still mounted
+    }
+
     if (emailController.text.isEmpty ||
         passwordController.text.isEmpty ||
         fullNameController.text.isEmpty) {
@@ -40,7 +42,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
           email: emailController.text.toLowerCase().trim(),
           password: passwordController.text.trim());
       final User? user = FirebaseAuth.instance.currentUser;
-      final uid = user!.uid;
+      if (user == null || !mounted) {
+        return; // Check again if the widget is still mounted
+      }
+
+      final uid = user.uid;
       user.updateDisplayName(fullNameController.text);
       user.reload();
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
@@ -51,17 +57,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
         'userCartItems': [],
         'createdAt': Timestamp.now(),
       });
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => const LoginScreen()));
+
+      if (mounted) {
+        // Check one more time before navigating
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const LoginScreen()));
+      }
+
       log('Successfully registered');
     } on FirebaseException catch (error) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(error.message.toString())),
-      );
+      if (mounted) {
+        // Check before showing the snackbar
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(error.message.toString())),
+        );
+      }
     } finally {
-      emailController.clear();
-      passwordController.clear();
-      fullNameController.clear();
+      if (mounted) {
+        // Clear controllers only if the widget is still mounted
+        emailController.clear();
+        passwordController.clear();
+        fullNameController.clear();
+      }
     }
   }
 
@@ -80,10 +97,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
+          padding: const EdgeInsets.symmetric(horizontal: 15.0),
+          child: Column(children: [
             Text(
               "Sign Up",
               style: TextStyle(
@@ -94,7 +109,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 35),
+              padding: const EdgeInsets.only(top: 180),
               child: Column(children: [
                 AuthTextField(
                   textInputAction: TextInputAction.next,
@@ -109,7 +124,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: TextInputAction.next,
                   controller: passwordController,
                   labelText: "Password",
-                  trailingText: "Strong",
                 ),
                 AuthTextField(
                   textInputAction: TextInputAction.done,
@@ -121,25 +135,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
               ]),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 100),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    "Remember me",
-                    style: GoogleFonts.manrope(
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  const CustomSwitch(initialState: true),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
+            )
+          ])),
       bottomNavigationBar: NavigationCard(
           text: 'Sign Up',
           onTap: () async {

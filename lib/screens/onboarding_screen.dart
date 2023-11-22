@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const routeName = '/onboarding';
@@ -9,6 +10,10 @@ class OnboardingScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SharedPreferences.getInstance().then((prefs) {
+      prefs.setBool("first_launch", false);
+    });
+
     final color = Theme.of(context).colorScheme;
     return Scaffold(
       backgroundColor: color.primary,
@@ -29,7 +34,7 @@ class OnboardingScreen extends StatelessWidget {
                 bottom: 0,
                 child: Container(
                   padding: const EdgeInsets.only(
-                      top: 25.0, bottom: 5, left: 12, right: 12),
+                      top: 20.0, bottom: 5, left: 12, right: 12),
                   width: horizontalConverter(context, 345),
                   height: 244,
                   decoration: BoxDecoration(

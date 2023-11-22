@@ -14,7 +14,8 @@ class WishlistProvider with ChangeNotifier {
     return _wishlistItems;
   }
 
-  void toggleWishlist({required String productId}) async {
+  Future<void> toggleWishlist(
+      {required String productId, required BuildContext context}) async {
     final User? user = FirebaseAuth.instance.currentUser;
     final uid = user!.uid;
     final wishlistId = const Uuid().v4();
@@ -29,7 +30,9 @@ class WishlistProvider with ChangeNotifier {
             }
           ])
         });
+        await fetchWishList();
         _wishlistItems.remove(productId);
+        log('Item has been removed from your wishlist');
       } else {
         await FirebaseFirestore.instance.collection('users').doc(uid).update({
           'userWishList': FieldValue.arrayUnion([
@@ -39,17 +42,21 @@ class WishlistProvider with ChangeNotifier {
             }
           ])
         });
+        await fetchWishList();
         _wishlistItems.putIfAbsent(
-            productId,
-            () => WishListModel(
-                id: DateTime.now().toString(), productId: productId));
+          productId,
+          () => WishListModel(
+            id: DateTime.now().toString(),
+            productId: productId,
+          ),
+        );
         log('Item has been added to your wishlist');
       }
-
-      await fetchWishList();
       notifyListeners();
     } catch (error) {
-      log(error.toString());
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text(error.toString())),
+      );
     }
   }
 

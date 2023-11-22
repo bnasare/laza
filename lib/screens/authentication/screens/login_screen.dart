@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:laza/screens/authentication/screens/forgot_password_screen.dart';
@@ -7,7 +10,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
-import '../../../widgets/switch.dart';
 import '../widgets/auth_text_field.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,12 +23,13 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool rememberMe = true;
+  bool _lights = false;
   final String switchKey = 'switchState';
 
   @override
   void initState() {
     super.initState();
+    loadlightState();
     loadLogins();
   }
 
@@ -35,29 +38,19 @@ class _LoginScreenState extends State<LoginScreen> {
     await prefs.setBool(switchKey, value);
   }
 
+  loadlightState() async {
+    final prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _lights = prefs.getBool(switchKey) ?? false;
+    });
+  }
+
   saveLogins() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('email', emailController.text);
     await prefs.setString('password', passwordController.text);
 
     print('saved!!!');
-  }
-
-  loadLogins() async {
-    if (rememberMe) {
-      final prefs = await SharedPreferences.getInstance();
-      final String savedEmail = prefs.getString('email') ?? "";
-      final String savedPassword = prefs.getString('password') ?? "";
-
-      setState(() {
-        emailController = TextEditingController(text: savedEmail);
-        passwordController = TextEditingController(text: savedPassword);
-        rememberMe = prefs.getBool(switchKey) ?? false;
-      });
-
-      print(savedEmail);
-      // print(savedPassword);
-    }
   }
 
   void signUsersIn() async {
@@ -86,8 +79,6 @@ class _LoginScreenState extends State<LoginScreen> {
               title: Text('Sign-In error'),
             );
           });
-
-          
     }
   }
 
@@ -152,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         AuthTextField(
                           controller: passwordController,
                           labelText: "Password",
-                         // trailingText: "Strong",
+                          // trailingText: "Strong",
                           textInputAction: TextInputAction.done,
                         ),
                         Padding(
@@ -182,8 +173,16 @@ class _LoginScreenState extends State<LoginScreen> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              CustomSwitch(
-                                initialState: rememberMe,
+                              CupertinoSwitch(
+                                value: _lights,
+                                activeColor:
+                                    Theme.of(context).colorScheme.onSecondary,
+                                onChanged: (bool value) {
+                                  setState(() {
+                                    _lights = value;
+                                    saveSwitchState(value);
+                                  });
+                                },
                               ),
                             ],
                           ),
@@ -220,9 +219,22 @@ class _LoginScreenState extends State<LoginScreen> {
             text: 'Login',
             onTap: () {
               signUsersIn();
-              saveLogins();
-              loadLogins();
-              //   Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+              if (_lights == true) {
+                saveLogins();
+                loadLogins();
+              }
             }));
+  }
+
+  loadLogins() async {
+    final prefs = await SharedPreferences.getInstance();
+    final String savedEmail = prefs.getString('email') ?? "";
+    final String savedPassword = prefs.getString('password') ?? "";
+
+    setState(() {
+      emailController = TextEditingController(text: savedEmail);
+      passwordController = TextEditingController(text: savedPassword);
+    });
+    log(savedEmail);
   }
 }
