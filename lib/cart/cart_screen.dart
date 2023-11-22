@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:laza/providers/order_provider.dart';
-import 'package:laza/screens/order_confirmed_screen.dart';
+
 import 'package:laza/screens/user/widgets/delivery_address_card.dart';
 import 'package:provider/provider.dart';
 
@@ -74,9 +73,10 @@ class CartScreen extends StatelessWidget {
                     itemCount: cartItemsList.length,
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
-                          value: cartItemsList[index],
-                          child: CartWidget(
-                              quantity: cartItemsList[index].quantity));
+                        value: cartItemsList[index],
+                        child:
+                            CartWidget(quantity: cartItemsList[index].quantity),
+                      );
                     },
                   ),
                   const DeliveryAddressCard(
@@ -169,10 +169,7 @@ class CartScreen extends StatelessWidget {
             ),
             bottomNavigationBar: NavigationCard(
                 text: 'Checkout',
-                onTap: () async {
-                  await ordersProvider.placeOrder(context);
-                  Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
-                  await cartProvider.clearCart();
+
                 }),
           );
   }
