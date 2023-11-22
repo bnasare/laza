@@ -70,14 +70,22 @@ class _PaymentReferenceScreenState extends State<PaymentReferenceScreen> {
         bottomNavigationBar: NavigationCard(
             text: 'Proceed to payment',
             onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => PaymentPage(
-                      price: widget.amount,
-                      reference: referenceController.value.text),
-                ),
-              );
+              if (referenceController.value.text.trim() != "") {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentPage(
+                        price: widget.amount,
+                        reference: referenceController.value.text),
+                  ),
+                );
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text("Reference can not be empty"),
+                  ),
+                );
+              }
             }));
   }
 }

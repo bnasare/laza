@@ -92,9 +92,11 @@ class _PaymentPageState extends State<PaymentPage> {
       ),
       bottomNavigationBar: NavigationCard(
           text: 'Payment Done',
-          onTap: () {
-            // Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
-            Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+          onTap: () async {
+            if (await verifyTransaction()) {
+              // Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+              Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+            }
           }),
     );
   }
@@ -123,9 +125,9 @@ class _PaymentPageState extends State<PaymentPage> {
     }
   }
 
-  Future<String> initTransaction() async {
+  Future<Object> initTransaction() async {
     try {
-      print("Hey");
+      // print("Hey");
       // final price = total;
       final transaction = Transaction(
         amount: (widget.price * 100).toString(),
@@ -137,8 +139,42 @@ class _PaymentPageState extends State<PaymentPage> {
       // print("Auth_url: ${authRes.authorization_url}");
       return authRes.authorization_url;
     } catch (e) {
-      print("Error initializing transaction $e");
-      return e.toString();
+      // print("Error initializing transaction $e");
+      return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error initializing transaction $e"),
+        ),
+      );
+    }
+  }
+
+  Future<dynamic> verifyTransaction() async {
+    try {
+      String url =
+          "https://api.paystack.co/transaction/verify/${widget.reference}";
+      final res = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer ${ApiKey.secretKey}',
+        },
+      );
+      final resData = jsonDecode(res.body);
+      // print(resData["data"]["status"]);
+      if (resData["data"]["status"] == "success") {
+        return true;
+      }
+      return ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Complete Transaction before tapping this button"),
+        ),
+      );
+      // return (resData["status"]);
+    } catch (e) {
+      return ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Error verifying Transaction: $e"),
+        ),
+      );
     }
   }
 }
