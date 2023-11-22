@@ -33,7 +33,7 @@ void main() async {
     GoogleFonts.config.allowRuntimeFetching = false;
     runApp(
       DevicePreview(
-        enabled: true,
+        enabled: false,
         builder: (context) => MyApp(
           firstLaunch: firstLaunch,
         ),

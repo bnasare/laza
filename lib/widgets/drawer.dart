@@ -44,8 +44,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
               ),
               title: Text(
                 user?.displayName ?? 'Username',
-                style:
-                    const TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                style: const TextStyle(
+                    fontSize: 17, fontWeight: FontWeight.w500, height: 1),
               ),
               subtitle: const Text(
                 'Verified Profile',
@@ -121,9 +121,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   Navigator.pushNamed(context, SocialAuthScreen.routeName);
                   return;
                 }
+
                 await FirebaseAuth.instance.signOut();
-                Navigator.pushReplacementNamed(
-                    context, SocialAuthScreen.routeName);
+
+                Navigator.pushNamedAndRemoveUntil(
+                    context, SocialAuthScreen.routeName, (route) => false);
               },
             ),
           ],

@@ -5,10 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:laza/consts/api_keys.dart';
 import 'package:laza/screens/order_confirmed_screen.dart';
+import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../../../models/paystack_response_model.dart';
 import '../../../models/transaction_model.dart';
+import '../../../providers/cart_provider.dart';
+import '../../../providers/order_provider.dart';
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 
@@ -34,6 +37,9 @@ class _PaymentPageState extends State<PaymentPage> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
+    final ordersProvider = Provider.of<OrdersProvider>(context);
+    final cartProvider = Provider.of<CartProvider>(context);
+
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -95,7 +101,10 @@ class _PaymentPageState extends State<PaymentPage> {
           onTap: () async {
             if (await verifyTransaction()) {
               // Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
-              Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
+              Navigator.pushReplacementNamed(
+                  context, OrderConfirmedScreen.routeName);
+              await ordersProvider.placeOrder(context);
+              await cartProvider.clearCart();
             }
           }),
     );

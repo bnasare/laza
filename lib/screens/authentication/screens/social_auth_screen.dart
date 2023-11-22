@@ -15,7 +15,6 @@ import 'package:provider/provider.dart';
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
-import '../../../widgets/custom icons/custom_back_button.dart';
 import '../widgets/social_auth_card.dart';
 
 class SocialAuthScreen extends StatefulWidget {
@@ -96,14 +95,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
     return Scaffold(
       key: _scaffoldKey,
       resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        leading: Padding(
-          padding: const EdgeInsets.only(left: 13.0),
-          child: CustomBackButton(
-            backgroundColor: color.background,
-          ),
-        ),
-      ),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 13.0),
         child: Column(

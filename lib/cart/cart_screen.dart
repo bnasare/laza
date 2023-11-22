@@ -4,9 +4,7 @@ import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
 import '../providers/cart_provider.dart';
-import '../providers/order_provider.dart';
 import '../providers/product_provider.dart';
-import '../screens/order_confirmed_screen.dart';
 import '../screens/user/screen/reference_screen.dart';
 import '../screens/user/widgets/payment_method_card.dart';
 import '../widgets/cards/bottom_card.dart';
@@ -32,7 +30,6 @@ class CartScreen extends StatelessWidget {
       final getCurrProduct = productProvider.findProdById(key);
       total += (getCurrProduct.price) * value.quantity;
     });
-    final ordersProvider = Provider.of<OrdersProvider>(context);
 
     return cartItemsList.isEmpty
         ? const EmptyScreen(
@@ -178,9 +175,6 @@ class CartScreen extends StatelessWidget {
                     builder: (context) => PaymentReferenceScreen(amount: total),
                   ),
                 );
-                await ordersProvider.placeOrder(context);
-                Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
-                await cartProvider.clearCart();
               },
             ),
           );

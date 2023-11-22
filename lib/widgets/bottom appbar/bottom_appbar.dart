@@ -20,6 +20,7 @@ class CustomBottomNavigation extends StatelessWidget {
     final color = Theme.of(context).colorScheme;
 
     return BottomAppBar(
+      color: color.onPrimary,
       height: 70,
       elevation: 30,
       child: Row(

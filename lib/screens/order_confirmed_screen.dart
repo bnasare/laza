@@ -57,40 +57,34 @@ class OrderConfirmedScreen extends StatelessWidget {
               ),
             ),
             const Spacer(),
-            Column(
-              children: [
-                GestureDetector(
-                  onTap: () {
-                    Navigator.pushReplacementNamed(
-                        context, OrdersScreen.routeName);
-                  },
-                  child: Container(
-                    margin:
-                        const EdgeInsets.only(left: 10, right: 10, bottom: 27),
-                    height: 50,
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: color.background,
-                    ),
-                    child: Center(
-                      child: Text(
-                        'Go to orders',
-                        style: TextStyle(fontSize: 17, color: color.tertiary),
-                      ),
-                    ),
+            GestureDetector(
+              onTap: () {
+                Navigator.pushNamed(context, OrdersScreen.routeName);
+              },
+              child: Container(
+                margin: const EdgeInsets.only(left: 10, right: 10, bottom: 27),
+                height: 50,
+                width: MediaQuery.of(context).size.width,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: color.background,
+                ),
+                child: Center(
+                  child: Text(
+                    'Go to orders',
+                    style: TextStyle(fontSize: 17, color: color.tertiary),
                   ),
                 ),
-                NavigationCard(
-                    text: 'Continue Shopping',
-                    onTap: () {
-                      Navigator.pushReplacementNamed(
-                          context, HomeScreen.routeName);
-                    }),
-              ],
+              ),
             ),
           ],
         ),
+      ),
+      bottomNavigationBar: NavigationCard(
+        text: 'Continue Shopping',
+        onTap: () {
+          Navigator.pushReplacementNamed(context, HomeScreen.routeName);
+        },
       ),
     );
   }

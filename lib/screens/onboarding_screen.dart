@@ -66,13 +66,13 @@ class OnboardingScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(
+                              Navigator.pushReplacementNamed(
                                 context,
                                 SocialAuthScreen.routeName,
                               );
                             },
                             child: Container(
-                              width: 152,
+                              width: 150,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: color.background,
@@ -89,13 +89,14 @@ class OnboardingScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 5),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushNamed(
+                              Navigator.pushReplacementNamed(
                                   context, SocialAuthScreen.routeName);
                             },
                             child: Container(
-                              width: 152,
+                              width: 150,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: color.primary,
@@ -120,7 +121,7 @@ class OnboardingScreen extends StatelessWidget {
                         ),
                         child: TextButton(
                             onPressed: () {
-                              Navigator.pushNamed(
+                              Navigator.pushReplacementNamed(
                                   context, SocialAuthScreen.routeName);
                             },
                             child: Text(
