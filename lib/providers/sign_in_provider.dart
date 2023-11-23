@@ -23,7 +23,7 @@ class SignInProvider extends ChangeNotifier {
   bool _isSignedIn = false;
   bool get isSignedIn => _isSignedIn;
 
-  //hasError, errorCode, provider,uid, email, name, imageUrl, userCartItems, userWishlist
+  //hasError, errorCode, provider,uid, email, name, imageUrl, sex, userCartItems, userWishlist
   bool _hasError = false;
   bool get hasError => _hasError;
 
@@ -44,6 +44,9 @@ class SignInProvider extends ChangeNotifier {
 
   String? _imageUrl;
   String? get imageUrl => _imageUrl;
+
+  String? _sex;
+  String? get sex => _sex;
 
   List<String>? _userCartItems;
   List<String>? get userCartItems => _userCartItems;
@@ -69,7 +72,7 @@ class SignInProvider extends ChangeNotifier {
   }
 
   // sign in with google
-  Future signInWithGoogle() async {
+  Future signInWithGoogle({String? gender}) async {
     final GoogleSignInAccount? googleSignInAccount =
         await googleSignIn.signIn();
 
@@ -95,6 +98,7 @@ class SignInProvider extends ChangeNotifier {
         _uid = userDetails.uid;
         _userCartItems = [];
         _userWishlist = [];
+        await saveDataToFirestore(gender);
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -123,7 +127,7 @@ class SignInProvider extends ChangeNotifier {
   }
 
   // sign in with twitter
-  Future signInWithTwitter() async {
+  Future signInWithTwitter({String? gender}) async {
     final authResult = await twitterLogin.loginV2();
     if (authResult.status == TwitterLoginStatus.loggedIn) {
       try {
@@ -142,6 +146,7 @@ class SignInProvider extends ChangeNotifier {
         _hasError = false;
         _userCartItems = [];
         _userWishlist = [];
+        await saveDataToFirestore(gender);
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -171,7 +176,7 @@ class SignInProvider extends ChangeNotifier {
   }
 
   // sign in with facebook
-  Future signInWithFacebook() async {
+  Future signInWithFacebook({String? gender}) async {
     final LoginResult result = await facebookAuth.login();
     // getting the profile
     final graphResponse = await http.get(Uri.parse(
@@ -193,6 +198,7 @@ class SignInProvider extends ChangeNotifier {
         _provider = "FACEBOOK";
         _userCartItems = [];
         _userWishlist = [];
+        await saveDataToFirestore(gender);
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -232,6 +238,7 @@ class SignInProvider extends ChangeNotifier {
               _email = snapshot['email'],
               _imageUrl = snapshot['image_url'],
               _provider = snapshot['provider'],
+              _sex = snapshot['sex'],
               _userCartItems = (snapshot['user_cart_items'] as List<dynamic>?)
                   ?.cast<String>(),
               _userWishlist =
@@ -239,18 +246,24 @@ class SignInProvider extends ChangeNotifier {
             });
   }
 
-  Future saveDataToFirestore() async {
+  Future saveDataToFirestore(String? gender) async {
     final DocumentReference r =
         FirebaseFirestore.instance.collection("users").doc(uid);
+
+    if (_sex == null) {
+      _sex = gender;
+    }
     await r.set({
       "name": _name ?? "",
       "email": _email ?? "",
       "uid": _uid ?? "",
       "image_url": _imageUrl ?? "",
       "provider": _provider ?? "",
+      "sex": _sex ?? "",
       "user_cart_items": _userCartItems ?? [],
       "user_wishlist": _userWishlist ?? []
     });
+    SetOptions(merge: true);
     await saveDataToSharedPreferences();
     notifyListeners();
   }
@@ -265,6 +278,7 @@ class SignInProvider extends ChangeNotifier {
     await s.setString('uid', _uid ?? "");
     await s.setString('image_url', _imageUrl ?? "");
     await s.setString('provider', _provider ?? "");
+    await s.setString('sex', _sex ?? "");
     await s.setStringList('user_cart_items', _userCartItems ?? []);
     await s.setStringList('user_wishlist', _userWishlist ?? []);
     notifyListeners();
@@ -277,6 +291,7 @@ class SignInProvider extends ChangeNotifier {
     _imageUrl = s.getString('image_url');
     _uid = s.getString('uid');
     _provider = s.getString('provider');
+    _sex = s.getString('sex');
     _userCartItems = s.getStringList('user_cart_items');
     _userWishlist = s.getStringList('user_wishlist');
     notifyListeners();

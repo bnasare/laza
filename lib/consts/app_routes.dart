@@ -20,13 +20,16 @@ import '../screens/user/screen/user_address_screen.dart';
 import '../wishlist/wishlist_screen.dart';
 
 class AppRoutes {
+  String? gender;
   Map<String, WidgetBuilder> getRoutes() {
     return {
-      OnboardingScreen.routeName: (context) => const OnboardingScreen(),
+      OnboardingScreen.routeName: (context) => OnboardingScreen(),
       LoginScreen.routeName: (context) => const LoginScreen(),
       SignUpScreen.routeName: (context) => const SignUpScreen(),
       ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
-      SocialAuthScreen.routeName: (context) => const SocialAuthScreen(),
+      SocialAuthScreen.routeName: (context) => SocialAuthScreen(
+            gender: gender,
+          ),
       HomeScreen.routeName: (context) => const HomeScreen(),
       ResetPasswordScreen.routeName: (context) => ResetPasswordScreen(),
       CodeVerificationScreen.routeName: (context) => CodeVerificationScreen(),
