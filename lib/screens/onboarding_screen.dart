@@ -77,7 +77,7 @@ class OnboardingScreen extends StatelessWidget {
                                   ));
                             },
                             child: Container(
-                              width: 152,
+                              width: 150,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: color.background,
@@ -94,9 +94,10 @@ class OnboardingScreen extends StatelessWidget {
                               ),
                             ),
                           ),
+                          const SizedBox(width: 5),
                           GestureDetector(
                             onTap: () {
-                              gender = "F";
+                              gender = "W";
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -104,7 +105,7 @@ class OnboardingScreen extends StatelessWidget {
                                           SocialAuthScreen(gender: gender)));
                             },
                             child: Container(
-                              width: 152,
+                              width: 150,
                               height: 60,
                               decoration: BoxDecoration(
                                 color: color.primary,

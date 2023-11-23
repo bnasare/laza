@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:laza/providers/order_provider.dart';
-import 'package:laza/screens/order_confirmed_screen.dart';
 import 'package:laza/screens/user/widgets/delivery_address_card.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
 import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
+import '../screens/user/screen/reference_screen.dart';
 import '../screens/user/widgets/payment_method_card.dart';
 import '../widgets/cards/bottom_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
@@ -31,7 +30,6 @@ class CartScreen extends StatelessWidget {
       final getCurrProduct = productProvider.findProdById(key);
       total += (getCurrProduct.price) * value.quantity;
     });
-    final ordersProvider = Provider.of<OrdersProvider>(context);
 
     return cartItemsList.isEmpty
         ? const EmptyScreen(
@@ -74,9 +72,10 @@ class CartScreen extends StatelessWidget {
                     itemCount: cartItemsList.length,
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
-                          value: cartItemsList[index],
-                          child: CartWidget(
-                              quantity: cartItemsList[index].quantity));
+                        value: cartItemsList[index],
+                        child:
+                            CartWidget(quantity: cartItemsList[index].quantity),
+                      );
                     },
                   ),
                   const DeliveryAddressCard(
@@ -168,12 +167,16 @@ class CartScreen extends StatelessWidget {
               ),
             ),
             bottomNavigationBar: NavigationCard(
-                text: 'Checkout',
-                onTap: () async {
-                  await ordersProvider.placeOrder(context);
-                  Navigator.pushNamed(context, OrderConfirmedScreen.routeName);
-                  await cartProvider.clearCart();
-                }),
+              text: 'Checkout',
+              onTap: () async {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => PaymentReferenceScreen(amount: total),
+                  ),
+                );
+              },
+            ),
           );
   }
 }

@@ -50,9 +50,9 @@ class OrdersProvider with ChangeNotifier {
         }
 
         await fetchOrders();
-        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-          content: Text('Order placed successfully!'),
-        ));
+        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        //   content: Text('Order placed successfully!'),
+        // ));
       } catch (error) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(error.toString()),
