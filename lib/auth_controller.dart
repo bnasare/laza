@@ -43,7 +43,7 @@ class _AuthPageState extends State<AuthPage> {
                   return const HomeScreen();
                 }
               }
-              return const OnboardingScreen();
+              return OnboardingScreen();
             },
           );
   }
