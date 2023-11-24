@@ -4,22 +4,22 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:laza/firebase_options.dart';
 import 'package:laza/providers/internet_provider.dart';
-import 'package:laza/providers/review_provider.dart';
-import 'package:laza/providers/sign_in_provider.dart';
-import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
-import 'package:laza/screens/home_screen.dart';
-import 'package:laza/screens/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'consts/app_routes.dart';
 import 'consts/theme.dart';
+import 'firebase_options.dart';
 import 'providers/cart_provider.dart';
 import 'providers/order_provider.dart';
 import 'providers/product_provider.dart';
+import 'providers/review_provider.dart';
+import 'providers/sign_in_provider.dart';
 import 'providers/wishlist_provider.dart';
+import 'screens/authentication/screens/social_auth_screen.dart';
+import 'screens/home_screen.dart';
+import 'screens/onboarding_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

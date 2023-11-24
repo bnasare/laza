@@ -2,11 +2,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/orders/orders_screen.dart';
+import 'package:laza/providers/cart_provider.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:laza/widgets/switch.dart';
 import 'package:provider/provider.dart';
 
 import '../providers/order_provider.dart';
+import '../providers/wishlist_provider.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -22,6 +24,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
     final color = Theme.of(context).colorScheme;
     final ordersProvider = Provider.of<OrdersProvider>(context);
     final ordersList = ordersProvider.getOrders;
+    final wishlistProvider =
+        Provider.of<WishlistProvider>(context, listen: false);
+    final cartProvider = Provider.of<CartProvider>(context, listen: false);
 
     return Drawer(
       width: 300,
@@ -123,6 +128,10 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 }
 
                 await FirebaseAuth.instance.signOut();
+
+                ordersProvider.clearOrders();
+                wishlistProvider.clearWishListLocally();
+                cartProvider.clearCartLocally();
 
                 Navigator.pushNamedAndRemoveUntil(
                     context, SocialAuthScreen.routeName, (route) => false);

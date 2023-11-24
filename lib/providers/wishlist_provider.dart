@@ -82,6 +82,11 @@ class WishlistProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> clearWishListLocally() async {
+    _wishlistItems.clear();
+    notifyListeners();
+  }
+
   /// Add to Firebase wishlist
   // Future<void> addToWishList(
   //     {required String productId, required BuildContext context}) async {

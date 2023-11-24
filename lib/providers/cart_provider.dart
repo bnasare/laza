@@ -156,6 +156,11 @@ class CartProvider with ChangeNotifier {
     }
   }
 
+  Future<void> clearCartLocally() async {
+    _cartItems.clear();
+    notifyListeners();
+  }
+
   // void removeOneItem(String productId) {
   //   _cartItems.remove(productId);
   //   notifyListeners();
