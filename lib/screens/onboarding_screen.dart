@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:laza/consts/sizing_config.dart';
+import 'package:laza/providers/sign_in_provider.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const routeName = '/onboarding';
 
-  const OnboardingScreen({Key? key}) : super(key: key);
+  OnboardingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    String? gender;
     SharedPreferences.getInstance().then((prefs) {
       prefs.setBool("first_launch", false);
     });
@@ -66,10 +68,13 @@ class OnboardingScreen extends StatelessWidget {
                         children: [
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacementNamed(
-                                context,
-                                SocialAuthScreen.routeName,
-                              );
+                              gender = "M";
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        SocialAuthScreen(gender: gender),
+                                  ));
                             },
                             child: Container(
                               width: 150,
@@ -92,8 +97,12 @@ class OnboardingScreen extends StatelessWidget {
                           const SizedBox(width: 5),
                           GestureDetector(
                             onTap: () {
-                              Navigator.pushReplacementNamed(
-                                  context, SocialAuthScreen.routeName);
+                              gender = "W";
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          SocialAuthScreen(gender: gender)));
                             },
                             child: Container(
                               width: 150,
@@ -121,8 +130,12 @@ class OnboardingScreen extends StatelessWidget {
                         ),
                         child: TextButton(
                             onPressed: () {
-                              Navigator.pushReplacementNamed(
-                                  context, SocialAuthScreen.routeName);
+                              gender = "N/A";
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (_) =>
+                                          SocialAuthScreen(gender: gender)));
                             },
                             child: Text(
                               "Skip",

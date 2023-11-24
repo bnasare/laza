@@ -91,7 +91,7 @@ String firstRoute(bool firstLaunch) {
     if (user != null) {
       return HomeScreen.routeName;
     } else {
-      return SocialAuthScreen.routeName;
+      return OnboardingScreen.routeName;
     }
   }
 }

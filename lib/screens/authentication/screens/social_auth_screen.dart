@@ -18,9 +18,10 @@ import '../../../widgets/cards/bottom_card.dart';
 import '../widgets/social_auth_card.dart';
 
 class SocialAuthScreen extends StatefulWidget {
+  final String? gender;
   static const routeName = '/social_auth';
 
-  const SocialAuthScreen({Key? key}) : super(key: key);
+  const SocialAuthScreen({Key? key, required this.gender}) : super(key: key);
 
   @override
   State<SocialAuthScreen> createState() => _SocialAuthScreenState();
@@ -213,7 +214,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
       openSnackbar(context, "Check your Internet connection", Colors.red);
       googleController.reset();
     } else {
-      await sp.signInWithTwitter().then((value) {
+      await sp.signInWithTwitter(gender: widget.gender).then((value) {
         if (sp.hasError == true) {
           openSnackbar(context, sp.errorCode.toString(), Colors.red);
           twitterController.reset();
@@ -230,7 +231,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                       })));
             } else {
               // user does not exist
-              sp.saveDataToFirestore().then((value) => sp
+              sp.saveDataToFirestore(widget.gender).then((value) => sp
                   .saveDataToSharedPreferences()
                   .then((value) => sp.setSignIn().then((value) {
                         twitterController.success();
@@ -253,7 +254,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
       openSnackbar(context, "Check your Internet connection", Colors.red);
       facebookController.reset();
     } else {
-      await sp.signInWithFacebook().then((value) {
+      await sp.signInWithFacebook(gender: widget.gender).then((value) {
         if (sp.hasError == true) {
           openSnackbar(context, sp.errorCode.toString(), Colors.red);
           facebookController.reset();
@@ -270,7 +271,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                       })));
             } else {
               // user does not exist
-              sp.saveDataToFirestore().then((value) => sp
+              sp.saveDataToFirestore(widget.gender).then((value) => sp
                   .saveDataToSharedPreferences()
                   .then((value) => sp.setSignIn().then((value) {
                         facebookController.success();
@@ -293,7 +294,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
       openSnackbar(context, "Check your Internet connection", Colors.red);
       googleController.reset();
     } else {
-      await sp.signInWithGoogle().then((value) {
+      await sp.signInWithGoogle(gender: widget.gender).then((value) {
         if (sp.hasError == true) {
           openSnackbar(context, sp.errorCode.toString(), Colors.red);
           googleController.reset();
@@ -310,7 +311,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                       })));
             } else {
               // user does not exist
-              sp.saveDataToFirestore().then((value) => sp
+              sp.saveDataToFirestore(widget.gender).then((value) => sp
                   .saveDataToSharedPreferences()
                   .then((value) => sp.setSignIn().then((value) {
                         googleController.success();
@@ -326,6 +327,8 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
 // handle after signin
   handleAfterSignIn() {
     Future.delayed(const Duration(milliseconds: 1000)).then((value) {
+      SignInProvider sp = SignInProvider();
+      sp.saveDataToFirestore(widget.gender);
       Navigator.pushNamed(context, HomeScreen.routeName);
     });
   }
