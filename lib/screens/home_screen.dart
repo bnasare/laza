@@ -24,10 +24,20 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final TextEditingController searchTextController = TextEditingController();
+  final FocusNode searchTextFocusNode = FocusNode();
+  List<ProductModel> listProductSearch = [];
+
+  @override
+  void dispose() {
+    searchTextController.dispose();
+    searchTextFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final TextEditingController searchController = TextEditingController();
     final productProvider = Provider.of<ProductProvider>(context);
     List<ProductModel> allProducts = productProvider.getProducts;
 
@@ -86,7 +96,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 children: [
                   Expanded(
                     child: TextField(
-                      controller: searchController,
+                      controller: searchTextController,
+                      focusNode: searchTextFocusNode,
+                      onChanged: (value) {
+                        setState(() {
+                          listProductSearch =
+                              productProvider.searchQuery(value);
+                        });
+                      },
                       maxLines: 1,
                       keyboardType: TextInputType.text,
                       decoration: InputDecoration(
@@ -232,9 +249,33 @@ class _HomeScreenState extends State<HomeScreen> {
               physics: const NeverScrollableScrollPhysics(),
               itemCount: 1,
               itemBuilder: (context, index) {
-                return Container(
-                  padding: EdgeInsets.only(top: verticalConverter(context, 20)),
-                  child: GridView.builder(
+                // Check if search results are not empty
+                if (searchTextController.text.isNotEmpty &&
+                    listProductSearch.isNotEmpty) {
+                  return GridView.builder(
+                    padding:
+                        EdgeInsets.only(top: verticalConverter(context, 20)),
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 10.0,
+                      childAspectRatio: 0.62,
+                    ),
+                    itemCount: listProductSearch.length,
+                    itemBuilder: (context, index) {
+                      return ChangeNotifierProvider.value(
+                        value: listProductSearch[index],
+                        child: const ProductWidget(),
+                      );
+                    },
+                  );
+                } else {
+                  // Show the regular grid
+                  return GridView.builder(
+                    padding:
+                        EdgeInsets.only(top: verticalConverter(context, 20)),
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
@@ -246,11 +287,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     itemCount: allProducts.length < 6 ? allProducts.length : 6,
                     itemBuilder: (context, index) {
                       return ChangeNotifierProvider.value(
-                          value: allProducts[index],
-                          child: const ProductWidget());
+                        value: allProducts[index],
+                        child: const ProductWidget(),
+                      );
                     },
-                  ),
-                );
+                  );
+                }
               },
             )
           ],

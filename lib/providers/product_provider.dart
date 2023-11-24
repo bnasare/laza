@@ -11,6 +11,17 @@ class ProductProvider with ChangeNotifier {
     return productsList.firstWhere((element) => element.id == productId);
   }
 
+  List<ProductModel> searchQuery(String searchText) {
+    List<ProductModel> searchList = productsList
+        .where(
+          (element) => element.name.toLowerCase().contains(
+                searchText.toLowerCase(),
+              ),
+        )
+        .toList();
+    return searchList;
+  }
+
   static final List<ProductModel> productsList = [
     ProductModel(
       id: '1',

@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:laza/consts/sizing_config.dart';
-import 'package:laza/providers/sign_in_provider.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class OnboardingScreen extends StatelessWidget {
   static const routeName = '/onboarding';
 
-  OnboardingScreen({Key? key}) : super(key: key);
+  const OnboardingScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

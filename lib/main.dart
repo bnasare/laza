@@ -17,7 +17,6 @@ import 'providers/product_provider.dart';
 import 'providers/review_provider.dart';
 import 'providers/sign_in_provider.dart';
 import 'providers/wishlist_provider.dart';
-import 'screens/authentication/screens/social_auth_screen.dart';
 import 'screens/home_screen.dart';
 import 'screens/onboarding_screen.dart';
 
