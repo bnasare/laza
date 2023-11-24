@@ -239,10 +239,10 @@ class SignInProvider extends ChangeNotifier {
               _imageUrl = snapshot['image_url'],
               _provider = snapshot['provider'],
               _sex = snapshot['sex'],
-              _userCartItems = (snapshot['user_cart_items'] as List<dynamic>?)
-                  ?.cast<String>(),
+              _userCartItems =
+                  (snapshot['userCartItems'] as List<dynamic>?)?.cast<String>(),
               _userWishlist =
-                  (snapshot['user_wishlist'] as List<dynamic>?)?.cast<String>(),
+                  (snapshot['userWishlist'] as List<dynamic>?)?.cast<String>(),
             });
   }
 
@@ -260,8 +260,8 @@ class SignInProvider extends ChangeNotifier {
       "image_url": _imageUrl ?? "",
       "provider": _provider ?? "",
       "sex": _sex ?? "",
-      "user_cart_items": _userCartItems ?? [],
-      "user_wishlist": _userWishlist ?? []
+      "userCartItems": _userCartItems ?? [],
+      "userWishList": _userWishlist ?? []
     });
     SetOptions(merge: true);
     await saveDataToSharedPreferences();
@@ -279,8 +279,8 @@ class SignInProvider extends ChangeNotifier {
     await s.setString('image_url', _imageUrl ?? "");
     await s.setString('provider', _provider ?? "");
     await s.setString('sex', _sex ?? "");
-    await s.setStringList('user_cart_items', _userCartItems ?? []);
-    await s.setStringList('user_wishlist', _userWishlist ?? []);
+    await s.setStringList('userCartItems', _userCartItems ?? []);
+    await s.setStringList('userWishlist', _userWishlist ?? []);
     notifyListeners();
   }
 
@@ -292,8 +292,8 @@ class SignInProvider extends ChangeNotifier {
     _uid = s.getString('uid');
     _provider = s.getString('provider');
     _sex = s.getString('sex');
-    _userCartItems = s.getStringList('user_cart_items');
-    _userWishlist = s.getStringList('user_wishlist');
+    _userCartItems = s.getStringList('userCartItems');
+    _userWishlist = s.getStringList('userWishlist');
     notifyListeners();
   }
 
