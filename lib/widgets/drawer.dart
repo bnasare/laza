@@ -1,3 +1,4 @@
+import 'package:fancy_shimmer_image/fancy_shimmer_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
@@ -42,11 +43,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     child: Image.asset('assets/images/drawer_vector.png'))),
             ListTile(
               leading: CircleAvatar(
-                backgroundImage: NetworkImage(
-                  user?.photoURL ??
-                      'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541',
-                ),
-              ),
+                  child: FancyShimmerImage(
+                imageUrl: user?.photoURL ??
+                    'https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541',
+                boxFit: BoxFit.cover,
+              )),
               title: Text(
                 user?.displayName ?? 'Username',
                 style: const TextStyle(
