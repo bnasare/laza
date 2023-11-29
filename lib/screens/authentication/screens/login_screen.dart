@@ -152,9 +152,6 @@ class _LoginScreenState extends State<LoginScreen> {
                       AuthTextField(
                         controller: emailController,
                         labelText: "Email",
-                        trailingWidget: const Icon(
-                          Icons.check_outlined,
-                        ),
                         textInputAction: TextInputAction.next,
                       ),
                       AuthTextField(

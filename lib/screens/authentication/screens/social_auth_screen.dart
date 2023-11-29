@@ -168,7 +168,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Already have an account? ",
+                    "Already have an account?",
                     style: TextStyle(
                       color: color.tertiary,
                       fontSize: 15,

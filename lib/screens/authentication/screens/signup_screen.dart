@@ -115,10 +115,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: TextInputAction.next,
                   controller: fullNameController,
                   labelText: "Username",
-                  trailingWidget: Icon(
-                    Icons.check_outlined,
-                    color: color.onSecondary,
-                  ),
                 ),
                 AuthTextField(
                   textInputAction: TextInputAction.next,
@@ -129,10 +125,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: TextInputAction.done,
                   controller: emailController,
                   labelText: "Email Address",
-                  trailingWidget: Icon(
-                    Icons.check_outlined,
-                    color: color.onSecondary,
-                  ),
                 ),
               ]),
             )
