@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/models/review_model.dart';
 import 'package:laza/screens/user/screen/add_review_screen.dart';
+import 'package:laza/utils/snack_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
@@ -30,6 +33,17 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   bool showFullDescription = false;
+  final List<String> _sizes = ['S', 'M', 'L', 'XL', '2XL'];
+  final List<bool> _selectedSizes = [false, false, false, false, false];
+
+  String? getSelectedSize() {
+    for (int i = 0; i < _selectedSizes.length; i++) {
+      if (_selectedSizes[i]) {
+        return _sizes[i];
+      }
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -218,15 +232,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       horizontalConverter(context, 10),
                       0,
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizeCard(size: 'S'),
-                        SizeCard(size: 'M'),
-                        SizeCard(size: 'L'),
-                        SizeCard(size: 'XL'),
-                        SizeCard(size: '2XL'),
-                      ],
+                      children: List.generate(
+                        5,
+                        (index) {
+                          return GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                for (int i = 0; i < _selectedSizes.length; i++) {
+                                  _selectedSizes[i] = (i == index);
+                                }
+                              });
+                            },
+                            child: SizeCard(
+                              size: _sizes[index],
+                              isSelected: _selectedSizes[index],
+                            ),
+                          );
+                        }
+                      ),
                     ),
                   ),
                   Padding(
@@ -441,32 +466,38 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       bottomNavigationBar: NavigationCard(
         text: isInCart ? 'Added to Cart' : 'Add to Cart',
         onTap: () async {
-          final user = FirebaseAuth.instance.currentUser;
-          if (user == null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content:
-                    Text('You need to be logged in to perform this action'),
-              ),
-            );
-            return;
-          }
+          String? size = getSelectedSize();
+          if(size != null){
+            final user = FirebaseAuth.instance.currentUser;
+            if (user == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content:
+                  Text('You need to be logged in to perform this action'),
+                ),
+              );
+              return;
+            }
 
-          final alreadyInCart =
-              cartProvider.getCartItems.containsKey(productId);
-          if (alreadyInCart) {
-            print('Product is already in the cart.');
-            return;
-          }
+            final alreadyInCart =
+            cartProvider.getCartItems.containsKey(productId);
+            if (alreadyInCart) {
+              log('Product is already in the cart.');
+              return;
+            }
 
-          try {
-            await cartProvider.addProductsToCart(
-              productId: productId,
-              quantity: 1,
-            );
-            print('Product added to the cart successfully.');
-          } catch (error) {
-            print('Error adding product to cart: $error');
+            try {
+              await cartProvider.addProductsToCart(
+                productId: productId,
+                quantity: 1,
+              );
+              log('Product added to the cart successfully.');
+            } catch (error) {
+              log('Error adding product to cart: $error');
+            }
+          }
+          else{
+            openSnackbar(context, 'Please select a size', color.primary);
           }
         },
       ),
