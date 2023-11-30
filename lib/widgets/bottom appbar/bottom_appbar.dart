@@ -1,7 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/cart/cart_screen.dart';
-import 'package:laza/screens/user/screen/payment_details_screen.dart';
+import 'package:laza/screens/user/screen/user_screen.dart';
 import 'package:laza/wishlist/wishlist_screen.dart';
 
 import '../../screens/home_screen.dart';
@@ -57,13 +58,14 @@ class CustomBottomNavigation extends StatelessWidget {
             },
           ),
           BottomTabItem(
-            icon: IconlyLight.wallet,
-            label: 'Payment',
+            icon: CupertinoIcons.person,
+            label: 'User',
             index: 3,
             color: color,
             isSelected: selectedIndex == 3,
             onTap: () {
-              _navigateToScreen(context, const PaymentDetailsScreen());
+              _navigateToScreen(context, const UserScreen());
+              // Navigator.pushNamed(context, UserScreen.routeName);
             },
           ),
         ],
