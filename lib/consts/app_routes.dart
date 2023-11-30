@@ -17,6 +17,7 @@ import '../screens/order_confirmed_screen.dart';
 import '../screens/user/screen/new_payment_details_screen.dart';
 import '../screens/user/screen/payment_details_screen.dart';
 import '../screens/user/screen/user_address_screen.dart';
+import '../screens/user/screen/user_screen.dart';
 import '../wishlist/wishlist_screen.dart';
 
 class AppRoutes {
@@ -41,6 +42,7 @@ class AppRoutes {
       AllBrandsScreen.routeName: (context) => const AllBrandsScreen(),
       ProductDetailsScreen.routeName: (context) => const ProductDetailsScreen(),
       OrdersScreen.routeName: (context) => const OrdersScreen(),
+      UserScreen.routeName: (context) => const UserScreen(),
     };
   }
 }

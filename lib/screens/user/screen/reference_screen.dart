@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:laza/screens/authentication/widgets/auth_text_field.dart';
+import 'package:laza/screens/user/screen/payment_screen.dart';
 import 'package:laza/widgets/cards/bottom_card.dart';
 
 import '../../../widgets/custom icons/custom_back_button.dart';
-import 'Payment_screen.dart';
 
 class PaymentReferenceScreen extends StatefulWidget {
   static const routeName = '/new_payment_details';
