@@ -134,7 +134,7 @@ class _PaymentPageState extends State<PaymentPage> {
     }
   }
 
-  Future<Object> initTransaction() async {
+  Future<Object?> initTransaction() async {
     try {
       // print("Hey");
       // final price = total;
@@ -163,7 +163,8 @@ class _PaymentPageState extends State<PaymentPage> {
           ),
         );
       }
-      return "Error initializing transaction $e";
+      // return "Error initializing transaction $e";
+      return null;
     }
   }
 
