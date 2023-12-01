@@ -272,7 +272,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                           value: listProductSearch[index],
-                          child: const ProductWidget(),
+                          child: ProductWidget(),
                         );
                       },
                     );
@@ -294,7 +294,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                           value: allProducts[index],
-                          child: const ProductWidget(),
+                          child: ProductWidget(),
                         );
                       },
                     );

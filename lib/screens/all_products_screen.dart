@@ -106,7 +106,7 @@ class AllProductsScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                           value: allProducts[index],
-                          child: const ProductWidget(),
+                          child: ProductWidget(),
                         );
                       },
                     ),

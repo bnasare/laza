@@ -128,7 +128,7 @@ class BrandScreen extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                             value: brandProducts[index],
-                            child: const ProductWidget());
+                            child: ProductWidget());
                       },
                     ),
                   );
