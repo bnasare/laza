@@ -1,7 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:laza/cart/cart_screen.dart';
 import 'package:laza/screens/user/widgets/custom_textfield.dart';
+import 'package:laza/screens/user/widgets/delivery_address_card.dart';
 import 'package:laza/widgets/switch.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 
@@ -31,6 +34,65 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
     addressController.dispose();
     super.dispose();
   }
+
+final FirebaseAuth _auth = FirebaseAuth.instance;
+
+void saveToCart() {
+  Navigator.of(context).push(
+    MaterialPageRoute(
+      builder: (context) => CartScreen(
+        city: cityController.text,
+        address: addressController.text, // Make sure to add .text here
+      ),
+    ),
+  );
+}
+
+
+void _saveAddress() async {
+
+  User? currentUser = _auth.currentUser;
+
+  if (currentUser != null) {
+    final uid = currentUser.uid;
+
+    await FirebaseFirestore.instance.collection('users').doc(uid).update({
+      'telephone': phoneController.text,
+      'address': addressController.text,
+      'city': cityController.text,
+    });
+  } else {
+    print('User is not signed in');
+  }
+}
+
+Future<void> retreive() async {
+  User? currentUser = _auth.currentUser;
+  final uid = currentUser?.uid;
+
+  try {
+    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get();
+
+    // Check if the document exists
+    if (documentSnapshot.exists) {
+      // Now you can access the document field values
+      var telephone = documentSnapshot.get('telephone');
+      var address = documentSnapshot.get('address');
+      var city = documentSnapshot.get('city');
+
+      // Use the retrieved data as needed
+      print('Telephone: $telephone, Address: $address, City: $city');
+    } else {
+      print('Document does not exist for ID: $uid');
+    }
+  } catch (e) {
+    // Handle any potential errors here
+    print('Error fetching data: $e');
+  }
+}
 
   @override
   Widget build(BuildContext context) {
@@ -192,7 +254,10 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
       bottomNavigationBar: NavigationCard(
         text: 'Save Address',
         onTap: () {
-          Navigator.pop(context);
+          _saveAddress();
+          retreive();
+          saveToCart();
+       // Navigator.pop(context);
         },
       ),
     );

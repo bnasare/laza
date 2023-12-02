@@ -51,6 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       user.reload();
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'id': uid,
+        'telephone': '',
+        'city': '',
+        'address': '',
         'name': fullNameController.text,
         'email': emailController.text.toLowerCase(),
         'userWishList': [],
