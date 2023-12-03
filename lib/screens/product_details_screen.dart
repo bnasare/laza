@@ -14,13 +14,13 @@ import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
 import '../providers/review_provider.dart';
 import '../widgets/cards/bottom_card.dart';
-import '../widgets/cards/review_card.dart';
+import 'reviews/widgets/review_card.dart';
 import '../widgets/cards/size_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 import '../widgets/double_header_widget.dart';
 import '../widgets/other_product_images_widget.dart';
-import 'review_screen.dart';
+import 'reviews/screen/review_screen.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product_details';
