@@ -49,7 +49,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
     final productProvider = Provider.of<ProductProvider>(context);
-    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productId = ModalRoute.of(context)!.settings.arguments.toString();
     final getCurrentProduct = productProvider.findProdById(productId);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     bool? isInCart =
@@ -104,7 +104,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             top: verticalConverter(context, 5),
                           ),
                           child: Image.asset(
-                            'assets/images/${getCurrentProduct.category}.png',
+                            'assets/images/${getCurrentProduct.category.toLowerCase()}.png',
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -221,7 +221,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     padding:
                         EdgeInsets.only(top: verticalConverter(context, 15)),
                     child: const DoubleHeader(
-                      firstText: 'Size',
+                      firstText: 'Siz',
                       secondText: 'Size Guide',
                     ),
                   ),

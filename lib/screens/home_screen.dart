@@ -38,7 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final productProvider = Provider.of<ProductProvider>(context);
+    final productProvider = Provider.of<ProductProvider>(context, listen: false);
+    productProvider.fetchProducts();
     List<ProductModel> allProducts = productProvider.getProducts;
 
     return Scaffold(
