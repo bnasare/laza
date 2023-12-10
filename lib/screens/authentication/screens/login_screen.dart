@@ -12,6 +12,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../providers/cart_provider.dart';
 import '../../../providers/order_provider.dart';
+import '../../../providers/product_provider.dart';
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 import '../widgets/auth_text_field.dart';
@@ -240,10 +241,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 Provider.of<CartProvider>(context, listen: false);
             final wishlistProvider =
                 Provider.of<WishlistProvider>(context, listen: false);
+            final productProvider =
+                Provider.of<ProductProvider>(context, listen: false);
 
             await ordersProvider.fetchOrders();
             await cartProvider.fetchCart();
             await wishlistProvider.fetchWishList();
+            await productProvider.fetchProducts();
           } catch (e) {
             print(e);
           }

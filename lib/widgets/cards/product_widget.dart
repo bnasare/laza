@@ -17,23 +17,6 @@ class ProductWidget extends StatefulWidget {
 }
 
 class _ProductWidgetState extends State<ProductWidget> {
-  bool isLoading = false;
-
-  Future<void> _handleTap(BuildContext context) async {
-    setState(() {
-      isLoading = true;
-    });
-
-    await Future.delayed(const Duration(seconds: 3));
-
-    setState(() {
-      isLoading = false;
-    });
-
-    Navigator.pushNamed(context, ProductDetailsScreen.routeName,
-        arguments: Provider.of<ProductModel>(context, listen: false).id);
-  }
-
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
@@ -44,7 +27,8 @@ class _ProductWidgetState extends State<ProductWidget> {
 
     return GestureDetector(
       onTap: () {
-        _handleTap(context);
+        Navigator.pushNamed(context, ProductDetailsScreen.routeName,
+            arguments: productModel.id);
       },
       child: SizedBox(
         height: verticalConverter(context, 257),
@@ -62,7 +46,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(
-                    child: Image.asset(
+                    child: Image.network(
                       productModel.imagePath,
                       height: verticalConverter(context, 203),
                       width: horizontalConverter(context, 160),
@@ -78,16 +62,6 @@ class _ProductWidgetState extends State<ProductWidget> {
                     isInWishlist: isInWishList,
                   ),
                 ),
-                if (isLoading)
-                  Positioned(
-                    top: 55,
-                    left: 50,
-                    right: 50,
-                    bottom: 55,
-                    child: CircularProgressIndicator(
-                      color: color.primary,
-                    ),
-                  ),
               ],
             ),
             Text(

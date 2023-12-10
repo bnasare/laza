@@ -14,13 +14,13 @@ import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
 import '../providers/review_provider.dart';
 import '../widgets/cards/bottom_card.dart';
-import 'reviews/widgets/review_card.dart';
 import '../widgets/cards/size_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 import '../widgets/double_header_widget.dart';
 import '../widgets/other_product_images_widget.dart';
 import 'reviews/screen/review_screen.dart';
+import 'reviews/widgets/review_card.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product_details';
@@ -80,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         bottom: 0,
                         left: 10,
                         right: 10,
-                        child: Image.asset(
+                        child: Image.network(
                           getCurrentProduct.imagePath,
                           width: horizontalConverter(context, 310),
                           height: verticalConverter(context, 387),
@@ -234,24 +234,21 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     ),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: List.generate(
-                        5,
-                        (index) {
-                          return GestureDetector(
-                            onTap: (){
-                              setState(() {
-                                for (int i = 0; i < _selectedSizes.length; i++) {
-                                  _selectedSizes[i] = (i == index);
-                                }
-                              });
-                            },
-                            child: SizeCard(
-                              size: _sizes[index],
-                              isSelected: _selectedSizes[index],
-                            ),
-                          );
-                        }
-                      ),
+                      children: List.generate(5, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              for (int i = 0; i < _selectedSizes.length; i++) {
+                                _selectedSizes[i] = (i == index);
+                              }
+                            });
+                          },
+                          child: SizeCard(
+                            size: _sizes[index],
+                            isSelected: _selectedSizes[index],
+                          ),
+                        );
+                      }),
                     ),
                   ),
                   Padding(
@@ -467,20 +464,20 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         text: isInCart ? 'Added to Cart' : 'Add to Cart',
         onTap: () async {
           String? size = getSelectedSize();
-          if(size != null){
+          if (size != null) {
             final user = FirebaseAuth.instance.currentUser;
             if (user == null) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                   content:
-                  Text('You need to be logged in to perform this action'),
+                      Text('You need to be logged in to perform this action'),
                 ),
               );
               return;
             }
 
             final alreadyInCart =
-            cartProvider.getCartItems.containsKey(productId);
+                cartProvider.getCartItems.containsKey(productId);
             if (alreadyInCart) {
               log('Product is already in the cart.');
               return;
@@ -495,8 +492,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             } catch (error) {
               log('Error adding product to cart: $error');
             }
-          }
-          else{
+          } else {
             openSnackbar(context, 'Please select a size', color.primary);
           }
         },

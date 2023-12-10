@@ -14,8 +14,8 @@ class OnboardingScreen extends StatelessWidget {
     SharedPreferences.getInstance().then((prefs) {
       prefs.setBool("first_launch", false);
     });
-
     final color = Theme.of(context).colorScheme;
+
     return Scaffold(
       backgroundColor: color.primary,
       body: Center(
@@ -66,7 +66,7 @@ class OnboardingScreen extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               gender = "M";
                               Navigator.push(
                                   context,
@@ -95,9 +95,9 @@ class OnboardingScreen extends StatelessWidget {
                           ),
                           const SizedBox(width: 5),
                           GestureDetector(
-                            onTap: () {
+                            onTap: () async {
                               gender = "W";
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) =>
@@ -128,9 +128,9 @@ class OnboardingScreen extends StatelessWidget {
                           top: 9.0,
                         ),
                         child: TextButton(
-                            onPressed: () {
+                            onPressed: () async {
                               gender = "N/A";
-                              Navigator.push(
+                              Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(
                                       builder: (_) =>
