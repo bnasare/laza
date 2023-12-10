@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:laza/screens/user/screen/account_info.dart';
 
 import '../../../orders/orders_screen.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
@@ -45,7 +46,9 @@ class UserScreen extends StatelessWidget {
             UserGridCard(
               icon: IconlyLight.dangerCircle,
               name: "Account Information",
-              function: () {},
+              function: () {
+                Navigator.pushNamed(context, AccountInfo.routeName);
+              },
             ),
             UserGridCard(
               icon: IconlyLight.lock,
