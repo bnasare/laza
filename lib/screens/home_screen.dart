@@ -38,7 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
-    final productProvider = Provider.of<ProductProvider>(context, listen: false);
+    final productProvider =
+        Provider.of<ProductProvider>(context, listen: false);
     productProvider.fetchProducts();
     List<ProductModel> allProducts = productProvider.getProducts;
 
@@ -273,7 +274,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                           value: listProductSearch[index],
-                          child: ProductWidget(),
+                          child: const ProductWidget(),
                         );
                       },
                     );
@@ -295,7 +296,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       itemBuilder: (context, index) {
                         return ChangeNotifierProvider.value(
                           value: allProducts[index],
-                          child: ProductWidget(),
+                          child: const ProductWidget(),
                         );
                       },
                     );
