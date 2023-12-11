@@ -239,10 +239,12 @@ class SignInProvider extends ChangeNotifier {
               _imageUrl = snapshot['image_url'],
               _provider = snapshot['provider'],
               _sex = snapshot['sex'],
-              _userCartItems =
-                  (snapshot['userCartItems'] as List<dynamic>?)?.cast<String>(),
-              _userWishlist =
-                  (snapshot['userWishlist'] as List<dynamic>?)?.cast<String>(),
+              _userCartItems = (snapshot['userCartItems'] as List<dynamic>?)
+                      ?.cast<String>() ??
+                  [],
+              _userWishlist = (snapshot['userWishlist'] as List<dynamic>?)
+                      ?.cast<String>() ??
+                  [],
             });
   }
 
