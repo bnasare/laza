@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:laza/cart/cart_screen.dart';
 import 'package:laza/screens/user/widgets/custom_textfield.dart';
-import 'package:laza/widgets/switch.dart';
 
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
@@ -230,19 +229,19 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
                   ),
                 ),
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Save as primary address',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  CustomSwitch(initialState: true)
-                ],
-              ),
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Text(
+              //       'Save as primary address',
+              //       style: TextStyle(
+              //         fontSize: 15,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     CustomSwitch(initialState: true)
+              //   ],
+              // ),
             ],
           ),
         ),
