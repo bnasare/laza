@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:laza/screens/user/screen/user_address_screen.dart';
 import 'package:laza/screens/user/widgets/delivery_address_card.dart';
+import 'package:laza/utils/snack_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
@@ -15,10 +17,14 @@ import 'cart_widget.dart';
 class CartScreen extends StatelessWidget {
   static const routeName = '/cart';
 
-  const CartScreen({Key? key}) : super(key: key);
+  const CartScreen({Key? key,this.address, this.city}) : super(key: key);
 
+final String? city;
+final String? address;
   @override
   Widget build(BuildContext context) {
+
+
     final color = Theme.of(context).colorScheme;
     final cartProvider = Provider.of<CartProvider>(context);
     final cartItemsList =
@@ -37,7 +43,8 @@ class CartScreen extends StatelessWidget {
             buttonText: 'Continue Shopping',
             subtitle: "Your Cart's Feeling a Bit Lonely",
           )
-        : Scaffold(
+        : 
+        Scaffold(
             appBar: AppBar(
               centerTitle: true,
               backgroundColor: Colors.transparent,
@@ -78,21 +85,102 @@ class CartScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  const DeliveryAddressCard(
-                    assetName: 'map',
-                    label: 'Delivery Address',
-                    address: 'Chhatak, Sunamgonj 12/8AB',
-                    city: 'Sylhet',
-                  ),
-                  const Padding(
-                    padding: EdgeInsets.only(top: 20.0, bottom: 20),
-                    child: PaymentMethodCard(
-                      cardTypeImage: 'Frame',
-                      label: 'Payment Method',
-                      cardType: 'Visa Classic',
-                      truncatedCardNo: '**** 7690',
+                  Padding(
+                    padding: const EdgeInsets.only(bottom:20.0),
+                    child:GestureDetector(
+      onTap: () {
+        Navigator.pushNamed(context, UserAddressScreen.routeName);
+      },
+      child: Column(
+        children: [
+          GestureDetector(
+            onTap: () {
+              Navigator.pushNamed(context, UserAddressScreen.routeName);
+            },
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Delivery Address',
+                      style: TextStyle(
+                          fontSize: 17,
+                          fontWeight: FontWeight.w500,
+                          color: color.secondary),
                     ),
+                    Icon(Icons.arrow_forward_ios,
+                        size: 13, color: color.secondary),
+                  ],
+                ),
+                const SizedBox(height: 13),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(right: 16.0),
+                          child: Image.asset(
+                            'assets/images/map.png',
+                            height: 50,
+                            width: 50,
+                          ),
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Text(
+                                 address?? 'Enter your address',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400,
+                                    color: color.secondary),
+                              ),
+                            ),
+                            Text(
+                             city?? 'Enter your city',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400,
+                                  color: color.secondary),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 8.0),
+                      child: Container(
+                        width: 25,
+                        height: 25,
+                        decoration: BoxDecoration(
+                          color: color.onSecondary,
+                          shape: BoxShape.circle,
+                        ),
+                        child: Center(
+                          child: Icon(
+                            Icons.check,
+                            size: 15,
+                            color: color.onPrimary,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    )
+                    
+              
                   ),
+                  
                   Text(
                     'Order Info',
                     style: TextStyle(
@@ -169,12 +257,20 @@ class CartScreen extends StatelessWidget {
             bottomNavigationBar: NavigationCard(
               text: 'Checkout',
               onTap: () async {
-                Navigator.push(
+
+                    if (city == null && address ==  null) {
+                   print('No address selected');
+                    openSnackbar(context, 'Please select Delivery Address and City', Colors.red);
+
+                    }else{
+                         Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => PaymentReferenceScreen(amount: total),
                   ),
                 );
+                    }
+             
               },
             ),
           );
