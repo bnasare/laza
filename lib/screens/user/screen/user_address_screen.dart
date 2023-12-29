@@ -41,7 +41,7 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
       MaterialPageRoute(
         builder: (context) => CartScreen(
           city: cityController.text,
-          address: addressController.text, // Make sure to add .text here
+          address: addressController.text,
         ),
       ),
     );
@@ -71,20 +71,16 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
       DocumentSnapshot documentSnapshot =
           await FirebaseFirestore.instance.collection('users').doc(uid).get();
 
-      // Check if the document exists
       if (documentSnapshot.exists) {
-        // Now you can access the document field values
         var telephone = documentSnapshot.get('telephone');
         var address = documentSnapshot.get('address');
         var city = documentSnapshot.get('city');
 
-        // Use the retrieved data as needed
         print('Telephone: $telephone, Address: $address, City: $city');
       } else {
         print('Document does not exist for ID: $uid');
       }
     } catch (e) {
-      // Handle any potential errors here
       print('Error fetching data: $e');
     }
   }
@@ -249,10 +245,20 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
       bottomNavigationBar: NavigationCard(
         text: 'Save Address',
         onTap: () {
+          if (nameController.text.isNotEmpty ||
+              countryController.text.isNotEmpty ||
+              cityController.text.isNotEmpty ||
+              phoneController.text.isNotEmpty ||
+              addressController.text.isNotEmpty) {
+            saveToCart();
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Please fill all the fields'),
+            ));
+          }
           _saveAddress();
           retreive();
-          saveToCart();
-          // Navigator.pop(context);
+          //   saveToCart();
         },
       ),
     );

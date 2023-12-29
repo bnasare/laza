@@ -136,7 +136,7 @@ class CartScreen extends StatelessWidget {
                                                     bottom: 8.0),
                                                 child: Text(
                                                   address ??
-                                                      'Chhatak, Sunamgonji 12/8AB',
+                                                      'Enter your address',
                                                   style: TextStyle(
                                                       fontSize: 15,
                                                       fontWeight:
@@ -145,7 +145,7 @@ class CartScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                city ?? 'Sylhet',
+                                                city ?? 'Enter your city',
                                                 style: TextStyle(
                                                     fontSize: 13,
                                                     fontWeight: FontWeight.w400,
@@ -260,8 +260,8 @@ class CartScreen extends StatelessWidget {
               onTap: () async {
                 if (city == null && address == null) {
                   print('No address selected');
-                  openSnackbar(
-                      context, 'Please select delivery address', Colors.red);
+                  openSnackbar(context,
+                      'Please select Delivery Address and City', Colors.red);
                 } else {
                   Navigator.push(
                     context,
