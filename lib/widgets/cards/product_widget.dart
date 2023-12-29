@@ -46,7 +46,7 @@ class _ProductWidgetState extends State<ProductWidget> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: ClipRRect(
-                    child: Image.asset(
+                    child: Image.network(
                       productModel.imagePath,
                       height: verticalConverter(context, 203),
                       width: horizontalConverter(context, 160),

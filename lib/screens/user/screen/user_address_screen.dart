@@ -1,10 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:laza/cart/cart_screen.dart';
 import 'package:laza/screens/user/widgets/custom_textfield.dart';
-import 'package:laza/screens/user/widgets/delivery_address_card.dart';
-import 'package:laza/widgets/switch.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../../widgets/cards/bottom_card.dart';
 import '../../../widgets/custom icons/custom_back_button.dart';
 
@@ -35,60 +34,56 @@ class _UserAddressScreenState extends State<UserAddressScreen> {
     super.dispose();
   }
 
-final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
 
-void saveToCart() {
-  Navigator.of(context).push(
-    MaterialPageRoute(
-      builder: (context) => CartScreen(
-        city: cityController.text,
-        address: addressController.text, 
+  void saveToCart() {
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => CartScreen(
+          city: cityController.text,
+          address: addressController.text,
+        ),
       ),
-    ),
-  );
-}
-
-
-void _saveAddress() async {
-
-  User? currentUser = _auth.currentUser;
-
-  if (currentUser != null) {
-    final uid = currentUser.uid;
-
-    await FirebaseFirestore.instance.collection('users').doc(uid).update({
-      'telephone': phoneController.text,
-      'address': addressController.text,
-      'city': cityController.text,
-    });
-  } else {
-    print('User is not signed in');
+    );
   }
-}
 
-Future<void> retreive() async {
-  User? currentUser = _auth.currentUser;
-  final uid = currentUser?.uid;
+  void _saveAddress() async {
+    User? currentUser = _auth.currentUser;
 
-  try {
-    DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
-        .collection('users')
-        .doc(uid)
-        .get();
+    if (currentUser != null) {
+      final uid = currentUser.uid;
 
-    if (documentSnapshot.exists) {
-      var telephone = documentSnapshot.get('telephone');
-      var address = documentSnapshot.get('address');
-      var city = documentSnapshot.get('city');
-
-      print('Telephone: $telephone, Address: $address, City: $city');
+      await FirebaseFirestore.instance.collection('users').doc(uid).update({
+        'telephone': phoneController.text,
+        'address': addressController.text,
+        'city': cityController.text,
+      });
     } else {
-      print('Document does not exist for ID: $uid');
+      print('User is not signed in');
     }
-  } catch (e) {
-    print('Error fetching data: $e');
   }
-}
+
+  Future<void> retreive() async {
+    User? currentUser = _auth.currentUser;
+    final uid = currentUser?.uid;
+
+    try {
+      DocumentSnapshot documentSnapshot =
+          await FirebaseFirestore.instance.collection('users').doc(uid).get();
+
+      if (documentSnapshot.exists) {
+        var telephone = documentSnapshot.get('telephone');
+        var address = documentSnapshot.get('address');
+        var city = documentSnapshot.get('city');
+
+        print('Telephone: $telephone, Address: $address, City: $city');
+      } else {
+        print('Document does not exist for ID: $uid');
+      }
+    } catch (e) {
+      print('Error fetching data: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -230,19 +225,19 @@ Future<void> retreive() async {
                   ),
                 ),
               ),
-              const Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'Save as primary address',
-                    style: TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  CustomSwitch(initialState: true)
-                ],
-              ),
+              // const Row(
+              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //   children: [
+              //     Text(
+              //       'Save as primary address',
+              //       style: TextStyle(
+              //         fontSize: 15,
+              //         fontWeight: FontWeight.w500,
+              //       ),
+              //     ),
+              //     CustomSwitch(initialState: true)
+              //   ],
+              // ),
             ],
           ),
         ),
@@ -250,20 +245,20 @@ Future<void> retreive() async {
       bottomNavigationBar: NavigationCard(
         text: 'Save Address',
         onTap: () {
-                 if(nameController.text.isNotEmpty || countryController.text.isNotEmpty
-                  || cityController.text.isNotEmpty || phoneController.text.isNotEmpty 
-                  || addressController.text.isNotEmpty) {
-
-                      saveToCart();
-                  }else{
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                      content: Text('Please fill all the fields'),
-                    ));
-                  }
+          if (nameController.text.isNotEmpty ||
+              countryController.text.isNotEmpty ||
+              cityController.text.isNotEmpty ||
+              phoneController.text.isNotEmpty ||
+              addressController.text.isNotEmpty) {
+            saveToCart();
+          } else {
+            ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+              content: Text('Please fill all the fields'),
+            ));
+          }
           _saveAddress();
           retreive();
-       //   saveToCart();
-    
+          //   saveToCart();
         },
       ),
     );

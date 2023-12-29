@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:laza/screens/authentication/widgets/auth_text_field.dart';
+import 'package:laza/screens/user/screen/payment_screen.dart';
 import 'package:laza/widgets/cards/bottom_card.dart';
 
 import '../../../widgets/custom icons/custom_back_button.dart';
-import 'Payment_screen.dart';
 
 class PaymentReferenceScreen extends StatefulWidget {
   static const routeName = '/new_payment_details';
@@ -50,18 +50,22 @@ class _PaymentReferenceScreenState extends State<PaymentReferenceScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 15.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             AuthTextField(
                 controller: referenceController,
                 textInputAction: TextInputAction.done,
                 labelText: "Reference"),
-            Text(
-              "Enter a unique reference for your checkout",
-              style: TextStyle(
-                color: color.tertiary,
-                fontWeight: FontWeight.w400,
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Text(
+                " You must enter a unique reference for each checkout. Entering a previously used reference will result in a failed checkout.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  color: color.onBackground,
+                  fontWeight: FontWeight.w400,
+                  fontSize: 16,
+                ),
               ),
             )
           ],

@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/consts/sizing_config.dart';
+import 'package:laza/screens/reviews/widgets/rating_widget.dart';
+import 'package:laza/screens/reviews/widgets/review_card.dart';
 import 'package:laza/screens/user/screen/add_review_screen.dart';
-import 'package:laza/widgets/cards/review_card.dart';
 import 'package:laza/widgets/empty_widget.dart';
-import 'package:laza/widgets/rating_widget.dart';
 import 'package:provider/provider.dart';
-import '../models/review_model.dart';
-import '../providers/review_provider.dart';
-import '../widgets/custom icons/custom_back_button.dart';
+
+import '../../../models/review_model.dart';
+import '../../../providers/review_provider.dart';
+import '../../../widgets/custom icons/custom_back_button.dart';
 
 class ReviewScreen extends StatelessWidget {
   static const routeName = '/review';
@@ -76,42 +77,45 @@ class ReviewScreen extends StatelessWidget {
                       width: horizontalConverter(context, 125),
                       height: verticalConverter(context, 37),
                       child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) {
-                                return AddReviewScreen(
-                                  productId: productId,
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              const Color.fromRGBO(255, 112, 67, 1),
-                          foregroundColor: color.onPrimary,
-                          elevation: 0,
-                        ),
-                        child: const Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              IconlyLight.edit,
-                              size: 15,
-                            ),
-                            SizedBox(width: 3),
-                            Text(
-                              'Add Review',
-                              style: TextStyle(
-                                fontSize: 13,
-                                fontWeight: FontWeight.w500,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return AddReviewScreen(
+                                    productId: productId,
+                                  );
+                                },
                               ),
-                            )
-                          ],
-                        ),
-                      ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                const Color.fromRGBO(255, 112, 67, 1),
+                            foregroundColor: color.onPrimary,
+                            elevation: 0,
+                          ),
+                          child: const OverflowBox(
+                            maxWidth:
+                                double.infinity, // Adjust the value as needed
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  IconlyLight.edit,
+                                  size: 15,
+                                ),
+                                SizedBox(width: 3),
+                                Text(
+                                  'Add Review',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )),
                     ),
                   ),
                   Expanded(

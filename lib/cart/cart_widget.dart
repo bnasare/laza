@@ -62,7 +62,7 @@ class _CartWidgetState extends State<CartWidget> {
           children: [
             Padding(
               padding: const EdgeInsets.only(right: 15.0),
-              child: Image.asset(
+              child: Image.network(
                 getCurrProduct.imagePath,
                 width: 100,
                 fit: BoxFit.cover,

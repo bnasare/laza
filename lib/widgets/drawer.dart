@@ -5,6 +5,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/orders/orders_screen.dart';
 import 'package:laza/providers/cart_provider.dart';
 import 'package:laza/screens/authentication/screens/social_auth_screen.dart';
+import 'package:laza/screens/user/screen/account_info.dart';
 import 'package:laza/widgets/switch.dart';
 import 'package:provider/provider.dart';
 
@@ -80,7 +81,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
             ListTile(
               leading: const Icon(IconlyLight.dangerCircle),
               title: const Text('Account Information'),
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, AccountInfo.routeName);
+              },
             ),
             ListTile(
               leading: const Icon(IconlyLight.lock),

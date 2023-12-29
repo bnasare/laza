@@ -5,8 +5,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:laza/providers/cart_provider.dart';
 import 'package:laza/providers/internet_provider.dart';
+import 'package:laza/providers/order_provider.dart';
+import 'package:laza/providers/product_provider.dart';
 import 'package:laza/providers/sign_in_provider.dart';
+import 'package:laza/providers/wishlist_provider.dart';
 import 'package:laza/screens/authentication/screens/login_screen.dart';
 import 'package:laza/screens/authentication/screens/signup_screen.dart';
 import 'package:laza/screens/home_screen.dart';
@@ -118,8 +122,27 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                   padding: const EdgeInsets.only(bottom: 15.0),
                   child: RoundedLoadingButton(
                     color: const Color(0xFF4267B2),
-                    onPressed: () {
-                      handleFacebookAuth();
+                    onPressed: () async {
+                      try {
+                        handleFacebookAuth();
+                        final ordersProvider =
+                            Provider.of<OrdersProvider>(context, listen: false);
+                        final cartProvider =
+                            Provider.of<CartProvider>(context, listen: false);
+                        final wishlistProvider = Provider.of<WishlistProvider>(
+                            context,
+                            listen: false);
+                        final productProvider = Provider.of<ProductProvider>(
+                            context,
+                            listen: false);
+
+                        await ordersProvider.fetchOrders();
+                        await cartProvider.fetchCart();
+                        await wishlistProvider.fetchWishList();
+                        await productProvider.fetchProducts();
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                     controller: facebookController,
                     child: const SocialAuthCard(
@@ -134,8 +157,27 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                   child: RoundedLoadingButton(
                     controller: twitterController,
                     color: const Color(0xFF1DA1F2),
-                    onPressed: () {
-                      handleTwitterAuth();
+                    onPressed: () async {
+                      try {
+                        handleTwitterAuth();
+                        final ordersProvider =
+                            Provider.of<OrdersProvider>(context, listen: false);
+                        final cartProvider =
+                            Provider.of<CartProvider>(context, listen: false);
+                        final wishlistProvider = Provider.of<WishlistProvider>(
+                            context,
+                            listen: false);
+                        final productProvider = Provider.of<ProductProvider>(
+                            context,
+                            listen: false);
+
+                        await ordersProvider.fetchOrders();
+                        await cartProvider.fetchCart();
+                        await wishlistProvider.fetchWishList();
+                        await productProvider.fetchProducts();
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                     child: const SocialAuthCard(
                       text: "Twitter",
@@ -148,8 +190,27 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                   padding: const EdgeInsets.only(bottom: 15.0),
                   child: RoundedLoadingButton(
                     controller: googleController,
-                    onPressed: () {
-                      handleGoogleSignIn();
+                    onPressed: () async {
+                      try {
+                        handleGoogleSignIn();
+                        final ordersProvider =
+                            Provider.of<OrdersProvider>(context, listen: false);
+                        final cartProvider =
+                            Provider.of<CartProvider>(context, listen: false);
+                        final wishlistProvider = Provider.of<WishlistProvider>(
+                            context,
+                            listen: false);
+                        final productProvider = Provider.of<ProductProvider>(
+                            context,
+                            listen: false);
+
+                        await ordersProvider.fetchOrders();
+                        await cartProvider.fetchCart();
+                        await wishlistProvider.fetchWishList();
+                        await productProvider.fetchProducts();
+                      } catch (e) {
+                        print(e);
+                      }
                     },
                     color: const Color(0xFFEA4335),
                     child: const SocialAuthCard(
@@ -168,7 +229,7 @@ class _SocialAuthScreenState extends State<SocialAuthScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Text(
-                    "Already have an account? ",
+                    "Already have an account?",
                     style: TextStyle(
                       color: color.tertiary,
                       fontSize: 15,

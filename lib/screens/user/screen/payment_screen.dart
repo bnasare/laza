@@ -134,7 +134,7 @@ class _PaymentPageState extends State<PaymentPage> {
     }
   }
 
-  Future<Object> initTransaction() async {
+  Future<Object?> initTransaction() async {
     try {
       // print("Hey");
       // final price = total;
@@ -149,11 +149,22 @@ class _PaymentPageState extends State<PaymentPage> {
       return authRes.authorization_url;
     } catch (e) {
       // print("Error initializing transaction $e");
-      return ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text("Error initializing transaction $e"),
-        ),
-      );
+      // return ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text("Error initializing transaction $e"),
+      //   ),
+      // );
+      if (context.mounted) {
+        Navigator.of(context).pop();
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text(
+                "It appears you previously used this reference. Reference Field cannot be a duplicate. Enter a new unique Reference"),
+          ),
+        );
+      }
+      // return "Error initializing transaction $e";
+      return null;
     }
   }
 

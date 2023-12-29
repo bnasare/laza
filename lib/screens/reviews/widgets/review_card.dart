@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:laza/consts/sizing_config.dart';
 import 'package:intl/intl.dart';
-import 'package:laza/widgets/rating_widget.dart';
+import 'package:laza/screens/reviews/widgets/rating_widget.dart';
 
 class ReviewCard extends StatelessWidget {
   const ReviewCard({

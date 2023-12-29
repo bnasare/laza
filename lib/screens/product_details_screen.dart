@@ -1,9 +1,12 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/models/review_model.dart';
 import 'package:laza/screens/user/screen/add_review_screen.dart';
+import 'package:laza/utils/snack_bar.dart';
 import 'package:provider/provider.dart';
 
 import '../consts/sizing_config.dart';
@@ -11,13 +14,13 @@ import '../providers/cart_provider.dart';
 import '../providers/product_provider.dart';
 import '../providers/review_provider.dart';
 import '../widgets/cards/bottom_card.dart';
-import '../widgets/cards/review_card.dart';
 import '../widgets/cards/size_card.dart';
 import '../widgets/custom icons/custom_back_button.dart';
 import '../widgets/custom icons/custom_trailing_button.dart';
 import '../widgets/double_header_widget.dart';
 import '../widgets/other_product_images_widget.dart';
-import 'review_screen.dart';
+import 'reviews/screen/review_screen.dart';
+import 'reviews/widgets/review_card.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
   static const routeName = '/product_details';
@@ -30,12 +33,23 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   bool showFullDescription = false;
+  final List<String> _sizes = ['S', 'M', 'L', 'XL', '2XL'];
+  final List<bool> _selectedSizes = [false, false, false, false, false];
+
+  String? getSelectedSize() {
+    for (int i = 0; i < _selectedSizes.length; i++) {
+      if (_selectedSizes[i]) {
+        return _sizes[i];
+      }
+    }
+    return null;
+  }
 
   @override
   Widget build(BuildContext context) {
     final color = Theme.of(context).colorScheme;
     final productProvider = Provider.of<ProductProvider>(context);
-    final productId = ModalRoute.of(context)!.settings.arguments as String;
+    final productId = ModalRoute.of(context)!.settings.arguments.toString();
     final getCurrentProduct = productProvider.findProdById(productId);
     final cartProvider = Provider.of<CartProvider>(context, listen: false);
     bool? isInCart =
@@ -66,7 +80,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                         bottom: 0,
                         left: 10,
                         right: 10,
-                        child: Image.asset(
+                        child: Image.network(
                           getCurrentProduct.imagePath,
                           width: horizontalConverter(context, 310),
                           height: verticalConverter(context, 387),
@@ -90,7 +104,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                             top: verticalConverter(context, 5),
                           ),
                           child: Image.asset(
-                            'assets/images/${getCurrentProduct.category}.png',
+                            'assets/images/${getCurrentProduct.category.toLowerCase()}.png',
                             fit: BoxFit.contain,
                           ),
                         ),
@@ -207,7 +221,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                     padding:
                         EdgeInsets.only(top: verticalConverter(context, 15)),
                     child: const DoubleHeader(
-                      firstText: 'Size',
+                      firstText: 'Siz',
                       secondText: 'Size Guide',
                     ),
                   ),
@@ -218,15 +232,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       horizontalConverter(context, 10),
                       0,
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        SizeCard(size: 'S'),
-                        SizeCard(size: 'M'),
-                        SizeCard(size: 'L'),
-                        SizeCard(size: 'XL'),
-                        SizeCard(size: '2XL'),
-                      ],
+                      children: List.generate(5, (index) {
+                        return GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              for (int i = 0; i < _selectedSizes.length; i++) {
+                                _selectedSizes[i] = (i == index);
+                              }
+                            });
+                          },
+                          child: SizeCard(
+                            size: _sizes[index],
+                            isSelected: _selectedSizes[index],
+                          ),
+                        );
+                      }),
                     ),
                   ),
                   Padding(
@@ -441,32 +463,37 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       bottomNavigationBar: NavigationCard(
         text: isInCart ? 'Added to Cart' : 'Add to Cart',
         onTap: () async {
-          final user = FirebaseAuth.instance.currentUser;
-          if (user == null) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content:
-                    Text('You need to be logged in to perform this action'),
-              ),
-            );
-            return;
-          }
+          String? size = getSelectedSize();
+          if (size != null) {
+            final user = FirebaseAuth.instance.currentUser;
+            if (user == null) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content:
+                      Text('You need to be logged in to perform this action'),
+                ),
+              );
+              return;
+            }
 
-          final alreadyInCart =
-              cartProvider.getCartItems.containsKey(productId);
-          if (alreadyInCart) {
-            print('Product is already in the cart.');
-            return;
-          }
+            final alreadyInCart =
+                cartProvider.getCartItems.containsKey(productId);
+            if (alreadyInCart) {
+              log('Product is already in the cart.');
+              return;
+            }
 
-          try {
-            await cartProvider.addProductsToCart(
-              productId: productId,
-              quantity: 1,
-            );
-            print('Product added to the cart successfully.');
-          } catch (error) {
-            print('Error adding product to cart: $error');
+            try {
+              await cartProvider.addProductsToCart(
+                productId: productId,
+                quantity: 1,
+              );
+              log('Product added to the cart successfully.');
+            } catch (error) {
+              log('Error adding product to cart: $error');
+            }
+          } else {
+            openSnackbar(context, 'Please select a size', color.primary);
           }
         },
       ),

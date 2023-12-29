@@ -228,31 +228,39 @@ class SignInProvider extends ChangeNotifier {
 
   // ENTRY FOR CLOUDFIRESTORE
   Future getUserDataFromFirestore(uid) async {
-    await FirebaseFirestore.instance
-        .collection("users")
-        .doc(uid)
-        .get()
-        .then((DocumentSnapshot snapshot) => {
-              _uid = snapshot['uid'],
-              _name = snapshot['name'],
-              _email = snapshot['email'],
-              _imageUrl = snapshot['image_url'],
-              _provider = snapshot['provider'],
-              _sex = snapshot['sex'],
-              _userCartItems =
-                  (snapshot['userCartItems'] as List<dynamic>?)?.cast<String>(),
-              _userWishlist =
-                  (snapshot['userWishlist'] as List<dynamic>?)?.cast<String>(),
-            });
+    try {
+      DocumentSnapshot snapshot =
+          await FirebaseFirestore.instance.collection("users").doc(uid).get();
+
+      if (snapshot.exists) {
+        // Document exists, access fields
+        _uid = snapshot['uid'];
+        _name = snapshot['name'];
+        _email = snapshot['email'];
+        _imageUrl = snapshot['image_url'];
+        _provider = snapshot['provider'];
+        _sex = snapshot['sex'];
+
+        // Handle lists with null checks
+        _userCartItems =
+            (snapshot['userCartItems'] as List<dynamic>?)?.cast<String>() ?? [];
+        _userWishlist =
+            (snapshot['userWishlist'] as List<dynamic>?)?.cast<String>() ?? [];
+      } else {
+        // Document does not exist, handle accordingly
+        print('Document with uid $uid does not exist');
+      }
+    } catch (e) {
+      print('Error fetching user data: $e');
+      // Handle the error as needed
+    }
   }
 
   Future saveDataToFirestore(String? gender) async {
     final DocumentReference r =
         FirebaseFirestore.instance.collection("users").doc(uid);
 
-    if (_sex == null) {
-      _sex = gender;
-    }
+    _sex ??= gender;
     await r.set({
       "name": _name ?? "",
       "email": _email ?? "",

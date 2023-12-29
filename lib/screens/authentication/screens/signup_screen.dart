@@ -51,6 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       user.reload();
       await FirebaseFirestore.instance.collection('users').doc(uid).set({
         'id': uid,
+        'telephone': '',
+        'city': '',
+        'address': '',
         'name': fullNameController.text,
         'email': emailController.text.toLowerCase(),
         'userWishList': [],
@@ -115,10 +118,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: TextInputAction.next,
                   controller: fullNameController,
                   labelText: "Username",
-                  trailingWidget: Icon(
-                    Icons.check_outlined,
-                    color: color.onSecondary,
-                  ),
                 ),
                 AuthTextField(
                   textInputAction: TextInputAction.next,
@@ -129,10 +128,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   textInputAction: TextInputAction.done,
                   controller: emailController,
                   labelText: "Email Address",
-                  trailingWidget: Icon(
-                    Icons.check_outlined,
-                    color: color.onSecondary,
-                  ),
                 ),
               ]),
             )
