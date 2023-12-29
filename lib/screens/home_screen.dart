@@ -3,6 +3,7 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:laza/models/product_model.dart';
 import 'package:laza/screens/all_brands_screen.dart';
 import 'package:laza/screens/all_products_screen.dart';
+import 'package:laza/utils/snack_bar.dart';
 import 'package:laza/widgets/cards/brand_card.dart';
 import 'package:laza/widgets/cards/product_widget.dart';
 import 'package:laza/widgets/drawer.dart';
@@ -251,58 +252,72 @@ class _HomeScreenState extends State<HomeScreen> {
                   ],
                 ),
               ),
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: 1,
-                itemBuilder: (context, index) {
-                  // Check if search results are not empty
-                  if (searchTextController.text.isNotEmpty &&
-                      listProductSearch.isNotEmpty) {
-                    return GridView.builder(
-                      padding:
-                          EdgeInsets.only(top: verticalConverter(context, 20)),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10.0,
-                        childAspectRatio: 0.62,
-                      ),
-                      itemCount: listProductSearch.length,
-                      itemBuilder: (context, index) {
-                        return ChangeNotifierProvider.value(
-                          value: listProductSearch[index],
-                          child: const ProductWidget(),
-                        );
-                      },
-                    );
-                  } else {
-                    // Show the regular grid
-                    return GridView.builder(
-                      padding:
-                          EdgeInsets.only(top: verticalConverter(context, 20)),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 10.0,
-                        childAspectRatio: 0.62,
-                      ),
-                      itemCount:
-                          allProducts.length < 6 ? allProducts.length : 6,
-                      itemBuilder: (context, index) {
-                        return ChangeNotifierProvider.value(
-                          value: allProducts[index],
-                          child: const ProductWidget(),
-                        );
-                      },
+              FutureBuilder(
+                future: productProvider.fetchProducts(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const SizedBox();
+                  } else if (snapshot.hasError) {
+                    openSnackbar(
+                      context,
+                      'Error: ${snapshot.error}',
+                      color,
                     );
                   }
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 1,
+                    itemBuilder: (context, index) {
+                      // Check if search results are not empty
+                      if (searchTextController.text.isNotEmpty &&
+                          listProductSearch.isNotEmpty) {
+                        return GridView.builder(
+                          padding: EdgeInsets.only(
+                              top: verticalConverter(context, 20)),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.0,
+                            childAspectRatio: 0.62,
+                          ),
+                          itemCount: listProductSearch.length,
+                          itemBuilder: (context, index) {
+                            return ChangeNotifierProvider.value(
+                              value: listProductSearch[index],
+                              child: const ProductWidget(),
+                            );
+                          },
+                        );
+                      } else {
+                        // Show the regular grid
+                        return GridView.builder(
+                          padding: EdgeInsets.only(
+                              top: verticalConverter(context, 20)),
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.0,
+                            childAspectRatio: 0.62,
+                          ),
+                          itemCount:
+                              allProducts.length < 6 ? allProducts.length : 6,
+                          itemBuilder: (context, index) {
+                            return ChangeNotifierProvider.value(
+                              value: allProducts[index],
+                              child: const ProductWidget(),
+                            );
+                          },
+                        );
+                      }
+                    },
+                  );
                 },
-              )
+              ),
             ],
           ),
         ),
